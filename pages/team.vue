@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white">
-    <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
+    <div class="mx-auto py-10 px-4 max-w-7xl sm:px-6 lg:px-8">
       <div class="space-y-12 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0">
         <div class="space-y-5 sm:space-y-4">
           <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Dem vi er</h2>
@@ -65,7 +65,7 @@
                       </li>
                     </ul>
                     <div class="text-gray-400" v-if="person.sideProjects.length > 0">
-                      <h5 class="font-bold uppercase">Fritids-projekter:</h5>
+                      <h5 class="font-bold uppercase">Hobby-projekter:</h5>
                       <ul>
                         <li v-for="project in person.sideProjects"><a class="hover:text-purple-600" :href="project.href">{{ project.name }}</a></li>
                       </ul>

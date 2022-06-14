@@ -21,15 +21,28 @@
       </div>
       <div class="mt-12 relative w-full h-64 sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full">
         <!--<img class="absolute inset-0 w-full h-full object-cover" src="assets/hero.png" alt="" /> -->
-        <div v-for="(project, idx) in projects">
+        <TransitionRoot
+          v-for="(project, idx) in projects"
+          as="div"
+          :show="showImage[idx]"
+          appear
+          enter="transform transition duration-[200ms]"
+          enterFrom="opacity-0 rotate-[-120deg] scale-50"
+          enterTo="opacity-100 rotate-0 scale-100"
+          leave="transform duration-200 transition ease-in-out"
+          leaveFrom="opacity-100 rotate-0 scale-100 "
+          leaveTo="opacity-0 scale-95 "
+        >
           <img :src="project.image" :alt="project.name" class="absolute project shadow-2xl border-4 border-gray-900" :style="{ top: `${idx * 150}px` }" />
-        </div>
+        </TransitionRoot>
       </div>
     </main>
   </div>
 </template>
 
 <script setup>
+import { TransitionRoot } from '@headlessui/vue'
+
 const projects = [
   {
     name: 'bygningshub.dk',
@@ -44,6 +57,18 @@ const projects = [
     image: 'assets/kvalitetsrosen.jpg',
   }
 ]
+
+const showImage = reactive([false, false, false])
+let idx = 0
+
+const interval = setInterval(() => {
+  showImage[idx] = true
+  idx++
+  if (idx === 4) {
+    clearInterval(interval)
+  }
+}, 200)
+
 </script>
 
 <style>
