@@ -11,10 +11,10 @@
           <p class="mt-3 max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">Vi designer, udvikler og drifter bæredygtige web-applikationer</p>
           <div class="mt-10 sm:flex sm:justify-center lg:justify-start">
             <div class="rounded-md shadow">
-              <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md bg-primary hover:bg-secondary md:py-4 md:text-lg md:px-10 text-black">Projekter</a>
+              <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md bg-secondary hover:bg-gray-700 md:py-4 md:text-lg md:px-10 text-white">Projekter</a>
             </div>
             <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-              <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-secondary bg-white hover:secondary md:py-4 md:text-lg md:px-10"> Kontakt </a>
+              <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black bg-white hover:secondary md:py-4 md:text-lg md:px-10"> Kontakt </a>
             </div>
           </div>
         </div>
