@@ -2,22 +2,41 @@
   <div class="bg-white">
     <div class="mx-auto py-10 px-4 max-w-7xl sm:px-6 lg:px-8">
       <div class="space-y-12 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0">
-        <div class="space-y-5 sm:space-y-4">
-          <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Dem vi er</h2>
-          <p class="text-xl text-gray-500">Vi er personer, der arbejder agilt ...</p>
-          <p class="text-gray-500">Vi arbejder rigtig, rigtig meget med</p>
-          <ul class="list-disc ml-10 text-gray-500">
-            <li>Vue</li>
-            <li>Node</li>
-            <li>Docker</li>
-            <li>Postgres</li>
-            <li>Nuxt</li>
-            <li>Feathers</li>
-            <li>Docker</li>
-            <li>Docker</li>
-            <li>Docker</li>
-          </ul>
-        </div>
+        <Transition 
+          @enter="enterElement" 
+          :css="false"
+          mode="out-in"
+        >
+          <div class="space-y-5 sm:space-y-4" v-if="show">
+            <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Dem vi er</h2>
+            <p class="text-xl text-gray-500">Vi er personer, der arbejder agilt med asd ak asdk alsd jaskldj asldkj adlk jasdlk ajdslkaj sdlkaj sdalskdja lkdsaklsd...</p>
+            
+            <div class="bg-gray-500 p-5 text-white">
+              <p class="pb-2">Vores teknologier</p>
+              <ul class="text-gray-500">
+                <li v-for="tech in technologies">
+                  <div class="relative pb-2">
+                    <div class="relative flex space-x-3">
+                      <div>
+                        <span class="bg-green-500 h-6 w-6 rounded-full flex items-center justify-center ring-6 ring-white">
+                          <CheckIcon class="w-4 h-4 text-white" aria-hidden="true" />
+                        </span>
+                      </div>
+                      <div class="min-w-0 flex-1 pt-0.5 flex justify-between space-x-4">
+                        <div>
+                          <p class="text-sm text-gray-500">
+                            <a href="#" class="font-medium text-white">{{ tech }}</a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              
+              </ul>
+            </div>
+          </div>
+        </Transition>
         <div class="lg:col-span-2">
           <ul role="list" class="space-y-12 sm:divide-y sm:divide-gray-200 sm:space-y-0 sm:-mt-8 lg:gap-x-8 lg:space-y-0">
             <li v-for="person in people" :key="person.name" class="sm:py-8">
@@ -82,7 +101,35 @@
 </template>
 
 <script lang="ts" setup>
-import { MailIcon } from '@heroicons/vue/solid'
+import { MailIcon, CheckIcon } from '@heroicons/vue/solid'
+import anime from 'animejs/lib/anime.es.js'
+
+const show = ref(false)
+
+const enterElement = (el: HTMLElement, done) => {
+  anime({
+    targets: el,
+    translateX: [-400, 0],
+    easing: 'easeOutExpo',
+    complete: done,
+    duration: 750
+  })
+}
+
+onMounted(() => {
+  show.value = true
+})
+
+const technologies = [
+  'Node',
+  'Docker',
+  'Postgres',
+  'Nuxt',
+  'Feathers',
+  'Docker',
+  'Docker',
+  'Docker',
+]
 
 const people = [
   {
@@ -120,4 +167,5 @@ const people = [
     ],
   },
 ]
+                
 </script>

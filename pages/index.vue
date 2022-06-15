@@ -40,7 +40,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { TransitionRoot } from '@headlessui/vue'
 
 const projects = [
@@ -69,11 +69,16 @@ const interval = setInterval(() => {
   }
 }, 200)
 
+const clickProject = (idx: number) => {
+  showImage[idx] = true
+}
+
 </script>
 
 <style>
 .project:hover {
   z-index: 999 !important;
-  left: -200px
+  left: -200px;
+  cursor: pointer;
 }
 </style>
