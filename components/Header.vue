@@ -9,7 +9,7 @@
               <Logo :height="headerHeight" />
             </ClientOnly>
           </NuxtLink>
-          <div class="hidden space-x-8 lg:block lg:ml-5" v-if="!isSmall">
+          <div v-if="!isSmall" class="hidden space-x-8 lg:block lg:ml-5">
             <NuxtLink v-for="link in navigation" :key="link.name" :to="link.href" class="text-base font-bold uppercase text-white hover:text-indigo-50">
               {{ link.name }}
             </NuxtLink>
@@ -17,7 +17,7 @@
         </div>
         <div class="grid justify-items-end lg:hidden">
           <NuxtLink v-for="link in navigation" :key="link.name" :to="link.href" class="text-base font-bold uppercase text-white hover:text-indigo-50">
-          {{ link.name }}
+            {{ link.name }}
           </NuxtLink>
         </div>
       </div>
@@ -26,7 +26,6 @@
 </template>
 
 <script setup lang="ts">
-import anime from 'animejs/lib/anime.es.js'
 
 const isSmall = ref(false)
 const headerHeight = ref(70)

@@ -8,7 +8,9 @@
             {{ ' ' }}
             <span class="block text-secondary xl:inline">applikationer</span>
           </h1>
-          <p class="mt-3 max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">Vi designer, udvikler og drifter bæredygtige web-applikationer</p>
+          <p class="mt-3 max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
+            Vi designer, udvikler og drifter bæredygtige web-applikationer
+          </p>
           <div class="mt-10 sm:flex sm:justify-center lg:justify-start">
             <div class="rounded-md shadow">
               <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md bg-secondary hover:bg-gray-700 md:py-4 md:text-lg md:px-10 text-white">Projekter</a>
@@ -22,18 +24,19 @@
       <div class="mt-12 relative w-full h-64 sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full">
         <!--<img class="absolute inset-0 w-full h-full object-cover" src="assets/hero.png" alt="" /> -->
         <TransitionRoot
-          v-for="(project, idx) in projects"
+          v-for="(project, key) in projects"
+          :key="key"
           as="div"
-          :show="showImage[idx]"
+          :show="showImage[key]"
           appear
           enter="transform transition duration-[200ms]"
-          enterFrom="opacity-0 rotate-[-120deg] scale-50"
-          enterTo="opacity-100 rotate-0 scale-100"
+          enter-from="opacity-0 rotate-[-120deg] scale-50"
+          enter-to="opacity-100 rotate-0 scale-100"
           leave="transform duration-200 transition ease-in-out"
-          leaveFrom="opacity-100 rotate-0 scale-100 "
-          leaveTo="opacity-0 scale-95 "
+          leave-from="opacity-100 rotate-0 scale-100 "
+          leave-to="opacity-0 scale-95 "
         >
-          <img :src="project.image" :alt="project.name" class="absolute project shadow-2xl border-4 border-gray-900" :style="{ top: `${idx * 150}px` }" />
+          <img :src="project.image" :alt="project.name" class="absolute project shadow-2xl border-4 border-gray-900" :style="{ top: `${idx * 150}px` }">
         </TransitionRoot>
       </div>
     </main>
@@ -55,7 +58,7 @@ const projects = [
   {
     name: 'Kvalitetsrosen',
     image: 'assets/kvalitetsrosen.jpg',
-  }
+  },
 ]
 
 const showImage = reactive([false, false, false])
@@ -69,9 +72,11 @@ const interval = setInterval(() => {
   }
 }, 200)
 
+/*
 const clickProject = (idx: number) => {
   showImage[idx] = true
 }
+*/
 
 </script>
 

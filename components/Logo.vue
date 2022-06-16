@@ -5,8 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import { propsToAttrMap } from '@vue/shared';
-
 
 const props = defineProps(['height'])
 
@@ -19,6 +17,7 @@ const colors = [
 ]
 const squares = []
 colors.forEach((color, i) => {
+  console.log(color)
   let x = 10
   if (i > 0) {
     x += squares[i - 1].x + squares[i - 1].width - 30
@@ -30,27 +29,27 @@ colors.forEach((color, i) => {
   } else if (i !== 0 && !(i % 2)) {
     width = squares[i - 1].width * 2
   }
-  let height = Math.random() * 50 + props.height
+  const height = Math.random() * 50 + props.height
   squares.push({
     x,
     y,
     width,
     height,
     color: colors[i],
-    movingUp: Math.random() > 0.5 ? true : false
+    movingUp: Math.random() > 0.5,
   })
 })
-const draw = async () => {
+const draw = () => {
   const element = document.getElementById('logo') as HTMLCanvasElement | null
   const ctx = element.getContext('2d')
   ctx.globalAlpha = 0.8
-  ctx.globalCompositeOperation = 'destination-over';
-  ctx.clearRect(0, 0, 300, 200);
-  squares.forEach((square, i) => {
+  ctx.globalCompositeOperation = 'destination-over'
+  ctx.clearRect(0, 0, 300, 200)
+  squares.forEach((square) => {
     if (square.movingUp) {
-      square.y -= .05
+      square.y -= 0.05
     } else {
-      square.y += .9
+      square.y += 0.9
     }
     if (square.y + square.height > 140) {
       square.movingUp = true
@@ -67,7 +66,7 @@ const draw = async () => {
   })
   window.requestAnimationFrame(draw)
 }
-onMounted(async () => {
+onMounted(() => {
   window.requestAnimationFrame(draw)
   // draw()
 })
