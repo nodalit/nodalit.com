@@ -1,10 +1,15 @@
 <template>
   <div>
-    <canvas id="logo" style="width: 75px; height: 75px; display: inline-block" />
+    <canvas id="logo" style="width: 75px; display: inline-block" :style="{ height: `${height}px` }" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { propsToAttrMap } from '@vue/shared';
+
+
+const props = defineProps(['height'])
+
 const colors = [
   '#ffbe0b',
   '#fb5607',
@@ -18,14 +23,14 @@ colors.forEach((color, i) => {
   if (i > 0) {
     x += squares[i - 1].x + squares[i - 1].width - 30
   }
-  const y = Math.random() * 40
+  const y = Math.random() * props.height / 1.5
   let width = Math.random() * 50 + 50
   if (i !== 0 && i % 2) {
     width = squares[i - 1].width / 1.5
   } else if (i !== 0 && !(i % 2)) {
     width = squares[i - 1].width * 2
   }
-  let height = Math.random() * 50 + 70
+  let height = Math.random() * 50 + props.height
   squares.push({
     x,
     y,
