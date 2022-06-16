@@ -7,6 +7,7 @@
 <script setup lang="ts">
 const colors = [
   '#ffbe0b',
+  '#fb5607',
   '#ff006e',
   '#8338ec',
   '#3a86ff',
@@ -19,6 +20,11 @@ colors.forEach((color, i) => {
   }
   const y = Math.random() * 40
   let width = Math.random() * 50 + 50
+  if (i !== 0 && i % 2) {
+    width = squares[i - 1].width / 1.5
+  } else if (i !== 0 && !(i % 2)) {
+    width = squares[i - 1].width * 2
+  }
   let height = Math.random() * 50 + 70
   squares.push({
     x,
