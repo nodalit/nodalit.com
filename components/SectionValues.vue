@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { AnnotationIcon, GlobeAltIcon, LightningBoltIcon, ScaleIcon } from '@heroicons/vue/outline'
+import { GlobeAltIcon, LightningBoltIcon, ScaleIcon } from '@heroicons/vue/outline'
 
 const features = [
   {

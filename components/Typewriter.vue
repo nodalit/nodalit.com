@@ -3,25 +3,24 @@
 </template>
 
 <script>
-import Typed from 'typed.js';
-
+import Typed from 'typed.js'
 
 export default {
   props: {
     words: {
       type: Array,
       default: () => [
-          'god',
-          'brugervenlig',
-          'sikker',
-          'nyskabende',
-          'sjov',
-          'lækker',
-          'hurtig',
-          'billig',
-          'bæredygtig',
-          'kompleks',
-        ]
+        'god',
+        'brugervenlig',
+        'sikker',
+        'nyskabende',
+        'sjov',
+        'lækker',
+        'hurtig',
+        'billig',
+        'bæredygtig',
+        'kompleks',
+      ],
     },
   },
   mounted () {
@@ -29,17 +28,16 @@ export default {
   },
   methods: {
     initTypewriter () {
-      if(document.querySelector('#typewriter')) {
-        var options = {
+      if (document.querySelector('#typewriter')) {
+        const options = {
           strings: this.words,
           loop: true,
-          typeSpeed: 40
-        };
-        var typed = new Typed('#typewriter', options);
+          typeSpeed: 40,
+        }
+        new Typed('#typewriter', options)
       } else {
         setTimeout(this.initTypewriter, 100)
       }
-  
     },
   },
 }
