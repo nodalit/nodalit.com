@@ -2,17 +2,23 @@
   <div class="bg-white">
     <div class="mx-auto py-10 px-4 max-w-7xl sm:px-6 lg:px-8">
       <div class="space-y-12 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0">
-        <Transition 
-          @enter="enterElement" 
+        <Transition
           :css="false"
           mode="out-in"
+          @enter="enterElement"
         >
-          <div class="space-y-5 sm:space-y-4" v-if="show">
-            <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Dem vi er</h2>
-            <p class="text-xl text-gray-500">Vi er personer, der arbejder agilt med asd ak asdk alsd jaskldj asldkj adlk jasdlk ajdslkaj sdlkaj sdalskdja lkdsaklsd...</p>
-            
+          <div v-if="show" class="space-y-5 sm:space-y-4">
+            <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Dem vi er
+            </h2>
+            <p class="text-xl text-gray-500">
+              Vi er personer, der arbejder agilt med asd ak asdk alsd jaskldj asldkj adlk jasdlk ajdslkaj sdlkaj sdalskdja lkdsaklsd...
+            </p>
+
             <div class="bg-gray-500 p-5 text-white">
-              <p class="pb-2">Vores teknologier</p>
+              <p class="pb-2">
+                Vores teknologier
+              </p>
               <ul class="text-gray-500">
                 <li v-for="tech in technologies">
                   <div class="relative pb-2">
@@ -32,7 +38,6 @@
                     </div>
                   </div>
                 </li>
-              
               </ul>
             </div>
           </div>
@@ -42,16 +47,20 @@
             <li v-for="person in people" :key="person.name" class="sm:py-8">
               <div class="space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0">
                 <div class="aspect-w-3 aspect-h-2 sm:aspect-w-3 sm:aspect-h-4">
-                  <img class="object-cover shadow-lg rounded-lg" :src="person.imageUrl" alt="" />
+                  <img class="object-cover shadow-lg rounded-lg" :src="person.imageUrl" alt="">
                 </div>
                 <div class="sm:col-span-2">
                   <div class="space-y-4">
                     <div class="text-lg leading-6 font-medium space-y-1">
                       <h3>{{ person.name }}</h3>
-                      <p class="text-secondary">{{ person.role }}</p>
+                      <p class="text-secondary">
+                        {{ person.role }}
+                      </p>
                     </div>
                     <div class="text-lg">
-                      <p class="text-gray-500">{{ person.bio }}</p>
+                      <p class="text-gray-500">
+                        {{ person.bio }}
+                      </p>
                     </div>
                     <ul role="list" class="flex space-x-5">
                       <li>
@@ -83,10 +92,14 @@
                         </a>
                       </li>
                     </ul>
-                    <div class="text-gray-400" v-if="person.sideProjects.length > 0">
-                      <h5 class="font-bold uppercase">Hobby-projekter:</h5>
+                    <div v-if="person.sideProjects.length > 0" class="text-gray-400">
+                      <h5 class="font-bold uppercase">
+                        Hobby-projekter:
+                      </h5>
                       <ul>
-                        <li v-for="project in person.sideProjects"><a class="hover:text-purple-600" :href="project.href">{{ project.name }}</a></li>
+                        <li v-for="project in person.sideProjects">
+                          <a class="hover:text-purple-600" :href="project.href">{{ project.name }}</a>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -112,7 +125,7 @@ const enterElement = (el: HTMLElement, done) => {
     translateX: [-400, 0],
     easing: 'easeOutExpo',
     complete: done,
-    duration: 750
+    duration: 750,
   })
 }
 
@@ -167,5 +180,5 @@ const people = [
     ],
   },
 ]
-                
+
 </script>
