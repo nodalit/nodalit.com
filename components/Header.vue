@@ -6,7 +6,7 @@
           <NuxtLink to="/">
             <span class="sr-only">Meetr</span>
             <ClientOnly>
-              <Logo :height="headerHeight" />
+              <Logo :height="headerHeight" id="headerLogo" />
             </ClientOnly>
           </NuxtLink>
           <div v-if="!isSmall" class="hidden space-x-8 lg:block lg:ml-5">
@@ -26,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+import anime from 'animejs/lib/anime.es.js'
 
 const isSmall = ref(false)
 const headerHeight = ref(70)
@@ -40,6 +41,24 @@ const scrolling = () => {
     headerHeight.value = initialHeaderHeight
   }
 }
+
+watch(isSmall, (val) => {
+  if (val) {
+    anime({
+      targets: document.getElementById('headerLogo'),
+      translateX: [100, 0],
+      easing: 'easeOutExpo',
+      duration: 750,
+    })
+  } else {
+    anime({
+      targets: document.getElementById('headerLogo'),
+      translateX: [-100, 0],
+      easing: 'easeOutExpo',
+      duration: 750,
+    })
+  }
+})
 
 onMounted(() => {
   initialHeaderHeight = document.getElementsByTagName('header')[0].clientHeight
