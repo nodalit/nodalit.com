@@ -1,6 +1,6 @@
 <template>
   <header class="bg-black" :class="{ 'fixed top-0 w-full z-50': isSmall }" :style="{ height: `${headerHeight}px` }">
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top" :class="{ 'max-w-full': isSmall }">
       <div class="w-full justify-between border-b border-indigo-500 lg:border-none" style="height: 70px;">
         <div class="flex items-center overflow-visible">
           <NuxtLink to="/">
