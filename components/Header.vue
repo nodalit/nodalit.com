@@ -2,7 +2,7 @@
   <header class="bg-black" :class="{ 'fixed top-0 w-full z-50': isSmall }" :style="{ height: `${headerHeight}px` }">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top" :class="{ 'max-w-full': isSmall }">
       <div class="w-full justify-between border-b border-indigo-500 lg:border-none" style="height: 70px;">
-        <div class="flex items-center overflow-visible">
+        <div class="flex items-center overflow-visible justify-between lg:justify-start" :style="{ justifyContent: isSmall ? 'space-between' : 'left' }">
           <NuxtLink to="/">
             <span class="sr-only">Meetr</span>
             <ClientOnly>
@@ -14,11 +14,12 @@
               {{ link.name }}
             </NuxtLink>
           </div>
-        </div>
-        <div class="grid justify-items-end lg:hidden">
-          <NuxtLink v-for="link in navigation" :key="link.name" :to="link.href" class="text-base font-bold uppercase text-white hover:text-indigo-50">
-            {{ link.name }}
-          </NuxtLink>
+          <div class="lg:hidden" :style="{ display: isSmall ? 'block' : null }">
+            <div class="-mr-2">
+              <span class="sr-only">Open menu</span>
+              <MenuIcon class="h-8 w-8 text-white rouned-md" aria-hidden="true" />
+            </div>
+          </div>
         </div>
       </div>
     </nav>
@@ -27,6 +28,9 @@
 
 <script setup lang="ts">
 import anime from 'animejs/lib/anime.es.js'
+import {
+  MenuIcon,
+} from '@heroicons/vue/outline'
 
 const isSmall = ref(false)
 const headerHeight = ref(70)
