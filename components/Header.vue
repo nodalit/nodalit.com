@@ -6,7 +6,7 @@
           <NuxtLink to="/">
             <span class="sr-only">Meetr</span>
             <ClientOnly>
-              <Logo :height="headerHeight" id="headerLogo" />
+              <Logo id="headerLogo" :height="headerHeight" />
             </ClientOnly>
           </NuxtLink>
           <div v-if="!isSmall" class="hidden space-x-8 lg:block lg:ml-5">
