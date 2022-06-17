@@ -14,7 +14,10 @@
               {{ link.name }}
             </NuxtLink>
           </div>
-          <div class="lg:hidden" :style="{ display: isSmall ? 'block' : null }">
+          <div
+            @click="showMenu = !showMenu"
+            class="lg:hidden"
+            :style="{ display: isSmall ? 'block' : null }">
             <div class="-mr-2">
               <span class="sr-only">Open menu</span>
               <MenuIcon class="h-8 w-8 text-white rouned-md" aria-hidden="true" />
@@ -23,6 +26,31 @@
         </div>
       </div>
     </nav>
+    <div
+      v-if="showMenu"
+      class="absolute z-30 right-10 p-8 transition transform origin-top-right rounded-2xl shadow-xl ring-1 ring-black ring-opacity-5 bg-gray-900 divide-y-2 divide-gray-50"
+      :style="{ top: `${headerHeight}px` }"
+    >
+      <nav class="grid gap-6">
+        <div
+          v-for="link in navigation"
+          :key="link.name"
+          :href="link.href"
+          class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50 text-slate-50 hover:text-black hover:cursor-pointer"
+          @click="goto(link.href)"
+        >
+          <div
+            class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full"
+            style="background: #ff006e;"
+          >
+            <!-- <component :is="item.icon" class="h-6 w-6" aria-hidden="true" /> -->
+          </div>
+          <div class="ml-4 text-xl font-bold">
+            {{ link.name }}
+          </div>
+        </div>
+      </nav>
+    </div>
   </header>
 </template>
 
@@ -31,8 +59,10 @@ import anime from 'animejs/lib/anime.es.js'
 import {
   MenuIcon,
 } from '@heroicons/vue/outline'
+const router = useRouter()
 
 const isSmall = ref(false)
+const showMenu = ref(false)
 const headerHeight = ref(70)
 let initialHeaderHeight = 70
 
@@ -78,4 +108,9 @@ const navigation = [
   { name: 'Hvad har vi lavet?', href: '/referencer' },
   { name: 'Hvem er vi?', href: '/team' },
 ]
+
+const goto = (href: string) => {
+  router.push(href)
+  showMenu.value = false
+}
 </script>
