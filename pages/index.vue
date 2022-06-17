@@ -36,7 +36,7 @@
           leave-from="opacity-100 rotate-0 scale-100 "
           leave-to="opacity-0 scale-95 "
         >
-          <img :src="project.image" :alt="project.name" class="absolute project shadow-2xl border-4 border-gray-900" :style="{ top: `${idx * 150}px` }">
+          <img :src="project.image" :alt="project.name" class="absolute project shadow-2xl border-4 border-gray-900" :style="{ top: `${key * 150}px` }">
         </TransitionRoot>
       </div>
     </main>
