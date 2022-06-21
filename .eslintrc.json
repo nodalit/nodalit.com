@@ -25,6 +25,7 @@
     "vue/require-v-for-key": "off",
     "vue/html-self-closing": "off",
     "vue/singleline-html-element-content-newline": "off",
-    "no-new": "off"
+    "no-new": "off",
+    "no-console": "off"
   }
 }

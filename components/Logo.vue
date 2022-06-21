@@ -6,7 +6,12 @@
 
 <script setup lang="ts">
 
-const props = defineProps(['height'])
+const props = defineProps({
+  height: {
+    type: Number,
+    default: 75,
+  },
+})
 
 const colors = [
   '#ffbe0b',
