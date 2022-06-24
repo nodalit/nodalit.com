@@ -1,3 +1,6 @@
+body {
+  background: rgb(243, 244, 246)
+}
 .router-link-active {
   text-decoration: underline;
 }
