@@ -22,73 +22,73 @@
               <p class="mt-6 text-base text-indigo-50 max-w-3xl">– eller <NuxtLink to="/team" class="underline hover:text-logo1">find en af os</NuxtLink> hvor vi nu er.</p>
             </div>
           </Transition>
-          <Transition
-            :css="false"
-            mode="out-in"
-            @enter="enterRightElement"
-          >
-            <div v-if="showSections" class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
-              <h3 class="text-lg font-bold text-gray-900 uppercase">SEND EN BESKED</h3>
-              <div class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
-                <div>
-                  <label for="name" class="block text-sm font-medium text-gray-900">Navn</label>
-                  <div class="mt-1">
-                    <input
-                      id="name"
-                      v-model="name"
-                      type="text"
-                      name="name"
-                      autocomplete="name"
-                      class="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label for="email" class="block text-sm font-medium text-gray-900">Email</label>
-                  <div class="mt-1">
-                    <input
-                      id="email"
-                      v-model="email"
-                      name="email"
-                      type="email"
-                      autocomplete="email"
-                      class="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
-                    />
-                  </div>
-                </div>
-                <div class="sm:col-span-2">
-                  <div class="flex justify-between">
-                    <label for="message" class="block text-sm font-medium text-gray-900">Besked</label>
-                    <span id="message-max" class="text-sm text-gray-500">Max. 500 tegn</span>
-                  </div>
-                  <div class="mt-1">
-                    <textarea
-                      id="message"
-                      v-model="message"
-                      name="message"
-                      rows="4"
-                      class="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border border-gray-300 rounded-md"
-                      aria-describedby="message-max"
-                    />
-                  </div>
+          <div class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
+            <h3 class="text-lg font-bold text-gray-900 uppercase">SEND EN BESKED</h3>
+            <div class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-900">Navn</label>
+                <div class="mt-1">
+                  <input
+                    id="name"
+                    v-model="name"
+                    type="text"
+                    name="name"
+                    autocomplete="name"
+                    class="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                  />
                 </div>
               </div>
               <div>
-                <div class="h-12">
-                  <div>
-                    <Transition name="slide-fade">
-                      <div v-if="isSent" class="sm:col-span-2 sm:flex">
-                        <p class="text-center text-gray-900 font-medium text-xl my-2">Din besked er sendt. Tak for din henvendelse.</p>
-                      </div>
-                    </Transition>
-                    <Transition name="slide-fade">
-                      <div v-if="isError" class="sm:col-span-2 sm:flex">
-                        <p class="text-center text-red-700 font-medium text-xl my-2">Der opstod en fejl – prøv meget gerne igen.</p>
-                      </div>
-                    </Transition>
-                  </div>
+                <label for="email" class="block text-sm font-medium text-gray-900">Email</label>
+                <div class="mt-1">
+                  <input
+                    id="email"
+                    v-model="email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    class="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                  />
                 </div>
-                <div class="sm:col-span-2 sm:flex sm:justify-end">
+              </div>
+              <div class="sm:col-span-2">
+                <div class="flex justify-between">
+                  <label for="message" class="block text-sm font-medium text-gray-900">Besked</label>
+                  <span id="message-max" class="text-sm text-gray-500">Max. 500 tegn</span>
+                </div>
+                <div class="mt-1">
+                  <textarea
+                    id="message"
+                    v-model="message"
+                    name="message"
+                    rows="4"
+                    class="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border border-gray-300 rounded-md"
+                    aria-describedby="message-max"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="h-12">
+                <div>
+                  <Transition name="slide-fade">
+                    <div v-if="isSent" class="sm:col-span-2 sm:flex">
+                      <p class="text-center text-gray-900 font-medium text-xl my-2">Din besked er sendt. Tak for din henvendelse.</p>
+                    </div>
+                  </Transition>
+                  <Transition name="slide-fade">
+                    <div v-if="isError" class="sm:col-span-2 sm:flex">
+                      <p class="text-center text-red-700 font-medium text-xl my-2">Der opstod en fejl – prøv meget gerne igen.</p>
+                    </div>
+                  </Transition>
+                </div>
+              </div>
+              <Transition
+                :css="false"
+                mode="out-in"
+                @enter="enterRightElement"
+              >
+                <div v-if="showSections" class="sm:col-span-2 sm:flex sm:justify-end">
                   <button type="submit" class="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-bold text-black bg-logo1 hover:bg-pink-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black sm:w-auto" :disabled="isSending" @click="send">
                     <svg v-if="isSending" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle
@@ -105,9 +105,9 @@
                     <span v-if="!isSending">SEND</span>
                   </button>
                 </div>
-              </div>
+              </Transition>
             </div>
-          </Transition>
+          </div>
         </div>
       </div>
     </div>
@@ -166,7 +166,7 @@ const enterLeftElement = (el: HTMLElement, done) => {
   anime({
     targets: el,
     translateX: [-400, 0],
-    easing: 'easeOutExpo',
+    // easing: 'easeOutExpo',
     complete: done,
     duration: 750,
   })
