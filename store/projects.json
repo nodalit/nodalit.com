@@ -25,7 +25,8 @@
     },
     "cta": {
       "text": "Har du en idé og et klart behov? Vi kan hjælpe med at konkretisere din idé til konkrete skærmbilleder og brugerflows og herefter give et tilbud på udviklingen af den færdige løsning.",
-      "buttonText": "Kontakt os og hør hvordan!"
+      "buttonText": "Kontakt os og hør hvordan!",
+      "link": "/kontakt"
     }
   },
   {
@@ -41,7 +42,8 @@
     ],
     "cta": {
       "text": "Har du en idé, som vi ser et forretningspotentiale i, så har du mulighed for at få udviklet en løsning skræddersyet til dine behov, for en brøkdel af prisen.",
-      "buttonText": "Kontakt os for en uforpligtende snak!"
+      "buttonText": "Kontakt os for en uforpligtende snak!",
+      "link": "/kontakt"
     },
     "quote": {
       "logoUrl": "https://tailwindui.com/img/logos/workcation.svg?color=white",
