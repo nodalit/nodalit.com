@@ -110,6 +110,7 @@ const navigation = [
   { name: 'Hvad kan vi?', href: '/loesninger' },
   { name: 'Hvad har vi lavet?', href: '/referencer' },
   { name: 'Hvem er vi?', href: '/team' },
+  { name: 'Kontakt os', href: '/kontakt' },
 ]
 
 const goto = (href: string) => {
