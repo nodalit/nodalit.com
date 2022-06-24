@@ -15,30 +15,8 @@
               Vi er personer, der arbejder agilt med asd ak asdk alsd jaskldj asldkj adlk jasdlk ajdslkaj sdlkaj sdalskdja lkdsaklsd...
             </p>
 
-            <div class="bg-gray-500 p-5 text-white">
-              <p class="pb-2">
-                Vores teknologier
-              </p>
-              <ul class="text-gray-500">
-                <li v-for="tech in technologies">
-                  <div class="relative pb-2">
-                    <div class="relative flex space-x-3">
-                      <div>
-                        <span class="bg-green-500 h-6 w-6 rounded-full flex items-center justify-center ring-6 ring-white">
-                          <CheckIcon class="w-4 h-4 text-white" aria-hidden="true" />
-                        </span>
-                      </div>
-                      <div class="min-w-0 flex-1 pt-0.5 flex justify-between space-x-4">
-                        <div>
-                          <p class="text-sm text-gray-500">
-                            <a href="#" class="font-medium text-white">{{ tech }}</a>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
+            <div id="techbox" class="ring-black ring-2 bg-gray-600 p-5 shadow-xl rounded-xl" style="height: 500px">
+              <!-- -->
             </div>
           </div>
         </Transition>
@@ -50,7 +28,7 @@
                   <img class="object-cover shadow-lg rounded-lg" :src="person.imageUrl" alt="">
                 </div>
                 <div class="sm:col-span-2">
-                  <div class="space-y-4">
+                  <div class="space-y-6">
                     <div class="text-lg leading-6 font-medium space-y-1">
                       <h3>{{ person.name }}</h3>
                       <p class="text-secondary">
@@ -92,6 +70,16 @@
                         </a>
                       </li>
                     </ul>
+                    <div v-if="person.freelanceProjects.length > 0" class="text-gray-400">
+                      <h5 class="font-bold uppercase">
+                        Konsulent-projekter:
+                      </h5>
+                      <ul>
+                        <li v-for="project in person.freelanceProjects">
+                          <a class="hover:text-purple-600" :href="project.href">{{ project.name }}</a>
+                        </li>
+                      </ul>
+                    </div>
                     <div v-if="person.sideProjects.length > 0" class="text-gray-400">
                       <h5 class="font-bold uppercase">
                         Hobby-projekter:
@@ -114,10 +102,11 @@
 </template>
 
 <script lang="ts" setup>
-import { MailIcon, CheckIcon } from '@heroicons/vue/solid'
+import { MailIcon } from '@heroicons/vue/solid'
 import anime from 'animejs/lib/anime.es.js'
 
 const show = ref(false)
+// const showTech = ref(false)
 
 const enterElement = (el: HTMLElement, done) => {
   anime({
@@ -128,11 +117,26 @@ const enterElement = (el: HTMLElement, done) => {
     duration: 750,
   })
 }
-
+/*
+const enterTechnologies = () => {
+  anime({
+    targets: '.tech-item',
+    translateX: [-400, 0],
+    delay: anime.stagger(50),
+    easing: 'easeInOutSine',
+    duration: 250,
+    // loop: true,
+    // direction: 'alternate',
+  })
+}
+*/
 onMounted(() => {
   show.value = true
+  // await nextTick()
+  // showTech.value = true
 })
 
+/*
 const technologies = [
   'Node',
   'Docker',
@@ -142,7 +146,23 @@ const technologies = [
   'Docker',
   'Docker',
   'Docker',
+  'Docker',
+  'Docker',
+  'Docker',
+  'Docker',
 ]
+
+const techPos = () => {
+  const width = document.getElementById('techbox').clientWidth
+  const top = Math.random() * 450
+  const left = Math.random() * (width - 150)
+  console.log(top)
+  return {
+    top: `${top}px`,
+    left: `${left}px`,
+  }
+}
+*/
 
 const people = [
   {
@@ -156,6 +176,12 @@ const people = [
     linkedinUrl: 'https://www.linkedin.com/in/madsringblom/',
     githubUrl: 'https://github.com/madsringblom',
     sideProjects: [
+    ],
+    freelanceProjects: [
+      {
+        name: 'Testfacilitet for Bygningshub',
+        href: 'https://bygningshub.dk/',
+      },
     ],
   },
   {
@@ -176,6 +202,12 @@ const people = [
       {
         name: 'Laterz',
         href: 'https://laterz.io/',
+      },
+    ],
+    freelanceProjects: [
+      {
+        name: 'Testfacilitet for Bygningshub',
+        href: 'https://bygningshub.dk/',
       },
     ],
   },
