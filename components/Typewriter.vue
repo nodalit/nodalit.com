@@ -1,5 +1,5 @@
 <template>
-  <span id="typewriter">god</span>
+  <span id="typewriter" class="text-logo1">god</span>
 </template>
 
 <script>
