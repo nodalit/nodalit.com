@@ -12,9 +12,11 @@
               Dem vi er
             </h2>
             <p class="text-xl text-gray-500">
-              Vi er personer, der arbejder agilt med asd ak asdk alsd jaskldj asldkj adlk jasdlk ajdslkaj sdlkaj sdalskdja lkdsaklsd...
+              Vi ved, at det er ok at blive klogere undervejs. Derfor arbejder vi altid agilt med korte leverance-intervaller og løbende inddragelse af vores kunder.
             </p>
-
+            <p>
+              Vi tror på at samarbejde baseret på tillid, øger såvel produktiviteten, som kvaliteten af det udviklede. Og så er det meget sjovere.
+            </p>
             <div id="techbox" class="ring-black ring-2 bg-gray-600 p-5 shadow-xl rounded-xl" style="height: 500px">
               <!-- -->
             </div>
