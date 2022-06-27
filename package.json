@@ -22,6 +22,7 @@
   "dependencies": {
     "@headlessui/vue": "^1.6.4",
     "@heroicons/vue": "^1.0.6",
+    "@lottiefiles/lottie-player": "^1.5.7",
     "@tailwindcss/forms": "^0.5.2",
     "animejs": "^3.2.1",
     "nodemailer": "^6.7.5",

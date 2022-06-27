@@ -15,7 +15,7 @@
               Vi ved, at det er ok at blive klogere undervejs. Derfor arbejder vi altid agilt med korte leverance-intervaller og løbende inddragelse af vores kunder.
             </p>
             <p>
-              Vi tror på at samarbejde baseret på tillid, øger såvel produktiviteten, som kvaliteten af det udviklede. Og så er det meget sjovere.
+              Vi tror på at samarbejde baseret på tillid, øger såvel produktiviteten, som kvaliteten af det udviklede. Og så er det meget sjovere – for alle parter.
             </p>
             <div id="techbox" class="ring-black ring-2 bg-gray-600 p-5 shadow-xl rounded-xl" style="height: 500px">
               <!-- -->

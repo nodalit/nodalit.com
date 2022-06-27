@@ -10,4 +10,9 @@ export default defineNuxtConfig({
       eslintPlugin(),
     ],
   },
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag: string) => ['lottie-player'].includes(tag),
+    },
+  },
 })

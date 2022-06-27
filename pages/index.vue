@@ -1,7 +1,8 @@
 <template>
   <div class="relative bg-gray-50">
     <main class="lg:relative">
-      <SectionHero />
+      <!-- <SectionHero /> -->
+      <HeroTest />
       <SectionTestimonial />
       <SectionValues />
     </main>
