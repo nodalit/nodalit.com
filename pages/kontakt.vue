@@ -4,24 +4,24 @@
       <div class="relative bg-white shadow-xl">
         <h2 class="sr-only">Kontakt os</h2>
         <div class="grid grid-cols-1 lg:grid-cols-3">
-          <Transition
-            :css="false"
-            mode="out-in"
-            @enter="enterLeftElement"
-          >
-            <div v-if="showSections" class="relative overflow-hidden py-10 px-6 sm:px-10 xl:p-12 bg-gradient-to-l from-pink-400 to-pink-600">
-              <h3 class="text-lg font-bold text-white uppercase">Kontaktinformation</h3>
-              <p class="mt-6 text-base text-indigo-50 max-w-3xl">Send os en email eller udfyld en formular – du bestemmer og vi lover at vende tilbage.</p>
-              <dl class="mt-8 space-y-6">
-                <dt><span class="sr-only">Email</span></dt>
-                <dd class="flex text-base text-indigo-50">
+          <div class="relative overflow-hidden py-10 px-6 sm:px-10 xl:p-12 bg-gradient-to-l from-pink-400 to-pink-600">
+            <h3 class="text-lg font-bold text-white uppercase">Kontaktinformation</h3>
+            <p class="mt-6 text-base text-indigo-50 max-w-3xl">Send os en email eller udfyld en formular – du bestemmer og vi lover at vende tilbage.</p>
+            <dl class="mt-8 space-y-6">
+              <dt><span class="sr-only">Email</span></dt>
+              <Transition
+                :css="false"
+                mode="out-in"
+                @enter="enterLeftElement"
+              >
+                <dd v-if="showSections" class="flex text-base text-indigo-50">
                   <MailIcon class="flex-shrink-0 w-6 h-6 text-logo1" aria-hidden="true" />
                   <span class="ml-3"><a href="mailto:mads@meetr.dk">kontakt@meetr.dk</a></span>
                 </dd>
-              </dl>
-              <p class="mt-6 text-base text-indigo-50 max-w-3xl">– eller <NuxtLink to="/team" class="underline hover:text-logo1">find en af os</NuxtLink> hvor vi nu er.</p>
-            </div>
-          </Transition>
+              </Transition>
+            </dl>
+            <p class="mt-6 text-base text-indigo-50 max-w-3xl">– eller <NuxtLink to="/team" class="underline hover:text-logo1">find en af os</NuxtLink> hvor vi nu er.</p>
+          </div>
           <div class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
             <h3 class="text-lg font-bold text-gray-900 uppercase">SEND EN BESKED</h3>
             <div class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
