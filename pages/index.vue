@@ -3,6 +3,7 @@
     <main class="lg:relative">
       <!-- <SectionHero /> -->
       <HeroTest />
+      <FrontTestimonial />
       <SectionTestimonial />
       <SectionValues />
     </main>
