@@ -2,26 +2,26 @@
   <div class="bg-white">
     <div class="mx-auto py-10 px-4 max-w-7xl sm:px-6 lg:px-8">
       <div class="space-y-12 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0">
-        <Transition
-          :css="false"
-          mode="out-in"
-          @enter="enterElement"
-        >
-          <div v-if="show" class="space-y-5 sm:space-y-4">
-            <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Dem vi er
-            </h2>
-            <p class="text-xl text-gray-500">
-              Vi ved, at det er ok at blive klogere undervejs. Derfor arbejder vi altid agilt med korte leverance-intervaller og løbende inddragelse af vores kunder.
-            </p>
-            <p>
-              Vi tror på at samarbejde baseret på tillid, øger såvel produktiviteten, som kvaliteten af det udviklede. Og så er det meget sjovere – for alle parter.
-            </p>
-            <div id="techbox" class="ring-black ring-2 bg-gray-600 p-5 shadow-xl rounded-xl" style="height: 500px">
+        <div class="space-y-5 sm:space-y-4">
+          <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+            Dem vi er
+          </h2>
+          <p class="text-xl text-gray-500">
+            Vi ved, at det er ok at blive klogere undervejs. Derfor arbejder vi altid agilt med korte leverance-intervaller og løbende inddragelse af vores kunder.
+          </p>
+          <p>
+            Vi tror på at samarbejde baseret på tillid, øger såvel produktiviteten, som kvaliteten af det udviklede. Og så er det meget sjovere – for alle parter.
+          </p>
+          <Transition
+            :css="false"
+            mode="out-in"
+            @enter="enterElement"
+          >
+            <div v-if="show" class="bg-[url('/assets/code.png')] ring-black ring-2 bg-gray-600 p-5 shadow-xl rounded-xl bg-contain" style="height: 500px">
               <!-- -->
             </div>
-          </div>
-        </Transition>
+          </Transition>
+        </div>
         <div class="lg:col-span-2">
           <ul role="list" class="space-y-12 sm:divide-y sm:divide-gray-200 sm:space-y-0 sm:-mt-8 lg:gap-x-8 lg:space-y-0">
             <li v-for="person in people" :key="person.name" class="sm:py-8">
@@ -108,63 +108,20 @@ import { MailIcon } from '@heroicons/vue/solid'
 import anime from 'animejs/lib/anime.es.js'
 
 const show = ref(false)
-// const showTech = ref(false)
 
 const enterElement = (el: HTMLElement, done) => {
   anime({
     targets: el,
-    translateX: [-400, 0],
+    translateY: [400, 0],
     easing: 'easeOutExpo',
     complete: done,
     duration: 750,
   })
 }
-/*
-const enterTechnologies = () => {
-  anime({
-    targets: '.tech-item',
-    translateX: [-400, 0],
-    delay: anime.stagger(50),
-    easing: 'easeInOutSine',
-    duration: 250,
-    // loop: true,
-    // direction: 'alternate',
-  })
-}
-*/
+
 onMounted(() => {
   show.value = true
-  // await nextTick()
-  // showTech.value = true
 })
-
-/*
-const technologies = [
-  'Node',
-  'Docker',
-  'Postgres',
-  'Nuxt',
-  'Feathers',
-  'Docker',
-  'Docker',
-  'Docker',
-  'Docker',
-  'Docker',
-  'Docker',
-  'Docker',
-]
-
-const techPos = () => {
-  const width = document.getElementById('techbox').clientWidth
-  const top = Math.random() * 450
-  const left = Math.random() * (width - 150)
-  console.log(top)
-  return {
-    top: `${top}px`,
-    left: `${left}px`,
-  }
-}
-*/
 
 const people = [
   {
@@ -210,6 +167,10 @@ const people = [
       {
         name: 'Testfacilitet for Bygningshub',
         href: 'https://bygningshub.dk/',
+      },
+      {
+        name: 'AlleOs i Alternativet',
+        href: 'https://alleos.alternativet.dk/',
       },
     ],
   },
