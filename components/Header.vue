@@ -3,12 +3,12 @@
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top" :class="{ 'max-w-full': isSmall }">
       <div class="w-full justify-between border-b border-indigo-500 lg:border-none" style="height: 70px;">
         <div class="flex items-center overflow-visible justify-between lg:justify-start" :style="{ justifyContent: isSmall ? 'space-between' : 'left' }">
-          <NuxtLink to="/">
+          <a href="/">
             <span class="sr-only">Meetr</span>
             <ClientOnly>
               <Logo id="headerLogo" :height="headerHeight" />
             </ClientOnly>
-          </NuxtLink>
+          </a>
           <div v-if="!isSmall" class="hidden space-x-8 lg:block lg:ml-5">
             <NuxtLink v-for="link in navigation" :key="link.name" :to="link.href" class="text-base font-bold uppercase text-white hover:text-indigo-50">
               {{ link.name }}

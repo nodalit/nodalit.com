@@ -8,7 +8,7 @@
             <!-- <div class="aspect-w-10 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
               <img class="object-cover lg:h-full lg:w-full" src="/assets/link_rose_1.png" alt="LINK Kompass" />
             </div> -->
-            <div id="lottieContainerMobile" class="absolute" style="width: 1000px; left: -300px; top: -50px"></div>
+            <div id="lottieContainerMobile" ref="lottieRef" class="absolute" style="width: 1000px; left: -300px; top: -50px"></div>
           </div>
         </div>
         <div class="mt-12 lg:m-0 lg:col-span-2 lg:pl-8">
@@ -36,6 +36,7 @@
 import lottie from 'lottie-web'
 import animationData from '../assets/anim3.json'
 
+const lottieRef = ref(null)
 let anim
 
 const animateScroll = (duration: number) => {
@@ -48,20 +49,27 @@ const animateScroll = (duration: number) => {
 }
 
 const onScroll = () => {
-  animateScroll(400)
+  animateScroll(700)
 }
 
 onMounted(() => {
   if (process.client) {
-    const lottieContainer = document.getElementById('lottieContainerMobile')
     anim = lottie.loadAnimation({
-      container: lottieContainer,
+      container: lottieRef.value,
       renderer: 'svg',
       loop: false,
       autoplay: false,
       animationData,
     })
     document.addEventListener('scroll', onScroll)
+  }
+})
+
+onUnmounted(() => {
+  if (process.client) {
+    document.removeEventListener('scroll', onScroll)
+    anim.destroy()
+    anim = undefined
   }
 })
 
