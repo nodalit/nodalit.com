@@ -4,10 +4,11 @@
       <div class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8">
         <div class="relative lg:-my-8">
           <div aria-hidden="true" class="absolute inset-x-0 top-0 h-1/2 bg-white lg:hidden" />
-          <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:p-0 lg:h-full bg-white border-black border-2 rounded-2xl">
-            <div class="aspect-w-10 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
+          <div class="rounded-2xl relative">
+            <!-- <div class="aspect-w-10 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
               <img class="object-cover lg:h-full lg:w-full" src="/assets/link_rose_1.png" alt="LINK Kompass" />
-            </div>
+            </div> -->
+            <div id="lottieContainerMobile" class="absolute" style="width: 1000px; left: -300px; top: -50px"></div>
           </div>
         </div>
         <div class="mt-12 lg:m-0 lg:col-span-2 lg:pl-8">
@@ -31,7 +32,39 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import lottie from 'lottie-web'
+import animationData from '../assets/anim3.json'
+
+let anim
+
+const animateScroll = (duration: number) => {
+  const scrollPosition = window.scrollY
+  const maxFrames = anim.totalFrames
+  const frame = (maxFrames / 100) * (scrollPosition / (duration / 100))
+  if (frame <= maxFrames) {
+    anim.goToAndStop(frame, true)
+  }
+}
+
+const onScroll = () => {
+  animateScroll(400)
+}
+
+onMounted(() => {
+  if (process.client) {
+    const lottieContainer = document.getElementById('lottieContainerMobile')
+    anim = lottie.loadAnimation({
+      container: lottieContainer,
+      renderer: 'svg',
+      loop: false,
+      autoplay: false,
+      animationData,
+    })
+    document.addEventListener('scroll', onScroll)
+  }
+})
+
 const testimonial = {
   name: 'Grethe Hauglang',
   title: 'CEO',

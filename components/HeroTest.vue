@@ -39,7 +39,9 @@ const animateScroll = (duration: number) => {
   const scrollPosition = window.scrollY
   const maxFrames = anim.totalFrames
   const frame = (maxFrames / 100) * (scrollPosition / (duration / 100))
-  anim.goToAndStop(frame, true)
+  if (frame <= maxFrames) {
+    anim.goToAndStop(frame, true)
+  }
 }
 
 const onScroll = () => {
