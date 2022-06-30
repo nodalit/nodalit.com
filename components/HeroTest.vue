@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import lottie from 'lottie-web'
-import animationData from '../assets/anim.json'
+import animationData from '../assets/anim2.json'
 const lottieReady = ref(false)
 let anim
 
@@ -43,7 +43,7 @@ const animateScroll = (duration: number) => {
 }
 
 const onScroll = () => {
-  animateScroll(500)
+  animateScroll(400)
 }
 
 onMounted(() => {
@@ -57,9 +57,7 @@ onMounted(() => {
       autoplay: false,
       animationData,
     })
-    console.log(anim)
     document.addEventListener('scroll', onScroll)
-    // anim.play()
   }
 })
 </script>
