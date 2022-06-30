@@ -21,7 +21,7 @@
         <div class="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative">
           <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0">
             <!-- <img class="w-full lg:absolute lg:inset-y-0 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none" src="assets/hero.png" alt="" /> -->
-            <div id="lottieContainer" class="w-full lg:absolute lg:inset-y-0 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none"></div>
+            <div ref="lottieRef" class="w-full lg:absolute lg:inset-y-0 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none"></div>
           </div>
         </div>
       </div>
@@ -32,7 +32,8 @@
 <script setup lang="ts">
 import lottie from 'lottie-web'
 import animationData from '../assets/anim2.json'
-const lottieReady = ref(false)
+const lottieRef = ref(null)
+
 let anim
 
 const animateScroll = (duration: number) => {
@@ -50,10 +51,8 @@ const onScroll = () => {
 
 onMounted(() => {
   if (process.client) {
-    lottieReady.value = true
-    const lottieContainer = document.getElementById('lottieContainer')
     anim = lottie.loadAnimation({
-      container: lottieContainer,
+      container: lottieRef.value,
       renderer: 'svg',
       loop: false,
       autoplay: false,
