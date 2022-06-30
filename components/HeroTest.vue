@@ -21,13 +21,7 @@
         <div class="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative">
           <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0">
             <!-- <img class="w-full lg:absolute lg:inset-y-0 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none" src="assets/hero.png" alt="" /> -->
-            <lottie-player
-              v-if="lottieReady"
-              autoplay="true"
-              src="/assets/anim.json"
-              class="w-full lg:absolute lg:inset-y-0 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none"
-            >
-            </lottie-player>
+            <div id="lottieContainer" class="w-full lg:absolute lg:inset-y-0 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none"></div>
           </div>
         </div>
       </div>
@@ -36,12 +30,36 @@
 </template>
 
 <script setup lang="ts">
+import lottie from 'lottie-web'
+import animationData from '../assets/anim.json'
 const lottieReady = ref(false)
+let anim
+
+const animateScroll = (duration: number) => {
+  const scrollPosition = window.scrollY
+  const maxFrames = anim.totalFrames
+  const frame = (maxFrames / 100) * (scrollPosition / (duration / 100))
+  anim.goToAndStop(frame, true)
+}
+
+const onScroll = () => {
+  animateScroll(500)
+}
 
 onMounted(() => {
   if (process.client) {
-    import('@lottiefiles/lottie-player')
     lottieReady.value = true
+    const lottieContainer = document.getElementById('lottieContainer')
+    anim = lottie.loadAnimation({
+      container: lottieContainer,
+      renderer: 'svg',
+      loop: false,
+      autoplay: false,
+      animationData,
+    })
+    console.log(anim)
+    document.addEventListener('scroll', onScroll)
+    // anim.play()
   }
 })
 </script>
