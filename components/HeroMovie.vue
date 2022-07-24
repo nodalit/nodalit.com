@@ -21,7 +21,12 @@
         <div class="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative hidden lg:block">
           <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0">
             <!-- <img class="w-full lg:absolute lg:inset-y-0 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none" src="assets/hero.png" alt="" /> -->
-            <div ref="lottieRef" class="w-full lg:absolute lg:inset-y-0 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none"></div>
+            <div class="w-full lg:absolute lg:inset-y-0 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none lg:flex lg:justify-center">
+              <video ref="vidRef" playsinline muted>
+                <source src="/assets/laptop.mp4" type="video/mp4" codec="hvc1" />
+                <source src="/assets/laptop.webm" type="video/webm" />
+              </video>
+            </div>
           </div>
         </div>
       </div>
@@ -30,35 +35,37 @@
 </template>
 
 <script setup lang="ts">
-import lottie from 'lottie-web'
-import animationData from '../assets/anim2.json'
-const lottieRef = ref(null)
-
-let anim
+const vidRef = ref(null)
 
 const animateScroll = (duration: number) => {
   const scrollPosition = window.scrollY
-  const maxFrames = anim.totalFrames
-  const frame = (maxFrames / 100) * (scrollPosition / (duration / 100))
-  if (frame <= maxFrames) {
-    anim.goToAndStop(frame, true)
+  const goto = (vidRef.value.duration / 100) * (scrollPosition / (duration / 100))
+  console.log(goto, vidRef.value.seeking)
+  if (vidRef.value.seeking) {
+    return
+  }
+  if (goto < vidRef.value.duration) {
+    vidRef.value.currentTime = goto
+  } else {
+    vidRef.value.currentTime = vidRef.value.duration
   }
 }
 
 const onScroll = () => {
-  animateScroll(400)
+  animateScroll(250)
 }
 
 onMounted(() => {
   if (process.client) {
-    anim = lottie.loadAnimation({
-      container: lottieRef.value,
-      renderer: 'svg',
-      loop: false,
-      autoplay: false,
-      animationData,
-    })
     document.addEventListener('scroll', onScroll)
+    vidRef.value.currentTime = 0.001
   }
 })
+
+onUnmounted(() => {
+  if (process.client) {
+    document.removeEventListener('scroll', onScroll)
+  }
+})
+
 </script>

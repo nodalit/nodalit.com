@@ -2,8 +2,8 @@
   <div class="relative bg-gray-50">
     <main class="lg:relative">
       <!-- <SectionHero /> -->
-      <HeroTest />
-      <FrontTestimonial />
+      <HeroMovie />
+      <FrontTestimonialMovie />
       <SectionTestimonial />
       <SectionValues />
     </main>
