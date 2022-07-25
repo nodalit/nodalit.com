@@ -1,7 +1,7 @@
 <template>
-  <header class="bg-black" :class="{ 'fixed top-0 w-full z-50': isSmall }" :style="{ height: `${headerHeight}px` }">
+  <header class="fixed top-0 w-full z-20" :style="{ height: `${headerHeight}px` }">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top" :class="{ 'max-w-full': isSmall }">
-      <div class="w-full justify-between border-b border-indigo-500 lg:border-none" style="height: 70px;">
+      <div class="w-full justify-between" style="height: 70px;">
         <div class="flex items-center overflow-visible justify-between lg:justify-start" :style="{ justifyContent: isSmall ? 'space-between' : 'left' }">
           <a href="/">
             <span class="sr-only">Meetr</span>
@@ -21,7 +21,7 @@
           >
             <div class="-mr-2">
               <span class="sr-only">Open menu</span>
-              <MenuIcon class="h-8 w-8 text-white rouned-md" aria-hidden="true" />
+              <MenuIcon class="h-8 w-8 text-black rouned-md" aria-hidden="true" />
             </div>
           </div>
         </div>
