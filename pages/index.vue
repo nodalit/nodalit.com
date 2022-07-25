@@ -4,7 +4,6 @@
       <!-- <SectionHero /> -->
       <HeroMovie />
       <FrontTestimonialMovie />
-      <SectionTestimonial />
       <SectionValues />
       <SectionFooter />
     </main>
