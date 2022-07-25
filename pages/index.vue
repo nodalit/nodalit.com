@@ -4,8 +4,8 @@
       <!-- <SectionHero /> -->
       <HeroTest />
       <FrontTestimonial />
-      <SectionTestimonial />
       <SectionValues />
+      <SectionFooter />
     </main>
   </div>
 </template>
