@@ -1,40 +1,42 @@
 <template>
-  <header id="header" class="fixed top-0 w-full z-20 mix-blend-difference" :style="{ height: `${headerHeight}px` }">
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top" :class="{ 'max-w-full': isSmall }">
-      <div class="w-full justify-between" style="height: 70px;">
-        <div class="flex items-center overflow-visible justify-between lg:justify-start" :style="{ justifyContent: isSmall ? 'space-between' : 'left' }">
-          <a href="/">
-            <span class="sr-only">Meetr</span>
-            <ClientOnly>
-              <Logo id="headerLogo" :height="headerHeight" />
-            </ClientOnly>
-          </a>
-          <div v-if="!isSmall" class="hidden space-x-8 lg:block lg:ml-5">
-            <NuxtLink v-for="link in navigation" :key="link.name" :to="link.href" class="text-base font-bold uppercase text-white hover:text-indigo-50">
-              {{ link.name }}
-            </NuxtLink>
-          </div>
-          <div
-            class="lg:hidden cursor-pointer"
-            :style="{ display: isSmall ? 'block' : null }"
-            @click="showMenu = !showMenu"
-          >
-            <div class="-mr-2">
-              <span class="sr-only">Open menu</span>
-              <MenuIcon
-                class="h-8 w-8 text-black rouned-md"
-                :style="{ color: textColor }"
-                aria-hidden="true"
-              />
+  <div>
+    <header id="header" class="fixed top-0 w-full z-20 mix-blend-difference" :style="{ height: `${headerHeight}px` }">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top" :class="{ 'max-w-full': isSmall }">
+        <div class="w-full justify-between" style="height: 70px;">
+          <div class="flex items-center overflow-visible justify-between lg:justify-start" :style="{ justifyContent: isSmall ? 'space-between' : 'left' }">
+            <a href="/">
+              <span class="sr-only">Meetr</span>
+              <ClientOnly>
+                <Logo id="headerLogo" :height="headerHeight" />
+              </ClientOnly>
+            </a>
+            <div v-if="!isSmall" class="hidden space-x-8 lg:block lg:ml-5">
+              <NuxtLink v-for="link in navigation" :key="link.name" :to="link.href" class="text-base font-bold uppercase text-white hover:text-indigo-50">
+                {{ link.name }}
+              </NuxtLink>
+            </div>
+            <div
+              class="lg:hidden cursor-pointer"
+              :style="{ display: isSmall ? 'block' : null }"
+              @click="showMenu = !showMenu"
+            >
+              <div class="-mr-2">
+                <span class="sr-only">Open menu</span>
+                <MenuIcon
+                  class="h-8 w-8 text-black rouned-md"
+                  :style="{ color: textColor }"
+                  aria-hidden="true"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
     <Transition name="scale" @enter="enterMenu">
       <div
-        v-if="showMenu"
-        class="absolute z-30 right-10 p-8 transition transform origin-top-right rounded-2xl shadow-xl ring-1 ring-black ring-opacity-5 bg-gray-900 divide-y-2 divide-gray-50"
+        v-if="showMenu && isSmall"
+        class="fixed z-30 right-10 p-8 transition transform origin-top-right rounded-2xl shadow-xl ring-1 ring-black ring-opacity-5 bg-gray-900 divide-y-2 divide-gray-50"
         :style="{ top: `${headerHeight}px` }"
       >
         <nav class="grid gap-6">
@@ -59,7 +61,7 @@
         </nav>
       </div>
     </Transition>
-  </header>
+  </div>
 </template>
 
 <script setup lang="ts">
