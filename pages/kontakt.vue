@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="max-w-7xl mx-auto py-10 px-4 sm:py-10 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto py-10 px-4 sm:py-10 sm:px-6 lg:px-8 mt-10">
       <div class="relative bg-white shadow-xl">
         <h2 class="sr-only">Kontakt os</h2>
         <div class="grid grid-cols-1 lg:grid-cols-3">

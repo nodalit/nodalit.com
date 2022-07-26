@@ -1,5 +1,5 @@
 <template>
-  <header class="fixed top-0 w-full z-20" :style="{ height: `${headerHeight}px` }">
+  <header id="header" class="fixed top-0 w-full z-20 mix-blend-difference" :style="{ height: `${headerHeight}px` }">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top" :class="{ 'max-w-full': isSmall }">
       <div class="w-full justify-between" style="height: 70px;">
         <div class="flex items-center overflow-visible justify-between lg:justify-start" :style="{ justifyContent: isSmall ? 'space-between' : 'left' }">
@@ -21,7 +21,11 @@
           >
             <div class="-mr-2">
               <span class="sr-only">Open menu</span>
-              <MenuIcon class="h-8 w-8 text-black rouned-md" aria-hidden="true" />
+              <MenuIcon
+                class="h-8 w-8 text-black rouned-md"
+                :style="{ color: textColor }"
+                aria-hidden="true"
+              />
             </div>
           </div>
         </div>
@@ -39,6 +43,7 @@
             :key="link.name"
             :href="link.href"
             class="menu-item -m-3 p-3 flex items-center rounded-lg hover:bg-gray-50 text-slate-50 hover:text-black hover:cursor-pointer"
+            :style="{ color: textColor }"
             @click="goto(link.href)"
           >
             <div
@@ -62,7 +67,53 @@ import anime from 'animejs/lib/anime.es.js'
 import {
   MenuIcon,
 } from '@heroicons/vue/outline'
-// const router = useRouter()
+
+const rgbToHsl = (r, g, b) => {
+  r /= 255
+  g /= 255
+  b /= 255
+  const max = Math.max(r, g, b)
+  const min = Math.min(r, g, b)
+  let h = (max + min) / 2
+  let s = (max + min) / 2
+  const l = (max + min) / 2
+
+  if (max === min) {
+    h = s = 0
+  } else {
+    const d = max - min
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break
+      case g: h = (b - r) / d + 2; break
+      case b: h = (r - g) / d + 4; break
+    }
+    h /= 6
+  }
+  return [h, s, l]
+}
+
+const elementBackgroundColor = (element) => {
+  const bgColor = window.getComputedStyle(element).backgroundColor
+  if (bgColor === 'rgba(0, 0, 0, 0)') { // Transparent
+    return elementBackgroundColor(element.parentElement)
+  } else {
+    return bgColor
+  }
+}
+
+const textColor = computed(() => {
+  if (process.client) {
+    const bgColor = elementBackgroundColor(document.getElementById('header'))
+    console.log(bgColor)
+    const regex = /\((.*)\)/gm
+    const ex = regex.exec(bgColor)
+    const rgb = ex[1].split(',').map(x => parseInt(x))
+    const hsl = rgbToHsl(rgb[0], rgb[1], rgb[2])
+    console.log(hsl)
+  }
+  return '#fff'
+})
 
 const isSmall = ref(false)
 const showMenu = ref(false)
