@@ -1,9 +1,9 @@
 <template>
-  <div :id="'fadingTextContainer' + uid" :class="'responsive-text-' + textSize">
+  <div :id="'fadingTextContainer' + uid" :class="'responsive-text-' + textSize + ' text-' + textColor">
     <span
       v-for="(word, index) in words"
       :key="index"
-      :class="word.highlight ? 'text-white' : ''"
+      :class="word.highlight ? 'text-' + highlightColor : '' "
       :style="`opacity: ${word.opacity}; line-height: 1.4;`"
     >
       {{ word.text + ' ' }}
@@ -23,6 +23,7 @@
  * container element height divided by number of words
  * set the tempo
  */
+import calcHorizontalDistance from '@/composables/calcHorizontalDistance'
 export default {
   props: {
     text: {
@@ -32,6 +33,14 @@ export default {
     textSize: {
       type: String,
       default: 'mega',
+    },
+    textColor: {
+      type: String,
+      default: 'black',
+    },
+    highlightColor: {
+      type: String,
+      default: 'white',
     },
     highlightFirstWords: {
       type: Number,
@@ -48,7 +57,6 @@ export default {
   },
   data () {
     return {
-      lastKnownScrollPosition: 0,
       ticking: false,
       containerEl: null,
       containerTop: null,
@@ -73,37 +81,41 @@ export default {
       const relY = y - startScroll
       return (relY / unit)
     },
-    scrollCalback () {
+    setContainerMeasurements () {
       if (!this.containerEl) {
         this.containerEl = document.getElementById('fadingTextContainer' + this.uid)
       }
-      if (this.containerEl && !this.containerTop) {
+      if (this.containerEl) {
         this.containerTop = this.containerEl.getBoundingClientRect().top
         this.containerHeight = this.containerEl.scrollHeight
       }
-      if (this.containerTop && !this.ticking) {
-        this.lastKnownScrollPosition = window.scrollY
-        const scrollStartPosition = (window.innerHeight * this.scrollStart / 100)
-        // hvor langt er punktet scrollStartPosition ift. this.containerTop
-        // scroll 300
-        // this.containerTop 600
-        // scrollStartPos 700
-        const relativeScroll = this.lastKnownScrollPosition - this.containerTop + scrollStartPosition
-        console.log(relativeScroll)
-        const h = this.containerHeight
-        const n = this.numOfWords
-        const unit = h / n
-        window.requestAnimationFrame(() => {
-          // eslint-disable-next-line
-          this.words.forEach((word, i) => {
-            const newOpacity = this.calcWordOpacity(relativeScroll, i, unit)
-            if (word.opacity !== newOpacity) {
-              word.opacity = newOpacity
-            }
+    },
+    setWordOpacities (relativeScroll, unit) {
+      this.words.forEach((word, i) => {
+        const newOpacity = this.calcWordOpacity(relativeScroll, i, unit)
+        if (word.opacity !== newOpacity) {
+          word.opacity = newOpacity
+        }
+      })
+    },
+    calcUnit () {
+      const h = this.containerHeight
+      const n = this.words.length
+      return h / n
+    },
+    scrollCallback () {
+      if (!this.ticking) {
+        if (this.containerHeight && this.containerTop) {
+          const relativeScroll = calcHorizontalDistance(this.scrollStart, this.containerTop)
+          const unit = this.calcUnit()
+          window.requestAnimationFrame(() => {
+            this.setWordOpacities(relativeScroll, unit)
+            this.ticking = false
           })
-          this.ticking = false
-        })
-        this.ticking = true
+          this.ticking = true
+        } else {
+          this.setContainerMeasurements()
+        }
       }
     },
   },
@@ -119,10 +131,9 @@ export default {
     })
   },
   mounted () {
-    this.numOfWords = this.words.length
-    this.scrollCalback()
+    this.scrollCallback()
     document.addEventListener('scroll', () => {
-      this.scrollCalback()
+      this.scrollCallback()
     })
   },
 }

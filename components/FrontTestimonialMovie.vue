@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="py-12 lg:m-0 lg:col-span-2 lg:pl-8">
-          <div class="sm:max-w-2xl lg:max-w-none px-4 sm:px-12 lg:px-0 lg:py-12">
+          <div class="sm:max-w-2xl lg:max-w-none px-12 lg:px-0 lg:py-12">
             <blockquote>
               <h3 class="responsive-text-base uppercase">Reference</h3>
               <div>

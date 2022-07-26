@@ -1,10 +1,10 @@
 <template>
   <div class="pt-20 pb-4 bg-gray-900 lg:overflow-hidden">
-    <div class="mx-auto max-w-7xl lg:px-8">
+    <div class="relative max-w-7xl mx-auto px-12 sm:px-12 lg:px-16">
       <div class="lg:grid lg:grid-cols-2 lg:gap-8">
-        <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
+        <div class="lg:text-left lg:flex lg:items-center">
           <div class="py-12 lg:py-20">
-            <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-6xl xl:text-6xl">
+            <h1 class="text-5xl tracking-tight font-extrabold text-white sm:text-6xl xl:text-6xl">
               <span class="block">Brug for en</span>
               <Typewriter />
               <span class="block text-white">digital løsning?</span>

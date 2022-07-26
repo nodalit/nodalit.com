@@ -1,11 +1,14 @@
 <template>
-  <div class="relative bg-logo3 bg-logo4 bg-gray-50">
+  <div class="relative bg-black bg-white bg-logo1 bg-logo3 bg-logo4 bg-logo5 bg-gray-50 bg-gray-200 bg-gray-300 bg-gray-400 bg-gray-500 bg-gray-600">
     <main class="lg:relative">
       <!-- <SectionHero /> -->
       <HeroMovie />
       <FrontTestimonialMovie />
+      <SectionExpertise />
+      <SectionCases />
+      <SectionUs />
       <SectionValues />
-      <SectionFooter />
+      <SectionContact />
     </main>
   </div>
 </template>
