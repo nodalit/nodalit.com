@@ -4,3 +4,22 @@ body {
 .router-link-active {
   text-decoration: underline;
 }
+
+.responsive-text-base {
+  @apply text-base sm:text-lg
+}
+
+.responsive-text-lg {
+  @apply text-lg sm:text-xl lg:text-2xl
+}
+
+.responsive-text-xl {
+  @apply text-xl sm:text-2xl lg:text-3xl
+}
+.responsive-text-mega {
+  @apply text-4xl sm:text-5xl lg:text-6xl
+}
+
+.responsive-text-2xl {
+  @apply text-2xl sm:text-4xl lg:text-5xl
+}

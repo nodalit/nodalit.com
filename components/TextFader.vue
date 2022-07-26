@@ -1,9 +1,9 @@
 <template>
-  <div :id="'fadingTextContainer' + uid" class="text-5xl lg:text-6xl">
+  <div :id="'fadingTextContainer' + uid" :class="'responsive-text-' + textSize">
     <span
       v-for="(word, index) in words"
       :key="index"
-      :class="word.highlight ? 'text-logo1' : ''"
+      :class="word.highlight ? 'text-white' : ''"
       :style="`opacity: ${word.opacity}; line-height: 1.4;`"
     >
       {{ word.text + ' ' }}
@@ -29,6 +29,18 @@ export default {
       type: String,
       default: '',
     },
+    textSize: {
+      type: String,
+      default: 'mega',
+    },
+    highlightFirstWords: {
+      type: Number,
+      default: 3,
+    },
+    scrollStart: {
+      type: Number,
+      default: 75,
+    },
     uid: {
       type: String,
       required: true,
@@ -37,27 +49,17 @@ export default {
   data () {
     return {
       lastKnownScrollPosition: 0,
-      ticking: 0,
+      ticking: false,
+      containerEl: null,
+      containerTop: null,
       containerHeight: 0,
       fadeSpeed: 0,
       words: [],
       highlightedWords: ['agilt'],
-      unit: 20,
     }
   },
-  created () {
-    const text = this.text
-    const arr = text.split(' ')
-    arr.forEach((word, index) => {
-      this.words.push({
-        text: word,
-        opacity: 0,
-        highlight: this.highlightedWords.includes(word) || index < 3,
-      })
-    })
-  },
-  mounted () {
-    const calcWordOpacity = (relativeScroll, wordIndex, unit) => {
+  methods: {
+    calcWordOpacity (relativeScroll, wordIndex, unit) {
       const y = relativeScroll
       const i = wordIndex
       const startScroll = i * unit
@@ -70,40 +72,57 @@ export default {
       }
       const relY = y - startScroll
       return (relY / unit)
-    }
-    let ticking = false
-    let containerEl = null
-    let containerTop = null
-    console.log('this far')
-    this.numOfWords = this.words.length
-    document.addEventListener('scroll', () => {
-      if (!containerEl) {
-        containerEl = document.getElementById('fadingTextContainer' + this.uid)
+    },
+    scrollCalback () {
+      if (!this.containerEl) {
+        this.containerEl = document.getElementById('fadingTextContainer' + this.uid)
       }
-      if (containerEl && !containerTop) {
-        containerTop = containerEl.getBoundingClientRect().top
-        this.containerHeight = containerEl.scrollHeight
+      if (this.containerEl && !this.containerTop) {
+        this.containerTop = this.containerEl.getBoundingClientRect().top
+        this.containerHeight = this.containerEl.scrollHeight
       }
-      if (containerTop && !ticking) {
+      if (this.containerTop && !this.ticking) {
         this.lastKnownScrollPosition = window.scrollY
-        const scrollStartPosition = (window.innerHeight * 0.8)
-        const relativeScroll = this.lastKnownScrollPosition - containerTop + scrollStartPosition
+        const scrollStartPosition = (window.innerHeight * this.scrollStart / 100)
+        // hvor langt er punktet scrollStartPosition ift. this.containerTop
+        // scroll 300
+        // this.containerTop 600
+        // scrollStartPos 700
+        const relativeScroll = this.lastKnownScrollPosition - this.containerTop + scrollStartPosition
+        console.log(relativeScroll)
         const h = this.containerHeight
         const n = this.numOfWords
         const unit = h / n
         window.requestAnimationFrame(() => {
           // eslint-disable-next-line
           this.words.forEach((word, i) => {
-            const newOpacity = calcWordOpacity(relativeScroll, i, unit)
+            const newOpacity = this.calcWordOpacity(relativeScroll, i, unit)
             if (word.opacity !== newOpacity) {
               word.opacity = newOpacity
             }
           })
-          ticking = false
+          this.ticking = false
         })
-
-        ticking = true
+        this.ticking = true
       }
+    },
+  },
+  created () {
+    const text = this.text
+    const arr = text.split(' ')
+    arr.forEach((word, index) => {
+      this.words.push({
+        text: word,
+        opacity: 0,
+        highlight: this.highlightedWords.includes(word) || index < this.highlightFirstWords,
+      })
+    })
+  },
+  mounted () {
+    this.numOfWords = this.words.length
+    this.scrollCalback()
+    document.addEventListener('scroll', () => {
+      this.scrollCalback()
     })
   },
 }

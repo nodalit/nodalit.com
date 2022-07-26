@@ -2,10 +2,10 @@
   <div>
     <div class="pb-16 bg-gradient-to-r from-gray-100 to-gray-300 lg:pb-0 lg:z-10 lg:relative">
       <div class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8">
-        <div class="relative lg:-my-8 hidden lg:block">
+        <div class="relative hidden lg:block">
           <div aria-hidden="true" class="absolute inset-x-0 top-0 h-1/2 bg-white lg:hidden" />
           <div class="rounded-2xl relative">
-            <div class="absolute" style="width: 1000px; left: -300px; top: -50px">
+            <div class="" style="width: 1000px; margin: -50px -300px">
               <video ref="vidRef" playsinline muted>
                 <source src="/assets/mobile.mp4" type="video/mp4" codec="hvc1" />
                 <source src="/assets/mobile.webm" type="video/webm" />
@@ -13,12 +13,14 @@
             </div>
           </div>
         </div>
-        <div class="lg:m-0 lg:col-span-2 lg:pl-8 md:pt-5">
-          <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:px-0 lg:py-20 lg:max-w-none">
+        <div class="py-12 lg:m-0 lg:col-span-2 lg:pl-8">
+          <div class="sm:max-w-2xl lg:max-w-none px-4 sm:px-12 lg:px-0 lg:py-12">
             <blockquote>
+              <h3 class="responsive-text-base uppercase">Reference</h3>
               <div>
-                <img src="/assets/link_arkitektur_logo.svg" class="h-24 lg:h-12" />
-                <p class="mt-6 text-2xl font-medium text-black">{{ testimonial.quote }}</p>
+                <h3 class="text-5xl lg:text-6xl">LINK Arkitektur</h3>
+                <!-- <img src="/assets/link_arkitektur_logo.svg" class="h-24 lg:h-12" /> -->
+                <p class="mt-6 responsive-text-lg text-black">{{ testimonial.quote }}</p>
               </div>
               <footer class="mt-6 md:flex">
                 <div class="md:flex md:items-center md:justify-center">
