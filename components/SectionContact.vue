@@ -1,5 +1,5 @@
 <template>
-  <BaseSection class="overflow-hidden" :bg-color="'gray-900'">
+  <BaseSection id="kontakt" class="overflow-hidden" :bg-color="'gray-900'">
     <h3 class="responsive-text-base pb-6 text-white">KONTAKT OS</h3>
     <TextFader
       :uid="'contact-intro'"

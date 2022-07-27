@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="cases">
     <BaseSection
       v-for="project in projects"
       :key="project.name"
@@ -23,7 +23,7 @@
       </div>
       <p class="responsive-text-xl pb-6">{{ project.description }}</p>
       <div class="flex justify-center">
-        <BaseButtonCTA>
+        <BaseButtonCTA @click="scrollTo('kontakt')">
           Kontakt os for en uforpligtende snak
         </BaseButtonCTA>
       </div>
@@ -70,7 +70,10 @@ const animateScroll = (duration) => {
 const onScroll = () => {
   animateScroll(250)
 }
-
+const scrollTo = (id) => {
+  const element = document.getElementById(id)
+  element.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+}
 onMounted(() => {
   if (process.client) {
     document.addEventListener('scroll', onScroll)

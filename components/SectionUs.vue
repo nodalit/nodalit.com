@@ -1,9 +1,10 @@
 <template>
   <BaseSection
+    id="team"
     class="overflow-hidden"
     :bgColor="'logo1'"
   >
-    <h3 class="responsive-text-base pb-6">HVEM ER VI?</h3>
+    <h3 class="responsive-text-base pb-6">TEAM</h3>
     <TextFader
       :uid="'about-intro'"
       :highlightFirstWords="2"
@@ -26,9 +27,42 @@
             </div>
             <div>
               <h3 class="responsive-text-xl pb-3">{{ employee.name }}</h3>
-              <p class="responsive-text-base pb-1">{{ employee.role }}</p>
-              <p class="responsive-text-base">{{ employee.mail }}</p>
+              <p class="responsive-text-base pb-1">
+                {{ employee.role }}
+              </p>
               <p class="responsive-text-lg">{{ employee.bio }}</p>
+              <p class="responsive-text-base mt-2">
+                <span>TIDLIGERE PROJEKTER: </span>
+                <a
+                  :href="employee.otherProjects[0].href"
+                  class="hover:underline"
+                  target="_blank"
+                >
+                  {{ employee.otherProjects[0].name }}
+                </a>
+                <span
+                  v-for="project in employee.otherProjects.slice(1)"
+                  :key="project.href"
+                >
+                  <span
+                  >, </span>
+                  <a
+                    :href="project.href"
+                    class="hover:underline"
+                    target="_blank"
+                  >
+                    {{ project.name }}
+                  </a>
+                </span>
+              </p>
+              <p class="responsive-text-base pb-1 flex items-center">
+                <MailIcon class="flex-shrink-0 w-6 h-6 text-white" aria-hidden="true" />
+                <span class="ml-3">
+                  <a :href="'mailto:' + employee.mail">
+                    {{ employee.mail }}
+                  </a>
+                </span>
+              </p>
             </div>
           </div>
         </BaseFadeIn>
@@ -38,6 +72,8 @@
 </template>
 
 <script setup>
+import { MailIcon } from '@heroicons/vue/outline'
+
 // import projects from '@/store/projects.json'
 const employees = [
   {
@@ -49,12 +85,22 @@ const employees = [
     twitterUrl: null,
     linkedinUrl: 'https://www.linkedin.com/in/madsringblom/',
     githubUrl: 'https://github.com/madsringblom',
-    sideProjects: [
-    ],
-    freelanceProjects: [
+    otherProjects: [
       {
         name: 'Testfacilitet for Bygningshub',
         href: 'https://bygningshub.dk/',
+      },
+      {
+        name: 'Forsyningsdataportal',
+        href: 'https://forsyningsdataportal.dk/',
+      },
+      {
+        name: 'MEETR',
+        href: 'https://meetr.dk/',
+      },
+      {
+        name: 'Coreculture Målingsværktøj',
+        href: 'https://maaling.coreculture.dk/#/',
       },
     ],
   },
@@ -67,7 +113,7 @@ const employees = [
     twitterUrl: 'https://twitter.com/huulbaek',
     linkedinUrl: 'https://www.linkedin.com/in/thomas-huulb%C3%A6k-titanium-150468/',
     githubUrl: 'https://github.com/huulbaek',
-    sideProjects: [
+    otherProjects: [
       {
         name: 'Punkr',
         href: 'https://punkr.app/',
@@ -76,8 +122,6 @@ const employees = [
         name: 'Laterz',
         href: 'https://laterz.io/',
       },
-    ],
-    freelanceProjects: [
       {
         name: 'Testfacilitet for Bygningshub',
         href: 'https://bygningshub.dk/',

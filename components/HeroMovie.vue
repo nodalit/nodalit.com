@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-20 pb-4 bg-gray-900 lg:overflow-hidden">
+  <div class="base-section pt-20 pb-4 bg-gray-900 lg:overflow-hidden">
     <div class="relative max-w-7xl mx-auto px-12 sm:px-12 lg:px-16">
       <div class="lg:grid lg:grid-cols-2 lg:gap-8">
         <div class="lg:text-left lg:flex lg:items-center">
@@ -12,9 +12,9 @@
             <p class="mt-3 responsive-text-lg text-gray-300 sm:mt-5">
               Vi laver små og store digitale løsninger for vores kunder, store som små.
               Vi er uhørt billige og vi elsker vores arbejde – spørg bare nogle af vores
-              <NuxtLink :href="'/referencer'" class="text-logo1">
+              <a :href="'#cases'" @click.prevent="scrollTo('cases')" class="text-logo1">
                 kunder
-              </NuxtLink>!
+              </a>!
             </p>
           </div>
         </div>
@@ -66,5 +66,8 @@ onUnmounted(() => {
     document.removeEventListener('scroll', onScroll)
   }
 })
-
+const scrollTo = (id) => {
+  const element = document.getElementById(id)
+  element.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+}
 </script>

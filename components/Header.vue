@@ -1,19 +1,25 @@
 <template>
   <div>
-    <header id="header" class="fixed top-0 w-full z-20 mix-blend-difference" :style="{ height: `${headerHeight}px` }">
+    <header id="header" class="fixed top-0 w-full z-20" :style="{ height: `${headerHeight}px` }">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top" :class="{ 'max-w-full': isSmall }">
         <div class="w-full justify-between" style="height: 70px;">
           <div class="flex items-center overflow-visible justify-between lg:justify-start" :style="{ justifyContent: isSmall ? 'space-between' : 'left' }">
-            <a href="/">
+            <a href="/" @click.prevent="scrollTo('top')">
               <span class="sr-only">Meetr</span>
               <ClientOnly>
                 <Logo id="headerLogo" :height="headerHeight" />
               </ClientOnly>
             </a>
             <div v-if="!isSmall" class="hidden space-x-8 lg:block lg:ml-5">
-              <NuxtLink v-for="link in navigation" :key="link.name" :to="link.href" class="text-base font-bold uppercase text-white hover:text-indigo-50">
+              <a
+                v-for="link in navigation"
+                :key="link.name"
+                :href="link.href"
+                class="cursor-pointer text-base font-bold uppercase text-white hover:text-indigo-50"
+                @click.prevent="scrollTo(link.id)"
+              >
                 {{ link.name }}
-              </NuxtLink>
+              </a>
             </div>
             <div
               class="lg:hidden cursor-pointer"
@@ -24,7 +30,7 @@
                 <span class="sr-only">Open menu</span>
                 <MenuIcon
                   class="h-8 w-8 text-black rouned-md"
-                  :style="{ color: textColor }"
+                  :style="{ color: props.darkBg ? 'white' : 'black' }"
                   aria-hidden="true"
                 />
               </div>
@@ -45,7 +51,7 @@
             :key="link.name"
             :href="link.href"
             class="menu-item -m-3 p-3 flex items-center rounded-lg hover:bg-gray-50 text-slate-50 hover:text-black hover:cursor-pointer"
-            :style="{ color: textColor }"
+            :style="{ color: props.darkBg ? 'white' : 'black' }"
             @click="goto(link.href)"
           >
             <div
@@ -70,7 +76,11 @@ import {
   MenuIcon,
 } from '@heroicons/vue/outline'
 
-const rgbToHsl = (r, g, b) => {
+const props = defineProps({
+  darkBg: Boolean,
+})
+
+/* const rgbToHsl = (r, g, b) => {
   r /= 255
   g /= 255
   b /= 255
@@ -93,18 +103,18 @@ const rgbToHsl = (r, g, b) => {
     h /= 6
   }
   return [h, s, l]
-}
+} */
 
-const elementBackgroundColor = (element) => {
+/* const elementBackgroundColor = (element) => {
   const bgColor = window.getComputedStyle(element).backgroundColor
   if (bgColor === 'rgba(0, 0, 0, 0)') { // Transparent
     return elementBackgroundColor(element.parentElement)
   } else {
     return bgColor
   }
-}
+} */
 
-const textColor = computed(() => {
+/* const textColor = computed(() => {
   if (process.client) {
     const bgColor = elementBackgroundColor(document.getElementById('header'))
     console.log(bgColor)
@@ -115,7 +125,7 @@ const textColor = computed(() => {
     console.log(hsl)
   }
   return '#fff'
-})
+}) */
 
 const isSmall = ref(false)
 const showMenu = ref(false)
@@ -160,11 +170,17 @@ onUnmounted(() => {
 })
 
 const navigation = [
-  { name: 'Hvad kan vi?', href: '/loesninger' },
-  { name: 'Hvad har vi lavet?', href: '/referencer' },
-  { name: 'Hvem er vi?', href: '/team' },
-  { name: 'Kontakt os', href: '/kontakt' },
+  { name: 'Vores ekspertise', href: '#ekspertise', id: 'ekspertise' },
+  { name: 'Kundecases', href: '#cases', id: 'cases' },
+  { name: 'Team', href: '#team', id: 'team' },
+  { name: 'Manifest', href: '#manifest', id: 'manifest' },
+  { name: 'Kontakt', href: '#kontakt', id: 'kontakt' },
 ]
+
+const scrollTo = (id) => {
+  const element = document.getElementById(id)
+  element.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+}
 
 const goto = (href: string) => {
   navigateTo(href)
