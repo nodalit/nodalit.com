@@ -1,6 +1,6 @@
 <template>
   <section
-    class="relative py-12 md:py-20 lg:py-24"
+    class="base-section relative py-12 md:py-20 lg:py-24"
     :class="'bg-' + bgColor"
   >
     <!-- <svg
