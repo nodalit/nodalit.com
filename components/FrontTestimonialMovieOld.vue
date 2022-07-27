@@ -1,5 +1,5 @@
 <template>
-  <div ref="movieContainerRef">
+  <div>
     <div class="pb-16 bg-gradient-to-r from-gray-100 to-gray-300 lg:pb-0 lg:z-10 lg:relative">
       <div class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8">
         <div class="relative hidden lg:block">
@@ -47,35 +47,35 @@
 </template>
 
 <script setup lang="ts">
-import calcHorizontalDistance from '@/composables/calcHorizontalDistance'
-
 const vidRef = ref(null)
-const movieContainerRef = ref(null)
-let requestAnimationFrameId: number
 
-const tick = () => {
-  if (process.client) {
-    requestAnimationFrameId = requestAnimationFrame(tick)
-    if (vidRef.value.seeking) {
-      return
-    }
-    const horDist = calcHorizontalDistance(65, movieContainerRef.value)
-    const maxScroll = movieContainerRef.value.clientHeight - horDist
-    const scrollProgress = horDist / Math.max(maxScroll, 1)
-    vidRef.value.currentTime = vidRef.value.duration * scrollProgress
+const animateScroll = (duration: number) => {
+  const scrollPosition = window.scrollY
+  const goto = (vidRef.value.duration / 100) * (scrollPosition / (duration / 100))
+  if (vidRef.value.seeking) {
+    return
   }
+  if (goto < vidRef.value.duration) {
+    vidRef.value.currentTime = goto
+  } else {
+    vidRef.value.currentTime = vidRef.value.duration
+  }
+}
+
+const onScroll = () => {
+  animateScroll(500)
 }
 
 onMounted(() => {
   if (process.client) {
+    document.addEventListener('scroll', onScroll)
     vidRef.value.currentTime = 0.001
-    tick()
   }
 })
 
 onUnmounted(() => {
   if (process.client) {
-    cancelAnimationFrame(requestAnimationFrameId)
+    document.removeEventListener('scroll', onScroll)
   }
 })
 
