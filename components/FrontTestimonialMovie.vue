@@ -1,14 +1,16 @@
 <template>
-  <div class="base-section pb-16 bg-gray-200 lg:pb-0 lg:z-10 lg:relative">
-    <div class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8">
-      <div class="relative hidden lg:block">
-        <div aria-hidden="true" class="absolute inset-x-0 top-0 h-1/2 bg-white lg:hidden" />
-        <div class="rounded-2xl relative">
-          <div class="" style="width: 1000px; margin: -50px -300px">
-            <video ref="vidRef" playsinline muted>
-              <source src="/assets/mobile.mp4" type="video/mp4" codec="hvc1" />
-              <source src="/assets/mobile.webm" type="video/webm" />
-            </video>
+  <div ref="movieContainerRef">
+    <div class="base-section pb-16 bg-gray-200 lg:pb-0 lg:z-10 lg:relative">
+      <div class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8">
+        <div class="relative hidden lg:block">
+          <div aria-hidden="true" class="absolute inset-x-0 top-0 h-1/2 bg-white lg:hidden" />
+          <div class="rounded-2xl relative">
+            <div class="" style="width: 1000px; margin: -50px -300px">
+              <video ref="vidRef" playsinline muted>
+                <source src="/assets/mobile.mp4" type="video/mp4" codec="hvc1" />
+                <source src="/assets/mobile.webm" type="video/webm" />
+              </video>
+            </div>
           </div>
         </div>
       </div>
@@ -45,35 +47,35 @@
 </template>
 
 <script setup lang="ts">
+import calcHorizontalDistance from '@/composables/calcHorizontalDistance'
+
 const vidRef = ref(null)
+const movieContainerRef = ref(null)
+let requestAnimationFrameId: number
 
-const animateScroll = (duration: number) => {
-  const scrollPosition = window.scrollY
-  const goto = (vidRef.value.duration / 100) * (scrollPosition / (duration / 100))
-  if (vidRef.value.seeking) {
-    return
+const tick = () => {
+  if (process.client) {
+    requestAnimationFrameId = requestAnimationFrame(tick)
+    if (vidRef.value.seeking) {
+      return
+    }
+    const horDist = calcHorizontalDistance(65, movieContainerRef.value)
+    const maxScroll = movieContainerRef.value.clientHeight - horDist
+    const scrollProgress = horDist / Math.max(maxScroll, 1)
+    vidRef.value.currentTime = vidRef.value.duration * scrollProgress
   }
-  if (goto < vidRef.value.duration) {
-    vidRef.value.currentTime = goto
-  } else {
-    vidRef.value.currentTime = vidRef.value.duration
-  }
-}
-
-const onScroll = () => {
-  animateScroll(500)
 }
 
 onMounted(() => {
   if (process.client) {
-    document.addEventListener('scroll', onScroll)
     vidRef.value.currentTime = 0.001
+    tick()
   }
 })
 
 onUnmounted(() => {
   if (process.client) {
-    document.removeEventListener('scroll', onScroll)
+    cancelAnimationFrame(requestAnimationFrameId)
   }
 })
 

@@ -1,5 +1,5 @@
 <template>
-  <div ref="movieContainerRef" class="base-section pt-20 pb-4 bg-gray-900 lg:overflow-hidden">
+  <div class="pt-20 pb-4 bg-gray-900 lg:overflow-hidden">
     <div class="relative max-w-7xl mx-auto px-12 sm:px-12 lg:px-16">
       <div class="lg:grid lg:grid-cols-2 lg:gap-8">
         <div class="lg:text-left lg:flex lg:items-center">
@@ -12,9 +12,9 @@
             <p class="mt-3 responsive-text-lg text-gray-300 sm:mt-5">
               Vi laver små og store digitale løsninger for vores kunder, store som små.
               Vi er uhørt billige og vi elsker vores arbejde – spørg bare nogle af vores
-              <a :href="'#cases'" @click.prevent="scrollTo('cases')" class="text-logo1">
+              <NuxtLink :href="'/referencer'" class="text-logo1">
                 kunder
-              </a>!
+              </NuxtLink>!
             </p>
           </div>
         </div>
@@ -35,39 +35,36 @@
 </template>
 
 <script setup lang="ts">
-import calcHorizontalDistance from '@/composables/calcHorizontalDistance'
-
 const vidRef = ref(null)
-const movieContainerRef = ref(null)
-let requestAnimationFrameId: number
 
-const tick = () => {
-  if (process.client) {
-    requestAnimationFrameId = requestAnimationFrame(tick)
-    if (vidRef.value.seeking) {
-      return
-    }
-    const horDist = calcHorizontalDistance(0, movieContainerRef.value)
-    const maxScroll = movieContainerRef.value.clientHeight - horDist
-    const scrollProgress = horDist / Math.max(maxScroll, 1)
-    vidRef.value.currentTime = vidRef.value.duration * scrollProgress
+const animateScroll = (duration: number) => {
+  const scrollPosition = window.scrollY
+  const goto = (vidRef.value.duration / 100) * (scrollPosition / (duration / 100))
+  if (vidRef.value.seeking) {
+    return
   }
+  if (goto < vidRef.value.duration) {
+    vidRef.value.currentTime = goto
+  } else {
+    vidRef.value.currentTime = vidRef.value.duration
+  }
+}
+
+const onScroll = () => {
+  animateScroll(250)
 }
 
 onMounted(() => {
   if (process.client) {
+    document.addEventListener('scroll', onScroll)
     vidRef.value.currentTime = 0.001
-    tick()
   }
 })
 
 onUnmounted(() => {
   if (process.client) {
-    cancelAnimationFrame(requestAnimationFrameId)
+    document.removeEventListener('scroll', onScroll)
   }
 })
-const scrollTo = (id) => {
-  const element = document.getElementById(id)
-  element.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
-}
+
 </script>
