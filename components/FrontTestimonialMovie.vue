@@ -52,7 +52,6 @@ const vidRef = ref(null)
 const animateScroll = (duration: number) => {
   const scrollPosition = window.scrollY
   const goto = (vidRef.value.duration / 100) * (scrollPosition / (duration / 100))
-  console.log(goto, vidRef.value.seeking)
   if (vidRef.value.seeking) {
     return
   }

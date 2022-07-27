@@ -15,21 +15,23 @@
         v-for="employee in employees"
         :key="employee.name"
       >
-        <div
-          class="text-center md:text-left md:flex items-center justify-start gap-6"
-        >
+        <BaseFadeIn :uid="employee.name + 'fader'">
           <div
-            class="flex-shrink-0 flex justify-center md:justify-start mb-6 md:mb-0 saturate-0"
+            class="text-center md:text-left md:flex items-center justify-start gap-6"
           >
-            <img class="object-cover shadow-lg rounded-full w-56 h-56" :src="employee.imageUrl" alt="">
+            <div
+              class="flex-shrink-0 flex justify-center md:justify-start mb-6 md:mb-0 saturate-0"
+            >
+              <img class="object-cover shadow-lg rounded-full w-56 h-56" :src="employee.imageUrl" alt="">
+            </div>
+            <div>
+              <h3 class="responsive-text-xl pb-3">{{ employee.name }}</h3>
+              <p class="responsive-text-base pb-1">{{ employee.role }}</p>
+              <p class="responsive-text-base">{{ employee.mail }}</p>
+              <p class="responsive-text-lg">{{ employee.bio }}</p>
+            </div>
           </div>
-          <div>
-            <h3 class="responsive-text-xl pb-3">{{ employee.name }}</h3>
-            <p class="responsive-text-base pb-1">{{ employee.role }}</p>
-            <p class="responsive-text-base">{{ employee.mail }}</p>
-            <p class="responsive-text-lg">{{ employee.bio }}</p>
-          </div>
-        </div>
+        </BaseFadeIn>
       </li>
     </ul>
   </BaseSection>

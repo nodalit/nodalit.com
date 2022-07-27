@@ -24,6 +24,7 @@
  * set the tempo
  */
 import calcHorizontalDistance from '@/composables/calcHorizontalDistance'
+import calcElementOpacity from '@/composables/calcElementOpacity'
 export default {
   props: {
     text: {
@@ -46,7 +47,7 @@ export default {
       type: Number,
       default: 3,
     },
-    scrollStart: {
+    fadeInStart: {
       type: Number,
       default: 75,
     },
@@ -59,7 +60,6 @@ export default {
     return {
       ticking: false,
       containerEl: null,
-      containerTop: null,
       containerHeight: 0,
       fadeSpeed: 0,
       words: [],
@@ -67,34 +67,26 @@ export default {
     }
   },
   methods: {
-    calcWordOpacity (relativeScroll, wordIndex, unit) {
-      const y = relativeScroll
+    calcWordFadePoints (wordIndex, unit) {
       const i = wordIndex
-      const startScroll = i * unit
-      const endScroll = startScroll + unit
-      if (y <= startScroll) {
-        return 0
-      }
-      if (y >= endScroll) {
-        return 1
-      }
-      const relY = y - startScroll
-      return (relY / unit)
+      const start = i * unit
+      const end = start + unit
+      return { start, end }
     },
     setContainerMeasurements () {
       if (!this.containerEl) {
         this.containerEl = document.getElementById('fadingTextContainer' + this.uid)
       }
       if (this.containerEl) {
-        this.containerTop = this.containerEl.getBoundingClientRect().top
         this.containerHeight = this.containerEl.scrollHeight
       }
     },
     setWordOpacities (relativeScroll, unit) {
       this.words.forEach((word, i) => {
-        const newOpacity = this.calcWordOpacity(relativeScroll, i, unit)
-        if (word.opacity !== newOpacity) {
-          word.opacity = newOpacity
+        const fadePoints = this.calcWordFadePoints(i, unit)
+        const newWordOpacity = calcElementOpacity(relativeScroll, fadePoints, unit)
+        if (word.opacity !== newWordOpacity) {
+          word.opacity = newWordOpacity
         }
       })
     },
@@ -105,8 +97,9 @@ export default {
     },
     scrollCallback () {
       if (!this.ticking) {
-        if (this.containerHeight && this.containerTop) {
-          const relativeScroll = calcHorizontalDistance(this.scrollStart, this.containerTop)
+        if (this.containerHeight) {
+          // relativeScroll is the distance between fadeInStart and the containerEls top
+          const relativeScroll = calcHorizontalDistance(this.fadeInStart, this.containerEl)
           const unit = this.calcUnit()
           window.requestAnimationFrame(() => {
             this.setWordOpacities(relativeScroll, unit)
