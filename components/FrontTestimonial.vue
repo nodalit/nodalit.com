@@ -41,7 +41,7 @@
 
 <script setup lang="ts">
 import lottie from 'lottie-web'
-import animationData from '../public/anim3.json'
+import animationData from '../assets/anim3.json'
 
 const lottieRef = ref(null)
 let anim

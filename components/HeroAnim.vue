@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import lottie from 'lottie-web'
-import animationData from '../public/anim4.json'
+import animationData from '../assets/anim4.json'
 const lottieRef = ref(null)
 const lottieReady = ref(false)
 
