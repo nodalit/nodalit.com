@@ -28,8 +28,8 @@
       </nav>
     </header>
     <div
-      class="fixed top-3 right-6 block lg:hidden cursor-pointer z-40"
-      :class="isSmall ? 'lg:block' : ''"
+      class="fixed top-3 right-6 block cursor-pointer z-40"
+      :class="isSmall ? 'lg:block' : 'lg:hidden'"
       @click="showMenu = !showMenu"
     >
       <div class="-mr-2">
