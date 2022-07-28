@@ -79,7 +79,7 @@ const employees = [
   {
     name: 'Mads Ringblom',
     role: 'UX/UI & Frontend Dev',
-    imageUrl: 'assets/mads_ringblom.jpg',
+    imageUrl: '/mads_ringblom.jpg',
     bio: 'Mads Ringblom er UX/UI designer og frontend-udvikler med en passion for at lave brugervenlige og intuitive applikationer. Mads forstår at designe og facilitere effektive processer, der fører til de bedst mulige løsninger. I sin fritid spiller Mads en masse instrumenter i bandet TERESE.',
     mail: 'mads@meetr.dk',
     twitterUrl: null,
@@ -107,7 +107,7 @@ const employees = [
   {
     name: 'Thomas Titanium',
     role: 'Full Stack Dev',
-    imageUrl: 'assets/thomas_titanium.jpg',
+    imageUrl: '/thomas_titanium.jpg',
     bio: 'Thomas Titanium er full stack-udvikler, som elsker at lave robuste applikationer med de nyeste teknologier. Han har en stærk baggrund i it-sikkerhed og API-udvikling – men holder sig også skarp i frontend. Thomas løber og spiller tennis.',
     mail: 'thomas@meetr.dk',
     twitterUrl: 'https://twitter.com/huulbaek',

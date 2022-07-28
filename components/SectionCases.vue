@@ -16,8 +16,8 @@
       <div class="relative h-96 mb-6">
         <div class="w-full lg:absolute lg:inset-y-0 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none lg:flex lg:justify-center">
           <video ref="vidRef" playsinline muted>
-            <source src="/assets/laptop.mp4" type="video/mp4" codec="hvc1" />
-            <source src="/assets/laptop.webm" type="video/webm" />
+            <source src="/laptop.mp4" type="video/mp4" codec="hvc1" />
+            <source src="/laptop.webm" type="video/webm" />
           </video>
         </div>
       </div>

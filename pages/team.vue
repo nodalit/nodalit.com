@@ -17,7 +17,7 @@
             mode="out-in"
             @enter="enterElement"
           >
-            <div v-if="show" class="bg-[url('/assets/code.png')] ring-black ring-2 bg-gray-600 p-5 shadow-xl rounded-xl bg-cover" style="height: 800px">
+            <div v-if="show" class="bg-[url('/code.png')] ring-black ring-2 bg-gray-600 p-5 shadow-xl rounded-xl bg-cover" style="height: 800px">
             </div>
           </Transition>
         </div>
