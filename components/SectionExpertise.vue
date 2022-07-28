@@ -1,15 +1,18 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <BaseSection :bg-color="'black'" id="ekspertise">
+  <BaseSection
+    id="ekspertise"
+    :bg-color="'black'"
+  >
     <h3 class="responsive-text-base text-white">VORES EKSPERTISE</h3>
     <TextFader
       v-for="(paragraph, index) in paragraphs"
       :key="index"
       :uid="'expertise' + index"
       :text="paragraph"
-      :highlightFirstWords="3"
-      :textColor="'white'"
-      :highlightColor="'logo3'"
+      :highlight-first-words="3"
+      :text-color="'white'"
+      :highlight-color="'logo3'"
       class="mb-16"
     />
     <div class="flex justify-center">

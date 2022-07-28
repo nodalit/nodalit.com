@@ -4,9 +4,9 @@
     <TextFader
       :uid="'contact-intro'"
       :text="'Send os en email eller udfyld en formular – du bestemmer og vi lover at vende tilbage.'"
-      :highlightFirstWords="4"
-      :textColor="'white'"
-      :highlightColor="'logo1'"
+      :highlight-first-words="4"
+      :text-color="'white'"
+      :highlight-color="'logo1'"
       class="mb-12"
     />
     <BaseFadeIn :uid="'876'">
@@ -18,8 +18,8 @@
           @enter="enterLeftElement"
         >
           <dd v-if="showSections" class="flex items-center text-indigo-50">
-            <MailIcon class="flex-shrink-0 w-16 h-16 text-logo1" aria-hidden="true" />
-            <span class="ml-6 pb-2 text-5xl"><a href="mailto:mads@meetr.dk">kontakt@meetr.dk</a></span>
+            <MailIcon class="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 text-logo1" aria-hidden="true" />
+            <span class="ml-3 sm:ml-6 pb-2 responsive-text-mega"><a href="mailto:mads@meetr.dk">kontakt@meetr.dk</a></span>
           </dd>
         </Transition>
       </dl>

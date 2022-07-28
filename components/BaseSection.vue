@@ -34,7 +34,7 @@
       </defs>
       <rect width="404" height="404" fill="url(#ad119f34-7694-4c31-947f-5c9d249b21f3)" />
     </svg> -->
-    <div class="relative max-w-7xl mx-auto px-12 sm:px-12 lg:px-16">
+    <div class="relative max-w-screen-2xl mx-auto px-12 sm:px-12 lg:px-16">
       <slot />
     </div>
   </section>

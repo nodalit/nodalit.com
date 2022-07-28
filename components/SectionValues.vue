@@ -8,9 +8,9 @@
         :key="feature.name"
         :uid="feature.name"
         :text="feature.description"
-        :highlightFirstWords="feature.highlightFirstWords"
-        :textColor="'black'"
-        :highlightColor="'white'"
+        :highlight-first-words="feature.highlight-first-words"
+        :text-color="'black'"
+        :highlight-color="'white'"
         class="mb-16"
       />
     </div>

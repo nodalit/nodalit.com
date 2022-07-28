@@ -2,12 +2,12 @@
   <BaseSection
     id="team"
     class="overflow-hidden"
-    :bgColor="'logo1'"
+    :bg-color="'logo1'"
   >
     <h3 class="responsive-text-base pb-6">TEAM</h3>
     <TextFader
       :uid="'about-intro'"
-      :highlightFirstWords="2"
+      :highlight-first-words="2"
       :text="'Vi er et lille men dedikeret team, med mange års erfaring indenfor design og udvikling af digitale løsninger.'"
       class="mb-16"
     />
@@ -44,8 +44,7 @@
                   v-for="project in employee.otherProjects.slice(1)"
                   :key="project.href"
                 >
-                  <span
-                  >, </span>
+                  <span>, </span>
                   <a
                     :href="project.href"
                     class="hover:underline"
@@ -55,7 +54,7 @@
                   </a>
                 </span>
               </p>
-              <p class="responsive-text-base pb-1 flex items-center">
+              <p class="responsive-text-base mt-2 pb-1 flex justify-center md:justify-start items-center">
                 <MailIcon class="flex-shrink-0 w-6 h-6 text-white" aria-hidden="true" />
                 <span class="ml-3">
                   <a :href="'mailto:' + employee.mail">

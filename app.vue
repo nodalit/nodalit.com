@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :darkBg="darkBg"/>
+    <Header :dark-bg="darkBg" />
     <NuxtPage />
   </div>
 </template>

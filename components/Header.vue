@@ -1,31 +1,28 @@
 <template>
   <div>
     <header id="header" class="fixed top-0 w-full z-20" :style="{ height: `${headerHeight}px` }">
-      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top" :class="{ 'max-w-full': isSmall }">
-        <div class="w-full justify-between" style="height: 70px;">
-          <div
-            class="flex items-center overflow-visible justify-between lg:justify-start"
+      <div class="max-w-screen-2xl mx-auto px-12 lg:px-16 grid grid-cols-16 items-end" aria-label="Top" :class="{ 'max-w-full': isSmall }">
+        <a class="col-span-2" href="/" @click.prevent="scrollTo('top')">
+          <span class="sr-only">Meetr</span>
+          <ClientOnly>
+            <span class="text-3xl font-bold text-white">
+              <span class="text-logo1">N</span>odal<span class="text-logo3">it</span>
+            </span>
+            <!-- <Logo id="headerLogo" :height="headerHeight" /> -->
+          </ClientOnly>
+        </a>
+        <div v-if="!isSmall" class="col-span-12 hidden lg:flex items-center space-x-8">
+          <a
+            v-for="link in navigation"
+            :key="link.name"
+            :href="link.href"
+            class="cursor-pointer text-base uppercase text-white hover:text-indigo-50"
+            @click.prevent="scrollTo(link.id)"
           >
-            <a href="/" @click.prevent="scrollTo('top')">
-              <span class="sr-only">Meetr</span>
-              <ClientOnly>
-                <Logo id="headerLogo" :height="headerHeight" />
-              </ClientOnly>
-            </a>
-            <div v-if="!isSmall" class="hidden space-x-8 lg:block lg:ml-5">
-              <a
-                v-for="link in navigation"
-                :key="link.name"
-                :href="link.href"
-                class="cursor-pointer text-base uppercase text-white hover:text-indigo-50"
-                @click.prevent="scrollTo(link.id)"
-              >
-                {{ link.name }}
-              </a>
-            </div>
-          </div>
+            {{ link.name }}
+          </a>
         </div>
-      </nav>
+      </div>
     </header>
     <div
       class="fixed top-3 right-6 block cursor-pointer z-40"

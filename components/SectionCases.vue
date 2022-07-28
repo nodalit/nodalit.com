@@ -9,8 +9,8 @@
       <TextFader
         :uid="project.name"
         :text="project.example"
-        :highlightFirstWords="project.highlightFirstWords"
-        :highlightColor="project.highlightColor"
+        :highlight-first-words="project.highlightFirstWords"
+        :highlight-color="project.highlightColor"
         class="mb-4"
       />
       <div class="relative h-96 mb-6">
