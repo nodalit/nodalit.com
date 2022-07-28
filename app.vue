@@ -15,7 +15,7 @@ useHead({
   ],
 })
 
-const darkBg = ref(false)
+const darkBg = ref(true)
 
 const scrolling = () => {
   const htmlCollection = document.getElementsByClassName('base-section')

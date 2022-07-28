@@ -3,7 +3,9 @@
     <header id="header" class="fixed top-0 w-full z-20" :style="{ height: `${headerHeight}px` }">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top" :class="{ 'max-w-full': isSmall }">
         <div class="w-full justify-between" style="height: 70px;">
-          <div class="flex items-center overflow-visible justify-between lg:justify-start" :style="{ justifyContent: isSmall ? 'space-between' : 'left' }">
+          <div
+            class="flex items-center overflow-visible justify-between lg:justify-start"
+          >
             <a href="/" @click.prevent="scrollTo('top')">
               <span class="sr-only">Meetr</span>
               <ClientOnly>
@@ -15,55 +17,53 @@
                 v-for="link in navigation"
                 :key="link.name"
                 :href="link.href"
-                class="cursor-pointer text-base font-bold uppercase text-white hover:text-indigo-50"
+                class="cursor-pointer text-base uppercase text-white hover:text-indigo-50"
                 @click.prevent="scrollTo(link.id)"
               >
                 {{ link.name }}
               </a>
             </div>
-            <div
-              class="lg:hidden cursor-pointer"
-              :style="{ display: isSmall ? 'block' : null }"
-              @click="showMenu = !showMenu"
-            >
-              <div class="-mr-2">
-                <span class="sr-only">Open menu</span>
-                <MenuIcon
-                  class="h-8 w-8 text-black rouned-md"
-                  :style="{ color: props.darkBg ? 'white' : 'black' }"
-                  aria-hidden="true"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </nav>
     </header>
+    <div
+      class="fixed top-3 right-6 block lg:hidden cursor-pointer z-40"
+      :class="isSmall ? 'lg:block' : ''"
+      @click="showMenu = !showMenu"
+    >
+      <div class="-mr-2">
+        <span class="sr-only">Open menu</span>
+        <MenuIcon
+          class="h-8 w-8 text-white rouned-md"
+          :style="{ color: props.darkBg ? 'white' : 'black' }"
+          aria-hidden="true"
+        />
+      </div>
+    </div>
     <Transition name="scale" @enter="enterMenu">
       <div
-        v-if="showMenu && isSmall"
-        class="fixed z-30 right-10 p-8 transition transform origin-top-right rounded-2xl shadow-xl ring-1 ring-black ring-opacity-5 bg-gray-900 divide-y-2 divide-gray-50"
-        :style="{ top: `${headerHeight}px` }"
+        v-if="showMenu"
+        class="fixed z-30 right-0 left-0 top-0 bottom-0 p-8 transition transform origin-top-right bg-gray-900 flex"
       >
-        <nav class="grid gap-6">
-          <div
+        <nav class="flex-grow flex flex-col justify-center space-y-6">
+          <a
             v-for="link in navigation"
             :key="link.name"
             :href="link.href"
-            class="menu-item -m-3 p-3 flex items-center rounded-lg hover:bg-gray-50 text-slate-50 hover:text-black hover:cursor-pointer"
-            :style="{ color: props.darkBg ? 'white' : 'black' }"
-            @click="goto(link.href)"
+            class="menu-item -m-3 p-3 flex justify-center items-center rounded-lg text-slate-50 hover:text-logo3 hover:cursor-pointer"
+            @click.prevent="scrollTo(link.id)"
           >
-            <div
+            <!-- <div
               class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full"
               style="background: #ff006e;"
             >
-              <!-- <component :is="item.icon" class="h-6 w-6" aria-hidden="true" /> -->
-            </div>
-            <div class="ml-4 text-xl font-bold">
+              <component :is="item.icon" class="h-6 w-6" aria-hidden="true" />
+            </div> -->
+            <div class="ml-4 text-5xl text-center">
               {{ link.name }}
             </div>
-          </div>
+          </a>
         </nav>
       </div>
     </Transition>
@@ -77,7 +77,10 @@ import {
 } from '@heroicons/vue/outline'
 
 const props = defineProps({
-  darkBg: Boolean,
+  darkBg: {
+    type: Boolean,
+    default: true,
+  },
 })
 
 /* const rgbToHsl = (r, g, b) => {
@@ -178,14 +181,15 @@ const navigation = [
 ]
 
 const scrollTo = (id) => {
+  showMenu.value = false
   const element = document.getElementById(id)
   element.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
 }
 
-const goto = (href: string) => {
+/* const goto = (href: string) => {
   navigateTo(href)
   showMenu.value = false
-}
+} */
 
 const enterMenu = () => {
   anime({
