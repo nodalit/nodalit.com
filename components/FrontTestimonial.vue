@@ -12,7 +12,7 @@
           <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:px-0 lg:py-20 lg:max-w-none">
             <blockquote>
               <div>
-                <img src="/assets/link_arkitektur_logo.svg" class="h-24 lg:h-12" />
+                <img src="/link_arkitektur_logo.svg" class="h-24 lg:h-12" />
                 <p class="mt-6 text-2xl font-medium text-black">{{ testimonial.quote }}</p>
               </div>
               <footer class="mt-6 md:flex">

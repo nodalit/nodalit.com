@@ -7,8 +7,8 @@
           <div class="rounded-2xl relative">
             <div class="" style="width: 1000px; margin: -50px -300px">
               <video ref="vidRef" playsinline muted>
-                <source src="/assets/mobile.mp4" type="video/mp4" codec="hvc1" />
-                <source src="/assets/mobile.webm" type="video/webm" />
+                <source src="/mobile.mp4" type="video/mp4" codec="hvc1" />
+                <source src="/mobile.webm" type="video/webm" />
               </video>
             </div>
           </div>
