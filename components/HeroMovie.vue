@@ -1,6 +1,6 @@
 <template>
   <div ref="movieContainerRef" class="base-section pt-20 pb-4 bg-gray-900 lg:overflow-hidden">
-    <div class="relative max-w-screen-2xl mx-auto px-12 sm:px-12 lg:px-16">
+    <div class="relative max-w-screen-2xl mx-auto px-12 sm:px-12 lg:px-16 pb-8">
       <div class="xl:grid xl:grid-cols-16">
         <div
           class="xl:col-start-3 xl:col-end-14 3xl:col-start-1 grid grid-cols-2 gap-6"
@@ -9,9 +9,9 @@
           <div class="col-span-2 lg:col-span-1 lg:text-left lg:flex lg:items-center">
             <div class="py-12 lg:py-20">
               <h1 class="text-4xl sm:text-5xl tracking-tight font-extrabold text-white">
-                <span class="block">Brug for en</span>
+                <span class="block pb-1 sm:pb-2">Brug for en</span>
                 <Typewriter />
-                <span class="block text-white">digital løsning?</span>
+                <span class="block pt-1 sm:pt-2 text-white">digital løsning?</span>
               </h1>
               <p class="mt-3 responsive-text-lg text-gray-300 sm:mt-5">
                 Vi laver små og store digitale løsninger for vores kunder, store som små.
@@ -27,8 +27,8 @@
               <!-- <img class="w-full lg:absolute lg:inset-y-0 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none" src="assets/hero.png" alt="" /> -->
               <div class="w-full lg:absolute lg:inset-y-0 lg:top-6 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none lg:flex lg:justify-center">
                 <video ref="vidRef" playsinline muted>
-                  <source src="/assets/laptop.mp4" type="video/mp4" codec="hvc1" />
-                  <source src="/assets/laptop.webm" type="video/webm" />
+                  <source src="/laptop.mp4" type="video/mp4" codec="hvc1" />
+                  <source src="/laptop.webm" type="video/webm" />
                 </video>
               </div>
             </div>

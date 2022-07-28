@@ -8,7 +8,7 @@
         :key="feature.name"
         :uid="feature.name"
         :text="feature.description"
-        :highlight-first-words="feature.highlight-first-words"
+        :highlight-first-words="feature.highlightFirstWords"
         :text-color="'black'"
         :highlight-color="'white'"
         class="mb-16"
