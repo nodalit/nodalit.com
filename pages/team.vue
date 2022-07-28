@@ -103,7 +103,7 @@
 </template>
 
 <script lang="ts" setup>
-import { MailIcon } from '@heroicons/vue/solid'
+import { MailIcon } from '@heroicons/vue/solid/esm/index.js'
 import anime from 'animejs/lib/anime.es.js'
 
 const show = ref(false)
