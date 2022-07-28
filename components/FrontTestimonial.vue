@@ -68,13 +68,13 @@ onMounted(() => {
       autoplay: false,
       animationData,
     })
-    document.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll)
   }
 })
 
 onUnmounted(() => {
   if (process.client) {
-    document.removeEventListener('scroll', onScroll)
+    window.removeEventListener('scroll', onScroll)
     anim.destroy()
     anim = undefined
   }

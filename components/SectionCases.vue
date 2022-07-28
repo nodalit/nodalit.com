@@ -76,14 +76,14 @@ const scrollTo = (id) => {
 }
 onMounted(() => {
   if (process.client) {
-    document.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll)
     vidRef.value.currentTime = 0.001
   }
 })
 
 onUnmounted(() => {
   if (process.client) {
-    document.removeEventListener('scroll', onScroll)
+    window.removeEventListener('scroll', onScroll)
   }
 })
 </script>

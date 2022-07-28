@@ -67,7 +67,7 @@ onMounted(() => {
       },
     })
     lottieReady.value = true
-    document.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll)
   }
 })
 </script>

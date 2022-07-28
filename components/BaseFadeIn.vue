@@ -1,44 +1,38 @@
 <template>
   <div
-    :id="uid"
+    :id="props.uid"
     class="transition-opacity"
     :style="'opacity: ' + opacity + ';'"
   >
     <slot />
   </div>
 </template>
-<script>
+<script setup>
 import calcHorizontalDistance from '@/composables/calcHorizontalDistance'
 // import calcElementOpacity from '@/composables/calcElementOpacity'
-export default {
-  name: 'BadeFadeIn',
-  props: {
-    uid: {
-      type: String,
-      required: true,
-    },
+const props = defineProps({
+  uid: {
+    type: String,
+    required: true,
   },
-  data () {
-    return {
-      opacity: 0,
-    }
-  },
-  mounted () {
-    const containerEl = document.getElementById(this.uid)
-    // const containerHeight = containerEl.scrollHeight
-    addEventListener('scroll', () => {
-      const horDist = calcHorizontalDistance(70, containerEl)
-      if (horDist > 0) {
-        this.opacity = 1
-      } else {
-        this.opacity = 0
-      }
-      /* const unit = containerHeight
-      const fadePoints = { start: 0, end: containerHeight - 200 }
-      this.opacity = calcElementOpacity(horDist, fadePoints, unit) */
-    })
-  },
+})
+const opacity = ref(0)
+let containerEl = null
+const scrollCallback = () => {
+  const horDist = calcHorizontalDistance(70, containerEl)
+  if (horDist > 0) {
+    opacity.value = 1
+  } else {
+    opacity.value = 0
+  }
 }
+onMounted(() => {
+  containerEl = document.getElementById(props.uid)
+  window.addEventListener('scroll', scrollCallback)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', scrollCallback)
+})
 </script>
 <style scoped>
 

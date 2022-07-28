@@ -66,6 +66,24 @@ export default {
       highlightedWords: ['agilt'],
     }
   },
+  created () {
+    const text = this.text
+    const arr = text.split(' ')
+    arr.forEach((word, index) => {
+      this.words.push({
+        text: word,
+        opacity: 0,
+        highlight: this.highlightedWords.includes(word) || index < this.highlightFirstWords,
+      })
+    })
+  },
+  mounted () {
+    this.scrollCallback()
+    window.addEventListener('scroll', this.scrollCallback)
+  },
+  unmounted () {
+    window.removeEventListener('scroll', this.scrollCallback)
+  },
   methods: {
     calcWordFadePoints (wordIndex, unit) {
       const i = wordIndex
@@ -111,23 +129,6 @@ export default {
         }
       }
     },
-  },
-  created () {
-    const text = this.text
-    const arr = text.split(' ')
-    arr.forEach((word, index) => {
-      this.words.push({
-        text: word,
-        opacity: 0,
-        highlight: this.highlightedWords.includes(word) || index < this.highlightFirstWords,
-      })
-    })
-  },
-  mounted () {
-    this.scrollCallback()
-    document.addEventListener('scroll', () => {
-      this.scrollCallback()
-    })
   },
 }
 </script>
