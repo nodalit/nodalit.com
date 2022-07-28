@@ -121,7 +121,7 @@
 </template>
 
 <script setup lang="ts">
-import { MailIcon } from '@heroicons/vue/outline'
+import { MailIcon } from '@heroicons/vue/outline/esm/index.js'
 import anime from 'animejs/lib/anime.es.js'
 
 const email = ref('')

@@ -74,7 +74,7 @@
 import anime from 'animejs/lib/anime.es.js'
 import {
   MenuIcon,
-} from '@heroicons/vue/outline'
+} from '@heroicons/vue/outline/esm/index.js'
 
 const props = defineProps({
   darkBg: {

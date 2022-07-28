@@ -72,7 +72,7 @@
 </template>
 
 <script setup>
-import { MailIcon } from '@heroicons/vue/outline'
+import { MailIcon } from '@heroicons/vue/outline/esm/index.js'
 
 // import projects from '@/store/projects.json'
 const employees = [
