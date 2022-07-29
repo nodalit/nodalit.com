@@ -10,5 +10,6 @@
       <SectionValues />
       <SectionContact />
     </main>
+    <div class="hidden md:hidden"></div>
   </div>
 </template>
