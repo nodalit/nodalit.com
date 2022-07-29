@@ -21,11 +21,11 @@ module.exports = {
         logo5: '#3a86ff',
       },
       gridTemplateColumns: {
-        '16': 'repeat(16, minmax(0, 1fr))',
+        16: 'repeat(16, minmax(0, 1fr))',
       },
       gridColumn: {
         'end-14': '14',
-      }
+      },
     },
   },
   plugins: [
