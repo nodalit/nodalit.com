@@ -9,14 +9,14 @@ export default defineEventHandler(async (event) => {
     secure: false,
     auth: {
       user: 'andersand@meetr.dk',
-      pass: '<password>',
+      pass: process.env.SMTP_PW,
     },
     service: 'Outlook365',
   })
   const result = await transporter.sendMail({
     from: 'Anders And <andersand@meetr.dk>',
     to: 'kontakt@meetr.dk',
-    subject: 'Ny besked på meetr.dk',
+    subject: 'Ny besked på nodalit.dk',
     text: body.message,
   })
   console.log(result)
