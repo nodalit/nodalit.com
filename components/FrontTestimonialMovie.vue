@@ -9,7 +9,7 @@
         <div class="relative flex flex-col items-center md:block md:col-span-4 xl:col-span-3">
           <div aria-hidden="true" class="absolute inset-x-0 top-0 h-1/2 bg-white hidden" />
           <div class="rounded-2xl relative">
-            <div class="" style="width: 1000px; margin: -50px -300px">
+            <div>
               <video ref="vidRef" playsinline muted>
                 <source src="/mobile.mp4" type="video/mp4" codec="hvc1" />
                 <source src="/mobile.webm" type="video/webm" />
