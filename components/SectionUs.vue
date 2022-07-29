@@ -8,7 +8,7 @@
     <TextFader
       :uid="'about-intro'"
       :highlight-first-words="2"
-      :text="'Vi er et lille men dedikeret team, med mange års erfaring indenfor design og udvikling af digitale løsninger.'"
+      :text="texts.team.intro"
       class="mb-16"
     />
     <ul class="space-y-12">
@@ -72,64 +72,7 @@
 
 <script setup>
 import { MailIcon } from '@heroicons/vue/outline/esm/index.js'
-
+import texts from '@/assets/texts'
 // import projects from '@/store/projects.json'
-const employees = [
-  {
-    name: 'Mads Ringblom',
-    role: 'UX/UI & Frontend Dev',
-    imageUrl: '/mads_ringblom.jpg',
-    bio: 'Mads Ringblom er UX/UI designer og frontend-udvikler med en passion for at lave brugervenlige og intuitive applikationer. Mads forstår at designe og facilitere effektive processer, der fører til de bedst mulige løsninger. I sin fritid spiller Mads en masse instrumenter i bandet TERESE.',
-    mail: 'mads@meetr.dk',
-    twitterUrl: null,
-    linkedinUrl: 'https://www.linkedin.com/in/madsringblom/',
-    githubUrl: 'https://github.com/madsringblom',
-    otherProjects: [
-      {
-        name: 'Testfacilitet for Bygningshub',
-        href: 'https://bygningshub.dk/',
-      },
-      {
-        name: 'Forsyningsdataportal',
-        href: 'https://forsyningsdataportal.dk/',
-      },
-      {
-        name: 'MEETR',
-        href: 'https://meetr.dk/',
-      },
-      {
-        name: 'Coreculture Målingsværktøj',
-        href: 'https://maaling.coreculture.dk/#/',
-      },
-    ],
-  },
-  {
-    name: 'Thomas Titanium',
-    role: 'Full Stack Dev',
-    imageUrl: '/thomas_titanium.jpg',
-    bio: 'Thomas Titanium er full stack-udvikler, som elsker at lave robuste applikationer med de nyeste teknologier. Han har en stærk baggrund i it-sikkerhed og API-udvikling – men holder sig også skarp i frontend. Thomas løber og spiller tennis.',
-    mail: 'thomas@meetr.dk',
-    twitterUrl: 'https://twitter.com/huulbaek',
-    linkedinUrl: 'https://www.linkedin.com/in/thomas-huulb%C3%A6k-titanium-150468/',
-    githubUrl: 'https://github.com/huulbaek',
-    otherProjects: [
-      {
-        name: 'Punkr',
-        href: 'https://punkr.app/',
-      },
-      {
-        name: 'Laterz',
-        href: 'https://laterz.io/',
-      },
-      {
-        name: 'Testfacilitet for Bygningshub',
-        href: 'https://bygningshub.dk/',
-      },
-      {
-        name: 'AlleOs i Alternativet',
-        href: 'https://alleos.alternativet.dk/',
-      },
-    ],
-  },
-]
+const employees = texts.team.employees
 </script>

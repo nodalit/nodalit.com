@@ -3,7 +3,7 @@
     <h3 class="responsive-text-base pb-6 text-white">KONTAKT OS</h3>
     <TextFader
       :uid="'contact-intro'"
-      :text="'Send os en email eller udfyld en formular – du bestemmer og vi lover at vende tilbage.'"
+      :text="pageIntro"
       :highlight-first-words="4"
       :text-color="'white'"
       :highlight-color="'logo1'"
@@ -19,7 +19,7 @@
         >
           <dd v-if="showSections" class="flex items-center text-indigo-50">
             <MailIcon class="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 text-logo1" aria-hidden="true" />
-            <span class="ml-3 sm:ml-6 pb-2 responsive-text-mega"><a href="mailto:mads@meetr.dk">kontakt@meetr.dk</a></span>
+            <span class="ml-3 sm:ml-6 pb-2 responsive-text-mega"><a href="mailto:mads@meetr.dk">{{ contactEmail }}</a></span>
           </dd>
         </Transition>
       </dl>
@@ -123,7 +123,9 @@
 <script setup lang="ts">
 import { MailIcon } from '@heroicons/vue/outline/esm/index.js'
 import anime from 'animejs/lib/anime.es.js'
-
+import texts from '@/assets/texts'
+const pageIntro = texts.contact.intro
+const contactEmail = texts.contact.email
 const email = ref('')
 const name = ref('')
 const message = ref('')

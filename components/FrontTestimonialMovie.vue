@@ -47,6 +47,7 @@
 </template>
 
 <script setup lang="ts">
+import texts from '@/assets/texts'
 import calcHorizontalDistance from '@/composables/calcHorizontalDistance'
 
 const vidRef = ref(null)
@@ -79,10 +80,5 @@ onUnmounted(() => {
   }
 })
 
-const testimonial = {
-  name: 'Grethe Hauglang',
-  title: 'CEO',
-  company: 'LINK Arkitektur',
-  quote: 'Vi har haft en tæt og supergodt samarbejde med Meetr. De leverer til tiden og de forstår at oversætte vores forretningskrav til kode med konstant fokus på at gøre processen så let og gnidningsfri som mulig.',
-}
+const testimonial = texts.testemonials[0]
 </script>

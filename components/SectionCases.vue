@@ -21,9 +21,16 @@
           </video>
         </div>
       </div>
-      <p class="responsive-text-xl pb-6">{{ project.description }}</p>
-      <div class="flex justify-center">
-        <BaseButtonCTA @click="scrollTo('kontakt')">
+      <TextFader
+        :uid="project.name + '_cta'"
+        :text="project.description"
+        :highlight-first-words="2"
+        :highlight-color="project.highlightColor"
+        class="mb-4"
+      />
+      <!-- <p class="responsive-text-mega py-6">{{ project.description }}</p> -->
+      <div class="flex">
+        <BaseButtonCTA :highlight-color="project.highlightColor" @click="scrollTo('kontakt')">
           Kontakt os for en uforpligtende snak
         </BaseButtonCTA>
       </div>
@@ -33,24 +40,8 @@
 
 <script setup>
 // import projects from '@/store/projects.json'
-const projects = [
-  {
-    name: 'KUNDECASE 1',
-    example: 'Rudersdal Kommune ønskede at digitalisere deres forberedelsesskema til medarbejder-udviklingssamtaler. Efter den indledende dialog stod det klart at der var mulighed for en win win situation. Rudersdal fik et skræddersyet digitalt værktøj, matchende deres behov til en pris der var under licensprisen for et standard-system, samtidig fik vi ejerskab over det endelige produkt og mulighed for at videreudvikle og -sælge det til andre med samme behov.',
-    description: 'Har du en idé, som vi ser et forretningspotentiale i, så har du mulighed for at få udviklet en løsning skræddersyet til dine behov, for en brøkdel af prisen.',
-    highlightFirstWords: 2,
-    bgColor: 'logo3',
-    highlightColor: 'white',
-  },
-  {
-    name: 'KUNDECASE 2',
-    example: 'Link Arkitektur arbejdede allerede med bæredygtighedsworkshops men ønskede en digital løsning, der kunne gøre arbejdet lettere og mere skalerbart. Vi hjælp Link med at gå fra idé over prototype og til et færdigt digitalt værktøj, som ikke bare har gjort arbejdet lettere men også sat Link på landkortet.',
-    description: 'Har du en idé og et klart behov? Vi kan hjælpe med at konkretisere din idé til konkrete skærmbilleder og brugerflows og herefter give et tilbud på udviklingen af den færdige løsning.',
-    highlightFirstWords: 2,
-    bgColor: 'gray-300',
-    highlightColor: 'logo3',
-  },
-]
+import texts from '@/assets/texts'
+const projects = texts.cases
 
 const vidRef = ref(null)
 

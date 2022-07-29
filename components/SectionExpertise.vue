@@ -15,8 +15,8 @@
       :highlight-color="'logo3'"
       class="mb-16"
     />
-    <div class="flex justify-center">
-      <BaseButtonCTA @click="scrollTo('kontakt')">
+    <div class="flex">
+      <BaseButtonCTA :highlight-color="'logo3'" dark @click="scrollTo('kontakt')">
         Kontakt os og hør mere
       </BaseButtonCTA>
     </div>
@@ -24,12 +24,8 @@
 </template>
 
 <script setup>
-
-const paragraphs = [
-  'Vi er eksperter i at udvikle digitale værktøjer. Har I brug for at visualisere data grafisk eller på kort, understøtte en kritisk proces, gøre en arbejdsgang lettere, indsamle og analysere data eller på anden måde interagere med jeres brugere? Så kan vi hjælpe.',
-  'Vi har stor erfaring med sætte os ind i komplekse arbejdssituationer og omsætte faglige behov til digitale løsninger. Vi vælger altid den teknologi der bedst opfylder jeres behov og udvikler fx apps, browser-baserede løsninger, integrationer til office og webapplikationer til Mac og Windows.',
-  'Se eksempler på digitale løsninger vi har udviklet nedenfor.',
-]
+import texts from '@/assets/texts'
+const paragraphs = texts.expertise.paragraphs
 const scrollTo = (id) => {
   const element = document.getElementById(id)
   element.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
