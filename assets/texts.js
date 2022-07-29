@@ -4,7 +4,7 @@ export default {
       name: 'Grethe Hauglang',
       title: 'CEO',
       company: 'LINK Arkitektur',
-      quote: 'Vi har haft en tæt og supergodt samarbejde med Meetr. De leverer til tiden og de forstår at oversætte vores forretningskrav til kode med konstant fokus på at gøre processen så let og gnidningsfri som mulig.',
+      quote: 'Vi har haft en tæt og supergodt samarbejde med Nodalit. De leverer til tiden og de forstår at oversætte vores forretningskrav til kode med konstant fokus på at gøre processen så let og gnidningsfri som mulig.',
     },
   ],
   expertise: {
@@ -40,7 +40,7 @@ export default {
         role: 'UX/UI & Frontend Dev',
         imageUrl: '/mads_ringblom.jpg',
         bio: 'Mads Ringblom er UX/UI designer og frontend-udvikler med en passion for at lave brugervenlige og intuitive applikationer. Mads forstår at designe og facilitere effektive processer, der fører til de bedst mulige løsninger. I sin fritid spiller Mads en masse instrumenter i bandet TERESE.',
-        mail: 'mads@meetr.dk',
+        mail: 'mads@nodalit.dk',
         twitterUrl: null,
         linkedinUrl: 'https://www.linkedin.com/in/madsringblom/',
         githubUrl: 'https://github.com/madsringblom',
@@ -54,8 +54,8 @@ export default {
             href: 'https://forsyningsdataportal.dk/',
           },
           {
-            name: 'MEETR',
-            href: 'https://meetr.dk/',
+            name: 'NODALIT',
+            href: 'https://nodalit.dk/',
           },
           {
             name: 'Coreculture Målingsværktøj',
@@ -68,7 +68,7 @@ export default {
         role: 'Full Stack Dev',
         imageUrl: '/thomas_titanium.jpg',
         bio: 'Thomas Titanium er full stack-udvikler, som elsker at lave robuste applikationer med de nyeste teknologier. Han har en stærk baggrund i it-sikkerhed og API-udvikling – men holder sig også skarp i frontend. Thomas løber og spiller tennis.',
-        mail: 'thomas@meetr.dk',
+        mail: 'thomas@nodalit.dk',
         twitterUrl: 'https://twitter.com/huulbaek',
         linkedinUrl: 'https://www.linkedin.com/in/thomas-huulb%C3%A6k-titanium-150468/',
         githubUrl: 'https://github.com/huulbaek',
@@ -117,6 +117,6 @@ export default {
   },
   contact: {
     intro: 'Send os en email eller udfyld en formular – du bestemmer og vi lover at vende tilbage.',
-    email: 'kontakt@meetr.dk',
+    email: 'kontakt@nodalit.dk',
   },
 }

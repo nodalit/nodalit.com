@@ -8,7 +8,7 @@
           href="/"
           @click.prevent="scrollTo('top')"
         >
-          <span class="sr-only">Meetr</span>
+          <span class="sr-only">Nodalit</span>
           <ClientOnly>
             <span
               class="text-3xl font-bold text-white"
