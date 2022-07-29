@@ -1,9 +1,13 @@
 <template>
   <div ref="movieContainerRef">
     <div class="base-section pb-16 bg-gray-200 lg:pb-0 lg:z-10 lg:relative">
-      <div class="lg:mx-auto lg:max-w-screen-2xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
-        <div class="relative hidden lg:block lg:col-span-4 xl:col-span-3">
-          <div aria-hidden="true" class="absolute inset-x-0 top-0 h-1/2 bg-white lg:hidden" />
+      <div class="md:grid md:grid-cols-12 lg:mx-auto lg:max-w-screen-2xl lg:px-8 lg:gap-8">
+        <div class="sm:max-w-2xl md:hidden px-12 py-12">
+          <h3 class="responsive-text-base uppercase">Reference</h3>
+          <h4 class="text-5xl lg:text-6xl">LINK Arkitektur</h4>
+        </div>
+        <div class="relative flex flex-col items-center md:block md:col-span-4 xl:col-span-3">
+          <div aria-hidden="true" class="absolute inset-x-0 top-0 h-1/2 bg-white hidden" />
           <div class="rounded-2xl relative">
             <div class="" style="width: 1000px; margin: -50px -300px">
               <video ref="vidRef" playsinline muted>
@@ -13,14 +17,14 @@
             </div>
           </div>
         </div>
-        <div class="py-12 lg:m-0 lg:col-span-8 xl:col-span-8 lg:pl-9">
+        <div class="py-12 lg:m-0 md:col-span-8 xl:col-span-8 md:pl-9">
           <div class="sm:max-w-2xl lg:max-w-none px-12 lg:px-0 lg:py-12">
             <blockquote>
-              <h3 class="responsive-text-base uppercase">Reference</h3>
+              <h3 class="hidden md:block responsive-text-base uppercase">Reference</h3>
               <div>
-                <h3 class="text-5xl lg:text-6xl">LINK Arkitektur</h3>
+                <h3 class="hidden md:block text-5xl lg:text-6xl">LINK Arkitektur</h3>
                 <!-- <img src="/assets/link_arkitektur_logo.svg" class="h-24 lg:h-12" /> -->
-                <p class="mt-6 responsive-text-lg text-black">{{ testimonial.quote }}</p>
+                <p class="mt-6 responsive-text-lg text-black">"{{ testimonial.quote }}"</p>
               </div>
               <footer class="mt-6 md:flex">
                 <div class="md:flex md:items-center md:justify-center">
