@@ -57,6 +57,7 @@ import calcHorizontalDistance from '@/composables/calcHorizontalDistance'
 const vidRef = ref(null)
 const movieContainerRef = ref(null)
 let requestAnimationFrameId: number
+let currentFrame = 1
 
 const tick = () => {
   if (process.client) {
@@ -66,8 +67,25 @@ const tick = () => {
     }
     const horDist = calcHorizontalDistance(65, movieContainerRef.value)
     const maxScroll = movieContainerRef.value.clientHeight - horDist
+    if (horDist > maxScroll) {
+      if (currentFrame < 30) {
+        currentFrame = 30
+        vidRef.value.currentTime = 1
+      }
+      return
+    }
     const scrollProgress = horDist / Math.max(maxScroll, 1)
-    vidRef.value.currentTime = vidRef.value.duration * scrollProgress
+    const newPos = Math.round(vidRef.value.duration * scrollProgress * 100) / 100
+    const newFrame = Math.round(newPos * 30)
+    if (newFrame !== currentFrame) {
+      if (newFrame > 30) {
+        vidRef.value.currentTime = 1
+        return
+      }
+      vidRef.value.currentTime = newPos
+      currentFrame = newFrame
+      // console.log(currentFrame, newPos)
+    }
   }
 }
 

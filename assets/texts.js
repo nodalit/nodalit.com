@@ -22,6 +22,7 @@ export default {
       highlightFirstWords: 2,
       bgColor: 'logo3',
       highlightColor: 'white',
+      image: '/mus.png',
     },
     {
       name: 'KUNDECASE 2',
@@ -30,6 +31,7 @@ export default {
       highlightFirstWords: 2,
       bgColor: 'gray-300',
       highlightColor: 'logo3',
+      image: null,
     },
   ],
   team: {
