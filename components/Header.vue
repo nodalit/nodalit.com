@@ -1,12 +1,22 @@
 <template>
   <div>
     <header id="header" class="fixed top-0 w-full z-20" :style="{ height: `${headerHeight}px` }">
-      <div class="max-w-screen-2xl mx-auto px-12 lg:px-16 grid grid-cols-16 items-end" aria-label="Top" :class="{ 'max-w-full': isSmall }">
-        <a class="col-span-2" href="/" @click.prevent="scrollTo('top')">
+      <div class="max-w-screen-2xl px-12 pt-1 lg:px-16 grid grid-cols-16 items-end" aria-label="Top" :class="{ 'max-w-full': isSmall }">
+        <a
+          class="col-span-2 transition-transform origin-bottom-left"
+          :class="isSmall ? 'rotate-90 -translate-x-11 lg:-translate-x-14 -translate-y-6' : ''"
+          href="/"
+          @click.prevent="scrollTo('top')"
+        >
           <span class="sr-only">Meetr</span>
           <ClientOnly>
-            <span class="text-3xl font-bold text-white">
-              <span class="text-logo1">N</span>odal<span class="text-logo3">it</span>
+            <span
+              class="text-3xl font-bold text-white"
+            >
+              <span class="text-logo1">N</span>
+              <span class="">od</span>
+              <span class="">al</span>
+              <span class="text-logo3">it</span>
             </span>
             <!-- <Logo id="headerLogo" :height="headerHeight" /> -->
           </ClientOnly>

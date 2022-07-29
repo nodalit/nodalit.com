@@ -22,18 +22,18 @@
         </div>
       </div>
       <TextFader
-        :uid="project.name + '_cta'"
+        :uid="project.name + '_cta_text'"
         :text="project.description"
         :highlight-first-words="2"
         :highlight-color="project.highlightColor"
         class="mb-4"
       />
       <!-- <p class="responsive-text-mega py-6">{{ project.description }}</p> -->
-      <div class="flex">
+      <BaseFadeIn :uid="project.name + '_cta_button'">
         <BaseButtonCTA :highlight-color="project.highlightColor" @click="scrollTo('kontakt')">
           Kontakt os for en uforpligtende snak
         </BaseButtonCTA>
-      </div>
+      </BaseFadeIn>
     </BaseSection>
   </div>
 </template>

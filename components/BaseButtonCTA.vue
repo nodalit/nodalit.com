@@ -1,14 +1,14 @@
 <template>
   <button
-    class="responsive-text-mega rounded-lg p-3 bg-transparent"
+    class="responsive-text-mega bg-transparent"
     :class="dark ? 'text-white' : 'text-black'"
     @mouseenter="hover = true"
     @mouseleave="hover = false"
   >
-    <div class="flex space-x-2 items-center">
+    <div class="flex space-x-2 items-center text-left">
       <ChevronRightIcon
         :class="'text-' + highlightColor"
-        class="flex-shrink-0 w-6 h-6 sm:w-16 sm:h-16 transition-transform"
+        class="flex-shrink-0 w-6 h-6 sm:w-12 sm:h-12 lg:w-16 lg:h-16 transition-transform"
         aria-hidden="true"
         :style="hover ? 'transform: rotate(90deg);' : ''"
       />

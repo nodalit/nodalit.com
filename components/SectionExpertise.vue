@@ -15,11 +15,11 @@
       :highlight-color="'logo3'"
       class="mb-16"
     />
-    <div class="flex">
+    <BaseFadeIn :uid="'expertise_cta'">
       <BaseButtonCTA :highlight-color="'logo3'" dark @click="scrollTo('kontakt')">
         Kontakt os og hør mere
       </BaseButtonCTA>
-    </div>
+    </BaseFadeIn>
   </BaseSection>
 </template>
 
