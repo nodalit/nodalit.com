@@ -66,6 +66,6 @@ const testimonial = {
   name: 'Grethe Hauglang',
   title: 'CEO',
   company: 'Link Arkitektur',
-  quote: 'Vi har haft en tæt og supergodt samarbejde med MEETR. De leverer til tiden, er supergode til at oversætte vores forretningskrav til kode og har konstant fokus på at gøre processen så let og gnidningsfri som muligt.',
+  quote: 'Vi har haft en tæt og supergodt samarbejde med NODALIT. De leverer til tiden, er supergode til at oversætte vores forretningskrav til kode og har konstant fokus på at gøre processen så let og gnidningsfri som muligt.',
 }
 </script>

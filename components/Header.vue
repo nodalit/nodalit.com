@@ -1,17 +1,18 @@
 <template>
   <div>
     <header id="header" class="fixed top-0 w-full z-20" :style="{ height: `${headerHeight}px` }">
-      <div class="max-w-screen-2xl px-12 pt-1 lg:px-16 grid grid-cols-16 items-end" aria-label="Top" :class="{ 'max-w-full': isSmall }">
+      <div class="max-w-screen-2xl px-4 md:px-12 pt-3 md:pt-2 lg:px-16 grid grid-cols-16 items-end" aria-label="Top" :class="{ 'max-w-full': isSmall }">
         <a
-          class="col-span-2 transition-transform origin-bottom-left"
-          :class="isSmall ? 'rotate-90 -translate-x-11 lg:-translate-x-14 -translate-y-6' : ''"
+          class="col-span-2 md:col-span-3 xl:col-span-2 transition-transform origin-bottom-left"
+          :class="isSmall ? 'rotate-90 -translate-x-3 md:-translate-x-11 lg:-translate-x-14 -translate-y-8 md:-translate-y-6' : ''"
           href="/"
           @click.prevent="scrollTo('top')"
         >
-          <span class="sr-only">Meetr</span>
+          <span class="sr-only">Nodalit</span>
           <ClientOnly>
             <span
               class="text-3xl font-bold text-white"
+              style="line-height: 1;"
             >
               <span class="text-logo1">N</span>
               <span class="">od</span>
@@ -21,12 +22,12 @@
             <!-- <Logo id="headerLogo" :height="headerHeight" /> -->
           </ClientOnly>
         </a>
-        <div v-if="!isSmall" class="col-span-12 hidden lg:flex items-center space-x-8">
+        <div v-if="!isSmall" class="col-span-12 hidden md:flex items-center space-x-8">
           <a
             v-for="link in navigation"
             :key="link.name"
             :href="link.href"
-            class="cursor-pointer text-base uppercase text-white hover:text-indigo-50"
+            class="cursor-pointer flex-shrink-0 text-base uppercase text-white hover:text-indigo-50"
             @click.prevent="scrollTo(link.id)"
           >
             {{ link.name }}
@@ -36,7 +37,7 @@
     </header>
     <div
       class="fixed top-3 right-6 block cursor-pointer z-40"
-      :class="isSmall ? 'lg:block' : 'lg:hidden'"
+      :class="isSmall ? 'md:block' : 'md:hidden'"
       @click="showMenu = !showMenu"
     >
       <div class="-mr-2">

@@ -9,7 +9,7 @@
 import isElementBgDark from '@/composables/isElementBgDark'
 import isBehindElement from '@/composables/isBehindElement'
 useHead({
-  title: 'Meetr – web apps til mennesker',
+  title: 'Nodalit – web apps til mennesker',
   link: [
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
   ],
