@@ -31,7 +31,7 @@ export default {
       highlightFirstWords: 2,
       bgColor: 'gray-300',
       highlightColor: 'logo3',
-      image: null,
+      image: '/link_ipad.png',
     },
   ],
   team: {
