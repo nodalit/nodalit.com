@@ -70,8 +70,7 @@ const tick = () => {
         vidRef.value.currentTime = 1
         return
       }
-      console.log(newPos)
-      vidRef.value.currentTime = newPos
+      vidRef.value.currentTime = isNaN(newPos) ? 0 : newPos
       currentFrame = newFrame
       // console.log(currentFrame, newPos)
     }
