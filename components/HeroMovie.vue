@@ -70,7 +70,8 @@ const tick = () => {
         vidRef.value.currentTime = 1
         return
       }
-      vidRef.value.currentTime = newPos ?? 0.01
+      console.log(newPos)
+      vidRef.value.currentTime = newPos
       currentFrame = newFrame
       // console.log(currentFrame, newPos)
     }
