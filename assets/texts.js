@@ -1,10 +1,11 @@
 export default {
-  testemonials: [
+  testimonials: [
     {
-      name: 'Grethe Hauglang',
-      title: 'CEO',
+      name: 'Jan Buthke',
+      title: 'Head of LINK IO',
       company: 'LINK Arkitektur',
       quote: 'Vi har haft en tæt og supergodt samarbejde med Nodalit. De leverer til tiden og de forstår at oversætte vores forretningskrav til kode med konstant fokus på at gøre processen så let og gnidningsfri som mulig.',
+      image: '/jan_buthke.jpeg',
     },
   ],
   expertise: {

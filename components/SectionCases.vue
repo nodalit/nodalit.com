@@ -13,16 +13,8 @@
         :highlight-color="project.highlightColor"
         class="mb-4"
       />
-      <div class="relative h-96 mb-6">
-        <div class="w-full lg:absolute lg:inset-y-0 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none lg:flex lg:justify-center">
-          <!--
-          <video ref="vidRef" playsinline muted>
-            <source src="/laptop.mp4" type="video/mp4" codec="hvc1" />
-            <source src="/laptop.webm" type="video/webm" />
-          </video>
-          -->
-          <img v-if="project.image" :src="project.image" />
-        </div>
+      <div class="mb-6">
+        <img v-if="project.image" :src="project.image" class="w-1/2" />
       </div>
       <TextFader
         :uid="project.name + '_cta_text'"
