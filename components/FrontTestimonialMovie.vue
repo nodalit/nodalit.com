@@ -10,7 +10,7 @@
           <div aria-hidden="true" class="absolute inset-x-0 top-0 h-1/2 bg-white hidden" />
           <div class="rounded-2xl relative">
             <div>
-              <video ref="vidRef" playsinline muted>
+              <video ref="vidRef" playsinline muted preload="metadata">
                 <source src="/mobile.mp4" type="video/mp4" codec="hvc1" />
                 <source src="/mobile.webm" type="video/webm" />
               </video>
@@ -82,7 +82,7 @@ const tick = () => {
         vidRef.value.currentTime = 1
         return
       }
-      vidRef.value.currentTime = isNaN(newPos) ? 0 : newPos
+      vidRef.value.currentTime = isNaN(newPos) ? 0.001 : newPos
       currentFrame = newFrame
       // console.log(currentFrame, newPos)
     }
