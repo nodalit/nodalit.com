@@ -14,7 +14,7 @@
         class="mb-4"
       />
       <div class="mb-6">
-        <img v-if="project.image" :src="project.image" class="w-1/2" />
+        <img v-if="project.image" :src="project.image" class="lg:w-1/2 sm:w-full" />
       </div>
       <TextFader
         :uid="project.name + '_cta_text'"

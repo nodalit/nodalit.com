@@ -2,7 +2,7 @@
   <div ref="movieContainerRef">
     <div class="base-section pb-16 bg-gray-200 lg:pb-0 lg:z-10 lg:relative">
       <div class="md:grid md:grid-cols-12 lg:mx-auto lg:max-w-screen-2xl lg:px-8 lg:gap-8">
-        <div class="sm:max-w-2xl md:hidden px-12 py-12">
+        <div class="sm:max-w-2xl md:hidden px-12 pt-12">
           <h3 class="responsive-text-base uppercase">Reference</h3>
           <h4 class="text-5xl lg:text-6xl">LINK Arkitektur</h4>
         </div>
@@ -17,7 +17,7 @@
             </div>
           </div>
         </div>
-        <div class="py-12 lg:m-0 md:col-span-8 xl:col-span-8 md:pl-9">
+        <div class="lg:m-0 md:col-span-8 xl:col-span-8 md:pl-9">
           <div class="sm:max-w-2xl lg:max-w-none px-12 lg:px-0 lg:py-12">
             <blockquote>
               <h3 class="hidden md:block responsive-text-base uppercase">Reference</h3>
