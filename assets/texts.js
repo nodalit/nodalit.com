@@ -18,8 +18,8 @@ export default {
   cases: [
     {
       name: 'KUNDECASE 1',
-      example: 'Rudersdal Kommune ønskede at digitalisere deres forberedelsesskema til medarbejder-udviklingssamtaler. Efter den indledende dialog stod det klart at der var mulighed for en win-win situation. Rudersdal fik et skræddersyet digitalt værktøj, matchende deres behov til en pris, der var under licensprisen for et standard-system, samtidig fik vi ejerskab over det endelige produkt og mulighed for at videreudvikle og -sælge det til andre med samme behov.',
-      description: 'Har du en idé, som vi ser et forretningspotentiale i, så har du mulighed for at få udviklet en løsning skræddersyet til dine behov, for en brøkdel af prisen.',
+      example: 'Rudersdal Kommune ønskede at digitalisere deres forberedelsesskema til medarbejder-udviklingssamtaler. Efter den indledende dialog stod det klart, at der var mulighed for en win-win situation. Rudersdal fik et skræddersyet digitalt værktøj, der matchede deres behov, til en pris, der var under licensprisen for et standard-system. Samtidig fik vi ejerskab over det endelige produkt og mulighed for at videreudvikle og sælge det til andre med samme behov.',
+      description: 'Har du en idé, som vi ser et forretningspotentiale i, så har du mulighed for at få udviklet en skræddersyet løsning til dine behov, til en brøkdel af prisen.',
       highlightFirstWords: 2,
       bgColor: 'logo3',
       highlightColor: 'white',
@@ -27,8 +27,8 @@ export default {
     },
     {
       name: 'KUNDECASE 2',
-      example: 'Link Arkitektur arbejdede allerede med bæredygtigheds-workshops men ønskede en digital løsning, der kunne gøre arbejdet lettere og mere skalerbart. Vi hjælp Link med at gå fra idé over prototype og til et færdigt digitalt værktøj, som ikke bare har gjort arbejdet lettere men også sat Link på landkortet.',
-      description: 'Har du en idé og et klart behov? Vi kan hjælpe med at konkretisere din idé til konkrete skærmbilleder og brugerflows og herefter give et tilbud på udviklingen af den færdige løsning.',
+      example: 'LINK Arkitektur arbejdede allerede med bæredygtigheds-workshops, men ønskede en digital løsning, der kunne gøre arbejdet lettere og mere skalerbart. Vi hjælp LINK med at gå fra idé over prototype og til et færdigt digitalt værktøj, som ikke bare har gjort arbejdet lettere, men også cementeret LINKs store fokus på bæredygtighed.',
+      description: 'Har du en idé og et klart behov? Vi kan hjælpe med at konkretisere din idé med konkrete skærmbilleder og brugerflows, og herefter give et tilbud på udviklingen af den færdige løsning.',
       highlightFirstWords: 2,
       bgColor: 'gray-300',
       highlightColor: 'logo3',
@@ -100,13 +100,13 @@ export default {
     paragraphs: [
       {
         name: 'Agilt',
-        description: 'Vi tror på at det er ok at blive klogere undervejs. Derfor arbejder vi altid agilt med korte leverance-intervaller og løbende inddragelse af vores kunder. Det betyder ikke, at alt hele tiden er til forhandling, men at vi hele tiden tester og evaluerer del-leverancer op mod vores målsætninger. For jer som kunde vil det betyde at I løbende vil blive præsenteret for prototyper eller færdige delområder og blive inddraget i en dialog om hvorvidt det udviklede lever op til forventningerne.',
+        description: 'Vi tror på, at det er ok at blive klogere undervejs. Derfor arbejder vi altid agilt med korte leverance-intervaller og løbende inddragelse af vores kunder. Det betyder ikke, at alt hele tiden er til forhandling, men at vi hele tiden tester og evaluerer del-leverancer op mod vores målsætninger. For jer som kunde vil det betyde, at I løbende vil blive præsenteret for prototyper eller færdige delområder og blive inddraget i en dialog om, hvorvidt det udviklede lever op til forventningerne.',
         // 'med korte leverancer og løbende inddragelse af både opdragsgiver og slutbruger, fordi vi ved at det giver både en bedre proces og et bedre produkt.',
         highlightFirstWords: 3,
       },
       {
         name: 'Tillidsbaseret',
-        description: 'Vi tror på at samarbejde baseret på tillid, øger såvel produktiviteten, som kvaliteten af det udviklede. Og så er det meget sjovere. For jer som kunde betyder det blandt andet at vi hellere vil bruge 2 timer på at fixe noget, som gør at produktet lever op til sine målsætninger end bruge 2 timer på at forhandle, om det er dækket af kontrakten. Det går selvfølgelig begge veje og kræver også jeres tillid og hjælp til prioritere, hvis nye idéer tager tiden fra udvikling af det aftalte.',
+        description: 'Vi tror på, at samarbejde baseret på tillid, øger såvel produktiviteten som kvaliteten af det udviklede. Og så er det meget sjovere. For jer som kunde betyder det blandt andet, at vi hellere vil bruge 2 timer på at fikse noget, som gør at produktet lever op til sine målsætninger end bruge 2 timer på at forhandle, om det er dækket af kontrakten. Det går selvfølgelig begge veje og kræver også jeres tillid og hjælp til at prioritere, hvis nye idéer tager tiden fra udvikling af det aftalte.',
         // 'og bruger hellere 2 timer på at fixe et problem end 4 timer på at forhandle om det er dækket af kontrakten',
         highlightFirstWords: 3,
       },
