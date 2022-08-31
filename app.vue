@@ -14,7 +14,7 @@ useHead({
     {
       hid: 'description',
       name: 'description',
-      content: 'Vi laver digitale løsninger for vores kunder, store som små. Vi har fair priser og vi elsker vores arbejde.',
+      content: 'Vi laver digitale løsninger for vores kunder – store som små. Vi har fair priser og vi elsker vores arbejde.',
     },
   ],
   link: [
