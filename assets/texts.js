@@ -43,7 +43,7 @@ export default {
         role: 'UX/UI & Frontend Dev',
         imageUrl: '/mads_ringblom_3.jpg',
         bio: 'Mads Ringblom er UX/UI designer og frontend-udvikler med en passion for at lave brugervenlige og intuitive applikationer. Mads forstår at designe og facilitere effektive processer, der fører til de bedst mulige løsninger. I sin fritid spiller Mads en masse instrumenter i bandet TERESE.',
-        mail: 'mads@nodalit.dk',
+        mail: 'mads@nodalit.com',
         twitterUrl: null,
         linkedinUrl: 'https://www.linkedin.com/in/madsringblom/',
         githubUrl: 'https://github.com/madsringblom',
@@ -71,7 +71,7 @@ export default {
         role: 'Full Stack Dev',
         imageUrl: '/thomas_titanium.jpg',
         bio: 'Thomas Titanium er full stack-udvikler, som elsker at lave robuste applikationer med de nyeste teknologier. Han har en stærk baggrund i it-sikkerhed og API-udvikling – men holder sig også skarp i frontend. Thomas løber og spiller tennis.',
-        mail: 'thomas@nodalit.dk',
+        mail: 'thomas@nodalit.com',
         twitterUrl: 'https://twitter.com/huulbaek',
         linkedinUrl: 'https://www.linkedin.com/in/thomas-huulb%C3%A6k-titanium-150468/',
         githubUrl: 'https://github.com/huulbaek',
@@ -119,6 +119,6 @@ export default {
   },
   contact: {
     intro: 'Send os en email eller udfyld en formular – du bestemmer og vi lover at vende tilbage.',
-    email: 'kontakt@nodalit.dk',
+    email: 'kontakt@nodalit.com',
   },
 }

@@ -16,8 +16,8 @@ export default defineEventHandler(async (event) => {
   const result = await transporter.sendMail({
     from: 'Anders And <andersand@meetr.dk>',
     to: 'kontakt@meetr.dk',
-    subject: 'Ny besked på nodalit.dk',
-    text: body.message,
+    subject: 'Ny besked på nodalit.com',
+    text: `Fra: ${body.name}\nEmail: <${body.email}>\n\n${body.message}`,
   })
   console.log(result)
   return {
