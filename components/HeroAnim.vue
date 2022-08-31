@@ -10,8 +10,8 @@
               <span class="block text-white">digital løsning?</span>
             </h1>
             <p class="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-              Vi laver små og store digitale løsninger for vores kunder, store som små.
-              Vi har fair priser og vi elsker vores arbejde – spørg bare nogle af vores
+              Vi laver digitale løsninger for vores kunder – store som små.
+              Vi har fair priser og vi elsker vores arbejde. Spørg bare nogle af vores
               <NuxtLink :href="'/referencer'" class="text-logo1">
                 kunder
               </NuxtLink>!

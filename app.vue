@@ -9,12 +9,12 @@
 import isElementBgDark from '@/composables/isElementBgDark'
 import isBehindElement from '@/composables/isBehindElement'
 useHead({
-  title: 'Nodalit – web apps til mennesker',
+  title: 'Nodalit – web-apps til mennesker',
   meta: [
     {
       hid: 'description',
       name: 'description',
-      content: 'Vi laver små og store digitale løsninger for vores kunder, store som små. Vi har fair priser og vi elsker vores arbejde.',
+      content: 'Vi laver digitale løsninger for vores kunder, store som små. Vi har fair priser og vi elsker vores arbejde.',
     },
   ],
   link: [

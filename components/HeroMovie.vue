@@ -14,11 +14,10 @@
                 <span class="block pt-1 sm:pt-2 text-white">digital løsning?</span>
               </h1>
               <p class="mt-3 responsive-text-lg text-gray-300 sm:mt-5">
-                Vi laver små og store digitale løsninger for vores kunder, store som små.
-                Vi har fair priser og vi elsker vores arbejde – spørg bare nogle af vores
+                Vi laver digitale løsninger for vores kunder – store som små. Vi har fair priser og vi elsker vores arbejde. Se hvad
                 <a :href="'#cases'" class="text-logo1" @click.prevent="scrollTo('cases')">
-                  kunder
-                </a>!
+                  kunderne siger
+                </a>
               </p>
             </div>
           </div>
