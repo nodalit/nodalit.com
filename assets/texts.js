@@ -68,7 +68,7 @@ export default {
       },
       {
         name: 'Thomas Titanium',
-        role: 'Full Stack Developer',
+        role: 'Full Stack-udvikler',
         imageUrl: '/thomas_titanium.jpg',
         bio: 'Thomas Titanium er full stack-udvikler, som elsker at lave robuste applikationer med de nyeste teknologier. Han har en stærk baggrund i it-sikkerhed og API-udvikling – men holder sig også skarp i frontend. Thomas løber og spiller tennis.',
         mail: 'thomas@nodalit.com',
