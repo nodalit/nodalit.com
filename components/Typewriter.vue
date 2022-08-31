@@ -19,7 +19,6 @@ export default {
         'hurtig',
         'billig',
         'bæredygtig',
-        'kompleks',
       ],
     },
   },

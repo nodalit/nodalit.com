@@ -11,14 +11,14 @@ export default {
     paragraphs: [
       'Vi er eksperter i at udvikle digitale værktøjer. Har I brug for at visualisere data grafisk eller på kort, understøtte en kritisk proces, gøre en arbejdsgang lettere, indsamle og analysere data eller på anden måde interagere med jeres brugere? Så kan vi hjælpe.',
       'Vi har stor erfaring med sætte os ind i komplekse arbejdssituationer og omsætte faglige behov til brugervenlige digitale løsninger. Vi vælger altid den teknologi der bedst opfylder jeres behov og udvikler fx apps, browser-baserede løsninger, integrationer til office og webapplikationer til Mac og Windows.',
-      'Se eksempler på digitale løsninger vi har udviklet nedenfor.',
+      'Se eksempler hvilke udfordringer vi har løst for vores kunder nedenfor.',
     ],
   },
   cases: [
     {
       name: 'KUNDECASE 1',
-      example: 'Rudersdal Kommune ønskede at digitalisere deres forberedelsesskema til medarbejder-udviklingssamtaler. Efter den indledende dialog stod det klart at der var mulighed for en win-win situation. Rudersdal fik et skræddersyet digitalt værktøj, matchende deres behov til en pris, der var under licensprisen for et standard-system, samtidig fik vi ejerskab over det endelige produkt og mulighed for at videreudvikle og -sælge det til andre med samme behov.',
-      description: 'Har du en idé, som vi ser et forretningspotentiale i, så har du mulighed for at få udviklet en løsning skræddersyet til dine behov, for en brøkdel af prisen.',
+      example: 'Rudersdal Kommune ønskede at digitalisere deres forberedelsesskema til medarbejder-udviklingssamtaler. Efter den indledende dialog stod det klart, at der var mulighed for en win-win situation. Rudersdal fik et skræddersyet digitalt værktøj, der matchede deres behov og som kommunen løbende kan tilpasse. Samtidig fik Nodalit gennem det tætte samarbejde udviklet et produkt, som markedet formentlig efterspørger, og mulighed for at videreudvikle og sælge det til andre med samme behov.',
+      description: 'Har du en idé, som vi ser et forretningspotentiale i, så har du mulighed for at få udviklet en løsning skræddersyet til dine behov, uden at det koster en bondegårds.',
       highlightFirstWords: 2,
       bgColor: 'logo3',
       highlightColor: 'white',
@@ -38,7 +38,7 @@ export default {
       {
         name: 'Mads Ringblom',
         role: 'UX/UI & Frontend Dev',
-        imageUrl: '/mads_ringblom.jpg',
+        imageUrl: '/mads_ringblom_3.jpg',
         bio: 'Mads Ringblom er UX/UI designer og frontend-udvikler med en passion for at lave brugervenlige og intuitive applikationer. Mads forstår at designe og facilitere effektive processer, der fører til de bedst mulige løsninger. I sin fritid spiller Mads en masse instrumenter i bandet TERESE.',
         mail: 'mads@nodalit.dk',
         twitterUrl: null,
@@ -54,8 +54,8 @@ export default {
             href: 'https://forsyningsdataportal.dk/',
           },
           {
-            name: 'NODALIT',
-            href: 'https://nodalit.dk/',
+            name: 'MEETR',
+            href: 'https://meetr.dk/',
           },
           {
             name: 'Coreculture Målingsværktøj',
@@ -97,8 +97,7 @@ export default {
     paragraphs: [
       {
         name: 'Agilt',
-        description: 'Vi tror på at det er ok at blive klogere undervejs. Derfor arbejder vi altid agilt med korte leverance-intervaller og løbende inddragelse af vores kunder. Det betyder ikke, at alt hele tiden er til forhandling, men at vi hele tiden tester og evaluerer del-leverancer op mod vores målsætninger. For jer som kunde vil det betyde at I løbende vil blive præsenteret for prototyper eller færdige delområder og blive inddraget i en dialog om hvorvidt det udviklede lever op til forventningerne.',
-        // 'med korte leverancer og løbende inddragelse af både opdragsgiver og slutbruger, fordi vi ved at det giver både en bedre proces og et bedre produkt.',
+        description: 'Vi tror på at det er ok at blive klogere undervejs. Derfor arbejder vi altid agilt med korte leverance-intervaller og løbende inddragelse af vores kunder. Det betyder ikke, at alt er til konstant forhandling, men at vi hele tiden tester og evaluerer del-leverancer op mod vores målsætninger. For jer som kunde vil det betyde at I løbende vil blive præsenteret for prototyper eller færdige delområder og blive inddraget i en dialog om hvorvidt det udviklede lever op til forventningerne.',
         highlightFirstWords: 3,
       },
       {
