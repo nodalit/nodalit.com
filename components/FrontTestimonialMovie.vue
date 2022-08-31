@@ -2,22 +2,22 @@
   <div ref="movieContainerRef">
     <div class="base-section pb-16 bg-gray-200 lg:pb-0 lg:z-10 lg:relative">
       <div class="md:grid md:grid-cols-12 lg:mx-auto lg:max-w-screen-2xl lg:px-8 lg:gap-8">
-        <div class="sm:max-w-2xl md:hidden px-12 py-12">
+        <div class="sm:max-w-2xl md:hidden px-12 pt-12">
           <h3 class="responsive-text-base uppercase">Reference</h3>
           <h4 class="text-5xl lg:text-6xl">LINK Arkitektur</h4>
         </div>
         <div class="relative flex flex-col items-center md:block md:col-span-4 xl:col-span-3">
           <div aria-hidden="true" class="absolute inset-x-0 top-0 h-1/2 bg-white hidden" />
           <div class="rounded-2xl relative">
-            <div class="" style="width: 1000px; margin: -50px -300px">
-              <video ref="vidRef" playsinline muted>
+            <div>
+              <video ref="vidRef" playsinline muted preload="metadata">
                 <source src="/mobile.mp4" type="video/mp4" codec="hvc1" />
                 <source src="/mobile.webm" type="video/webm" />
               </video>
             </div>
           </div>
         </div>
-        <div class="py-12 lg:m-0 md:col-span-8 xl:col-span-8 md:pl-9">
+        <div class="lg:m-0 md:col-span-8 xl:col-span-8 md:pl-9">
           <div class="sm:max-w-2xl lg:max-w-none px-12 lg:px-0 lg:py-12">
             <blockquote>
               <h3 class="hidden md:block responsive-text-base uppercase">Reference</h3>
@@ -29,7 +29,7 @@
               <footer class="mt-6 md:flex">
                 <div class="md:flex md:items-center md:justify-center">
                   <div class="md:flex-shrink-0">
-                    <img class="mx-auto h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                    <img class="mx-auto h-10 w-10 rounded-full" :src="testimonial.image" alt="" />
                   </div>
                   <div class="mt-3 text-center md:mt-0 md:ml-4 md:flex md:items-center">
                     <div class="text-base font-medium text-gray-900">{{ testimonial.name }}</div>
@@ -57,6 +57,7 @@ import calcHorizontalDistance from '@/composables/calcHorizontalDistance'
 const vidRef = ref(null)
 const movieContainerRef = ref(null)
 let requestAnimationFrameId: number
+let currentFrame = 1
 
 const tick = () => {
   if (process.client) {
@@ -66,8 +67,25 @@ const tick = () => {
     }
     const horDist = calcHorizontalDistance(65, movieContainerRef.value)
     const maxScroll = movieContainerRef.value.clientHeight - horDist
+    if (horDist > maxScroll) {
+      if (currentFrame < 30) {
+        currentFrame = 30
+        vidRef.value.currentTime = 1
+      }
+      return
+    }
     const scrollProgress = horDist / Math.max(maxScroll, 1)
-    vidRef.value.currentTime = vidRef.value.duration * scrollProgress
+    const newPos = Math.round(vidRef.value.duration * scrollProgress * 100) / 100
+    const newFrame = Math.round(newPos * 30)
+    if (newFrame !== currentFrame) {
+      if (newFrame > 30) {
+        vidRef.value.currentTime = 1
+        return
+      }
+      vidRef.value.currentTime = isNaN(newPos) ? 0.001 : newPos
+      currentFrame = newFrame
+      // console.log(currentFrame, newPos)
+    }
   }
 }
 
@@ -84,5 +102,5 @@ onUnmounted(() => {
   }
 })
 
-const testimonial = texts.testemonials[0]
+const testimonial = texts.testimonials[0]
 </script>

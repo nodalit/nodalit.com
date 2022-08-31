@@ -15,7 +15,7 @@
               </h1>
               <p class="mt-3 responsive-text-lg text-gray-300 sm:mt-5">
                 Vi laver små og store digitale løsninger for vores kunder, store som små.
-                Vi er uhørt billige og vi elsker vores arbejde – spørg bare nogle af vores
+                Vi har fair priser og vi elsker vores arbejde – spørg bare nogle af vores
                 <a :href="'#cases'" class="text-logo1" @click.prevent="scrollTo('cases')">
                   kunder
                 </a>!
@@ -70,7 +70,7 @@ const tick = () => {
         vidRef.value.currentTime = 1
         return
       }
-      vidRef.value.currentTime = newPos
+      vidRef.value.currentTime = isNaN(newPos) ? 0 : newPos
       currentFrame = newFrame
       // console.log(currentFrame, newPos)
     }

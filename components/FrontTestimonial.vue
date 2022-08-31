@@ -18,7 +18,7 @@
               <footer class="mt-6 md:flex">
                 <div class="md:flex md:items-center md:justify-center">
                   <div class="md:flex-shrink-0">
-                    <img class="mx-auto h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                    <img class="mx-auto h-10 w-10 rounded-full" :src="testimonial.image" alt="" />
                   </div>
                   <div class="mt-3 text-center md:mt-0 md:ml-4 md:flex md:items-center">
                     <div class="text-base font-medium text-gray-900">{{ testimonial.name }}</div>
@@ -81,9 +81,10 @@ onUnmounted(() => {
 })
 
 const testimonial = {
-  name: 'Grethe Hauglang',
-  title: 'CEO',
+  name: 'Jan Buthke',
+  title: 'Head of LINK IO',
   company: 'LINK Arkitektur',
   quote: 'Vi har haft en tæt og supergodt samarbejde med Nodalit. De leverer til tiden og de forstår at oversætte vores forretningskrav til kode med konstant fokus på at gøre processen så let og gnidningsfri som mulig.',
+  image: '/jan_buthke.jpeg',
 }
 </script>

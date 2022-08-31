@@ -1,10 +1,11 @@
 export default {
-  testemonials: [
+  testimonials: [
     {
-      name: 'Grethe Hauglang',
-      title: 'CEO',
+      name: 'Jan Buthke',
+      title: 'Head of LINK IO',
       company: 'LINK Arkitektur',
       quote: 'Vi har haft en tæt og supergodt samarbejde med Nodalit. De leverer til tiden og de forstår at oversætte vores forretningskrav til kode med konstant fokus på at gøre processen så let og gnidningsfri som mulig.',
+      image: '/jan_buthke.jpeg',
     },
   ],
   expertise: {
@@ -22,14 +23,16 @@ export default {
       highlightFirstWords: 2,
       bgColor: 'logo3',
       highlightColor: 'white',
+      image: '/mus.png',
     },
     {
       name: 'KUNDECASE 2',
-      example: 'Link Arkitektur arbejdede allerede med bæredygtigheds-workshops men ønskede en digital løsning, der kunne gøre arbejdet lettere og mere skalerbart. Vi hjælp Link med at gå fra idé over prototype og til et færdigt digitalt værktøj, som ikke bare har gjort arbejdet lettere men også sat Link på landkortet.',
-      description: 'Har du en idé og et klart behov? Vi kan hjælpe med at konkretisere din idé til konkrete skærmbilleder og brugerflows og herefter give et tilbud på udviklingen af den færdige løsning.',
+      example: 'LINK Arkitektur arbejdede allerede med bæredygtigheds-workshops, men ønskede en digital løsning, der kunne gøre arbejdet lettere og mere skalerbart. Vi hjælp LINK med at gå fra idé over prototype og til et færdigt digitalt værktøj, som ikke bare har gjort arbejdet lettere, men også cementeret LINKs store fokus på bæredygtighed.',
+      description: 'Har du en idé og et klart behov? Vi kan hjælpe med at konkretisere din idé med konkrete skærmbilleder og brugerflows, og herefter give et tilbud på udviklingen af den færdige løsning.',
       highlightFirstWords: 2,
       bgColor: 'gray-300',
       highlightColor: 'logo3',
+      image: '/link_ipad.png',
     },
   ],
   team: {
@@ -102,7 +105,7 @@ export default {
       },
       {
         name: 'Tillidsbaseret',
-        description: 'Vi tror på at samarbejde baseret på tillid, øger såvel produktiviteten, som kvaliteten af det udviklede. Og så er det meget sjovere. For jer som kunde betyder det blandt andet at vi hellere vil bruge 2 timer på at fixe noget, som gør at produktet lever op til sine målsætninger end bruge 2 timer på at forhandle, om det er dækket af kontrakten. Det går selvfølgelig begge veje og kræver også jeres tillid og hjælp til prioritere, hvis nye idéer tager tiden fra udvikling af det aftalte.',
+        description: 'Vi tror på, at samarbejde baseret på tillid, øger såvel produktiviteten som kvaliteten af det udviklede. Og så er det meget sjovere. For jer som kunde betyder det blandt andet, at vi hellere vil bruge 2 timer på at fikse noget, som gør at produktet lever op til sine målsætninger end bruge 2 timer på at forhandle, om det er dækket af kontrakten. Det går selvfølgelig begge veje og kræver også jeres tillid og hjælp til at prioritere, hvis nye idéer tager tiden fra udvikling af det aftalte.',
         // 'og bruger hellere 2 timer på at fixe et problem end 4 timer på at forhandle om det er dækket af kontrakten',
         highlightFirstWords: 3,
       },
