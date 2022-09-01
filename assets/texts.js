@@ -28,7 +28,7 @@ export default {
     {
       name: 'KUNDECASE 2',
       example: 'LINK Arkitektur arbejdede allerede med bæredygtigheds-workshops, men ønskede en digital løsning, der kunne gøre arbejdet lettere og mere skalerbart. Vi hjalp LINK Arkitektur med at gå fra idé over prototype til et færdigt digitalt værktøj, som ikke bare har gjort arbejdet lettere, men også cementeret LINK Arkitekturs store fokus på bæredygtighed.',
-      description: 'Har du en idé og et behov? Vi hjælper med at konkretisere din idé med konkrete skærmbilleder og brugerflows. Herefter giver vi et tilbud på udviklingen af den færdige løsning.',
+      description: 'Har du et behov? Vi hjælper med at konkretisere løsningsforslag med skærmbilleder og brugerflows. Herefter giver vi et tilbud på udviklingen af den færdige løsning.',
       highlightFirstWords: 2,
       bgColor: 'gray-300',
       highlightColor: 'logo3',
