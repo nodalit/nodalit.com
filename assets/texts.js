@@ -19,7 +19,7 @@ export default {
     {
       name: 'KUNDECASE 1',
       example: 'Rudersdal Kommune ønskede at digitalisere deres forberedelsesskema til medarbejder-udviklingssamtaler. Efter den indledende dialog stod det klart, at der var mulighed for en win-win situation. Rudersdal fik et skræddersyet digitalt værktøj, der matchede deres behov, og som de løbende selv kan tilpasse. Gennem det tætte samarbejde med kommunen har vi udviklet et produkt, som også har et stort markedspotentiale.',
-      description: 'Har du en idé, så kontakt os. Sammen kan vi udvikle en løsning skræddersyet til dine behov uden at det koster en bondegård.',
+      description: 'Har du en god idé? Sammen kan vi udvikle en løsning skræddersyet til dine behov uden at det koster en bondegård.',
       highlightFirstWords: 2,
       bgColor: 'logo3',
       highlightColor: 'white',
