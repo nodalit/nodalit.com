@@ -17,6 +17,26 @@ useHead({
       content: 'Vi laver digitale løsninger for vores kunder – store som små. Vi har fair priser og vi elsker vores arbejde.',
     },
     {
+      hid: 'sharetitle',
+      name: 'og:title',
+      content: 'Nodalit – web-apps til mennesker',
+    },
+    {
+      hid: 'sharedescription',
+      name: 'og:description',
+      content: 'Vi laver digitale løsninger for vores kunder – store som små. Vi har fair priser og vi elsker vores arbejde.',
+    },
+    {
+      hid: 'sharetype',
+      name: 'og:type',
+      content: 'website',
+    },
+    {
+      hid: 'shareurl',
+      name: 'og:url',
+      content: 'https://www.nodalit.com',
+    },
+    {
       hid: 'shareimage',
       property: 'og:image',
       content: 'https://www.nodalit.com/shareimage_logo.png',
