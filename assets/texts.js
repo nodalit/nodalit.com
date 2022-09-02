@@ -18,7 +18,7 @@ export default {
   cases: [
     {
       name: 'KUNDECASE 1',
-      example: 'Rudersdal Kommune ønskede at digitalisere deres forberedelsesskema til medarbejder-udviklingssamtaler. Efter den indledende dialog stod det klart, at der var mulighed for en win-win situation. Rudersdal fik et skræddersyet digitalt værktøj, der matchede deres behov, og som de løbende selv kan tilpasse. Gennem det tætte samarbejde med kommunen har vi udviklet et produkt, som også har et stort markedspotentiale.',
+      example: ['Rudersdal Kommune ønskede at digitalisere deres forberedelsesskema til medarbejder-udviklingssamtaler. Efter den indledende dialog stod det klart, at der var mulighed for en win-win situation.', 'Rudersdal fik et skræddersyet digitalt værktøj, der matchede deres behov, og som de løbende selv kan tilpasse. Gennem det tætte samarbejde med kommunen har vi udviklet et produkt, som også har et stort markedspotentiale.'],
       description: 'Har du en god idé? Sammen kan vi udvikle en løsning skræddersyet til dine behov uden at det koster en bondegård.',
       highlightFirstWords: 2,
       bgColor: 'logo3',
@@ -27,7 +27,7 @@ export default {
     },
     {
       name: 'KUNDECASE 2',
-      example: 'LINK Arkitektur arbejdede allerede med bæredygtigheds-workshops, men ønskede en digital løsning, der kunne gøre arbejdet lettere og mere skalerbart. Vi hjalp LINK Arkitektur med at gå fra idé over prototype til et færdigt digitalt værktøj, som ikke bare har gjort arbejdet lettere, men også cementeret LINK Arkitekturs store fokus på bæredygtighed.',
+      example: ['LINK Arkitektur arbejdede allerede med bæredygtigheds-workshops, men ønskede en digital løsning, der kunne gøre arbejdet lettere og mere skalerbart. Vi hjalp LINK Arkitektur med at gå fra idé over prototype til et færdigt digitalt værktøj, som ikke bare har gjort arbejdet lettere, men også cementeret LINK Arkitekturs store fokus på bæredygtighed.'],
       description: 'Har du et behov? Vi hjælper med at konkretisere løsningsforslag med skærmbilleder og brugerflows. Herefter giver vi et tilbud på udviklingen af den færdige løsning.',
       highlightFirstWords: 2,
       bgColor: 'gray-300',

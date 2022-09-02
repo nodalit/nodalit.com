@@ -7,8 +7,10 @@
     >
       <h3 class="responsive-text-base">{{ project.name }}</h3>
       <TextFader
-        :uid="project.name"
-        :text="project.example"
+        v-for="(paragraph, index) in project.example"
+        :key="project.name + index"
+        :uid="project.name + index"
+        :text="paragraph"
         :highlight-first-words="project.highlightFirstWords"
         :highlight-color="project.highlightColor"
         class="mb-4"
@@ -17,7 +19,7 @@
         <img v-if="project.image" :src="project.image" class="lg:w-1/2 sm:w-full" />
       </div>
       <TextFader
-        :uid="project.name + '_cta_text'"
+        :uid="project.name + '_cta_text' + index"
         :text="project.description"
         :highlight-first-words="2"
         :highlight-color="project.highlightColor"
