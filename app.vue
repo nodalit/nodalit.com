@@ -16,6 +16,11 @@ useHead({
       name: 'description',
       content: 'Vi laver digitale løsninger for vores kunder – store som små. Vi har fair priser og vi elsker vores arbejde.',
     },
+    {
+      hid: 'shareimage',
+      property: 'og:image',
+      content: 'https://www.nodalit.com/shareimage_logo.png',
+    },
   ],
   link: [
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
