@@ -39,7 +39,7 @@ useHead({
     {
       hid: 'shareimage',
       property: 'og:image',
-      content: 'https://www.nodalit.com/shareimage_logo.png',
+      content: 'https://www.nodalit.com/shareimage_logo_nobg.png',
     },
   ],
   link: [
