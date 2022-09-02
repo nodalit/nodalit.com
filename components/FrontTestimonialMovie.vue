@@ -17,7 +17,7 @@
             </div>
           </div>
         </div>
-        <div class="lg:m-0 md:col-span-8 xl:col-span-8 md:pl-9">
+        <div class="lg:m-0 md:col-span-8 xl:col-span-8 md:pl-9 flex items-center">
           <div class="sm:max-w-2xl lg:max-w-none px-12 lg:px-0 lg:py-12">
             <blockquote>
               <h3 class="hidden md:block responsive-text-base uppercase">Reference</h3>
