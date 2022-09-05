@@ -10,7 +10,7 @@
       :key="index"
       :uid="'expertise' + index"
       :text="paragraph"
-      :highlight-first-words="3"
+      :highlight-first-words="index === 1 ? 4 : 3"
       :text-color="'white'"
       :highlight-color="'logo3'"
       class="mb-16"
