@@ -116,7 +116,8 @@ export default {
     ],
   },
   contact: {
-    intro: 'Send os en email eller udfyld en formular – du bestemmer, og vi lover at vende tilbage hurtigst muligt.',
+    intro: 'Giv os et kald, send en email eller udfyld formularen. Vi lover at vende tilbage hurtigst muligt.',
     email: 'kontakt@nodalit.com',
+    telephone: '+45 20317127',
   },
 }
