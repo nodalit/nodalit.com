@@ -8,14 +8,14 @@
         >
           <div class="col-span-2 lg:col-span-1 lg:text-left lg:flex lg:items-center">
             <div class="py-12 lg:py-20">
-              <h1 class="text-4xl sm:text-6xl tracking-tight font-bold text-white">
+              <h1 class="text-4xl sm:text-6xl sm:tracking-tight font-bold text-white">
                 <span class="block pb-1 sm:pb-2">Brug for en</span>
                 <Typewriter />
                 <span class="block pt-1 sm:pt-2 text-white">digital løsning?</span>
               </h1>
               <p class="mt-3 responsive-text-lg text-gray-300 sm:mt-5">
                 Vi laver digitale løsninger for vores kunder – store som små. Vi har fair priser, og vi elsker vores arbejde. Se, hvad
-                <a :href="'#cases'" class="text-logo1" @click.prevent="scrollTo('cases')">
+                <a :href="'#cases'" class="text-logo1" @click.prevent="scrollTo('testimonials')">
                   kunderne siger.
                 </a>
               </p>
