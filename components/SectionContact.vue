@@ -29,7 +29,7 @@
         >
           <dd v-if="showSections" class="flex items-center text-indigo-50">
             <DeviceMobileIcon class="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 text-logo1" aria-hidden="true" />
-            <span class="ml-3 sm:ml-6 pb-2 responsive-text-mega"><a href="mailto:mads@nodalit.com">{{ contactPhone }}</a></span>
+            <span class="ml-3 sm:ml-6 pb-2 responsive-text-mega"><a href="tel:+4520317127">{{ contactPhone }}</a></span>
           </dd>
         </Transition>
       </dl>
