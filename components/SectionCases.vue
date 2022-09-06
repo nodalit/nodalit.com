@@ -38,4 +38,8 @@
 <script setup>
 import texts from '@/assets/texts'
 const projects = texts.cases
+const scrollTo = (id) => {
+  const element = document.getElementById(id)
+  element.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+}
 </script>
