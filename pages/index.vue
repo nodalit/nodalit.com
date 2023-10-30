@@ -9,6 +9,7 @@
       <SectionUs />
       <SectionValues />
       <SectionContact />
+      <SectionFooter />
     </main>
     <div class="hidden md:hidden"></div>
   </div>

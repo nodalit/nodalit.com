@@ -1,35 +1,24 @@
 <template>
-  <div ref="movieContainerRef">
+  <div id="testimonials">
     <div class="base-section pb-16 bg-gray-200 lg:pb-0 lg:z-10 lg:relative">
-      <div class="md:grid md:grid-cols-12 lg:mx-auto lg:max-w-screen-2xl lg:px-8 lg:gap-8">
+      <div class="md:grid md:grid-cols-12 lg:mx-auto lg:max-w-screen-2xl lg:px-8 lg:gap-0">
         <div class="sm:max-w-2xl md:hidden px-12 pt-12">
           <h3 class="responsive-text-base uppercase">Reference</h3>
-          <h4 class="text-5xl lg:text-6xl">LINK Arkitektur</h4>
+          <h4 class="text-4xl lg:text-5xl">LINK Arkitektur</h4>
         </div>
-        <div class="relative flex flex-col items-center md:block md:col-span-4 xl:col-span-3">
-          <div aria-hidden="true" class="absolute inset-x-0 top-0 h-1/2 bg-white hidden" />
-          <div class="rounded-2xl relative">
-            <div>
-              <video ref="vidRef" playsinline muted preload="metadata">
-                <source src="/mobile.mp4" type='video/mp4; codecs="hvc1"' />
-                <source src="/mobile.webm" type="video/webm" />
-              </video>
-            </div>
-          </div>
-        </div>
-        <div class="lg:m-0 md:col-span-8 xl:col-span-8 md:pl-9">
+        <div class="lg:m-0 md:row-start-1 md:col-start-5 md:col-end-12 xl:col-start-4 xl:col-end-12 flex items-center">
           <div class="sm:max-w-2xl lg:max-w-none px-12 lg:px-0 lg:py-12">
             <blockquote>
               <h3 class="hidden md:block responsive-text-base uppercase">Reference</h3>
               <div>
-                <h3 class="hidden md:block text-5xl lg:text-6xl">LINK Arkitektur</h3>
+                <h3 class="hidden md:block text-4xl lg:text-5xl">LINK Arkitektur</h3>
                 <!-- <img src="/assets/link_arkitektur_logo.svg" class="h-24 lg:h-12" /> -->
                 <p class="mt-6 responsive-text-lg text-black">"{{ testimonial.quote }}"</p>
               </div>
               <footer class="mt-6 md:flex">
                 <div class="md:flex md:items-center md:justify-center">
                   <div class="md:flex-shrink-0">
-                    <img class="mx-auto h-10 w-10 rounded-full" :src="testimonial.image" alt="" />
+                    <img class="mx-auto h-16 w-16 rounded-full" :src="testimonial.image" alt="" />
                   </div>
                   <div class="mt-3 text-center md:mt-0 md:ml-4 md:flex md:items-center">
                     <div class="text-base font-medium text-gray-900">{{ testimonial.name }}</div>
@@ -43,6 +32,17 @@
                 </div>
               </footer>
             </blockquote>
+          </div>
+        </div>
+        <div ref="movieContainerRef" class="mx-8 md:mx-0 relative flex flex-col items-center md:block md:row-start-1 md:col-start-1 md:col-end-5 xl:col-end-4">
+          <div aria-hidden="true" class="absolute inset-x-0 top-0 h-1/2 bg-white hidden" />
+          <div class="rounded-2xl relative">
+            <div>
+              <video ref="vidRef" playsinline muted preload="metadata">
+                <source src="/mobile.mp4" type="video/mp4" codec="hvc1" />
+                <source src="/mobile.webm" type="video/webm" />
+              </video>
+            </div>
           </div>
         </div>
       </div>
