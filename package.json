@@ -15,7 +15,7 @@
     "@typescript-eslint/parser": "^5.28.0",
     "eslint": "^8.17.0",
     "eslint-plugin-vue": "^9.1.1",
-    "nuxt": "3.0.0-rc.3",
+    "nuxt": "^3.8.0",
     "typescript": "^4.7.3",
     "vite-plugin-eslint": "^1.6.1"
   },

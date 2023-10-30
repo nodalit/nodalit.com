@@ -26,7 +26,7 @@
               <!-- <img class="w-full lg:absolute lg:inset-y-0 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none" src="assets/hero.png" alt="" /> -->
               <div class="w-full lg:absolute lg:inset-y-0 lg:top-6 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none lg:flex lg:justify-center">
                 <video ref="vidRef" playsinline muted>
-                  <source src="/laptop.mp4" type="video/mp4" codec="hvc1" />
+                  <source src="/laptop.mp4" type='video/mp4; codecs="hvc1"' />
                   <source src="/laptop.webm" type="video/webm" />
                 </video>
               </div>
