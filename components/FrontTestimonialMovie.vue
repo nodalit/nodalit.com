@@ -39,7 +39,7 @@
           <div class="rounded-2xl relative">
             <div>
               <video ref="vidRef" playsinline muted preload="metadata">
-                <source src="/mobile.mp4" type="video/mp4" codec="hvc1" />
+                <source src="/mobile.mp4" type='video/mp4; codecs="hvc1"' />
                 <source src="/mobile.webm" type="video/webm" />
               </video>
             </div>
