@@ -147,6 +147,8 @@ section {
   padding: 3.5rem 1rem 1.5rem;
   text-align: center;
   pointer-events: none;
+  /* theme-0 colours so the hero doesn't paint black before the script runs */
+  color: #0f172a;
   transition: color 0.35s ease;
 }
 
@@ -182,10 +184,12 @@ section {
 }
 
 .hero-word {
+  color: #2563eb;
   transition: color 0.35s ease;
 }
 
 .cursor-blink {
+  color: #2563eb;
   animation: blink-cursor 1s step-end infinite;
 }
 
@@ -214,7 +218,16 @@ section {
   flex-direction: column;
   gap: 0.25rem;
   align-items: flex-end;
-  transition: color 0.35s ease;
+  /* hidden (and out of the tab order) until the script has built the dots (.ready) */
+  opacity: 0;
+  visibility: hidden;
+  color: #0f172a;
+  transition: color 0.35s ease, opacity 0.2s ease;
+}
+
+.nav-rail.ready {
+  opacity: 1;
+  visibility: visible;
 }
 
 @media (min-width: 768px) {

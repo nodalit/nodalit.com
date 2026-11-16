@@ -448,6 +448,7 @@ function buildNav() {
   })
   navDots = Array.from(navRail.querySelectorAll('.nav-dot'))
   navItems = Array.from(navRail.querySelectorAll('.nav-item'))
+  navRail.classList.add('ready')
 }
 
 function toggleMotion() {
