@@ -85,30 +85,19 @@ let displayWord = themes[0].word
 let typeTimer = null
 let navDots = []
 let navItems = []
-let heroIdx = 0
 let bgAnim = null
 let bgBaseColor = themes[0].bg
 let bgTarget = themes[0].bg
 
 let sectionTops = []
 let viewH = 0
+// section height (svh); balloon bounds, since sections no longer track .app
+let secH = 0
 let scrollTick = 0
 let stepping = false
 let stepTarget = 0
 let stepTimer = null
-let settleTimer = null
-let lastTop = 0
-let lastFrameT = 0
-let scrollFast = false
-let touching = false
 
-const SETTLE_PX = 1
-const SETTLE_DELTA_PX = 2
-// a finger resting this far off a snap point is still mid-drag
-const SETTLE_TOUCH_PX = 4
-const SETTLE_IDLE_MS = 120
-// above this, a touch scroll pauses JS loops so the fling stays smooth
-const FAST_PX_PER_MS = 0.5
 const BG_FADE_MS = 350
 
 const GAP_MS = 140
@@ -205,17 +194,20 @@ function setBg(c) {
 }
 
 // --- theme + typewriter ---
-// Cheap part only: runs mid-fling at the section crossing
 function applyTheme(idx) {
   const t = themes[idx]
   // fixed opacity-faded layers, NOT the scroll container: scroll layers cache
   // their background in tiles, which can show a stale color after a fast fling
   setBg(t.bg)
-  // mid-fling: swap colours without transitions (cleared at settle)
-  document.documentElement.classList.toggle('theme-snap', scrollFast)
+  // instant; body sits under the bg layers and drives toolbar tint / safe areas
+  document.body.style.backgroundColor = t.bg
   hero.style.color = t.heroText
   heroWord.style.color = t.accent
   heroCursor.style.color = t.accent
+  heroHeadline.classList.remove('font-mono', 'font-comic', 'font-serif', 'font-italic')
+  if (t.heroFont) heroHeadline.classList.add(t.heroFont)
+  // hiding happens in settleSection so they don't pop out mid-step
+  if (idx === 3) speedlines.classList.remove('hidden')
 
   // dots, labels and the pause toggle all paint with currentColor
   navRail.style.color = t.heroText
@@ -228,17 +220,6 @@ function applyTheme(idx) {
   })
 }
 
-// Font swap + typewriter: deferred to settle (or step start) since the
-// font change forces a text relayout
-function syncHero(idx) {
-  if (heroIdx === idx) return
-  heroIdx = idx
-  const font = themes[idx].heroFont
-  heroHeadline.classList.remove('font-mono', 'font-comic', 'font-serif', 'font-italic')
-  if (font) heroHeadline.classList.add(font)
-  animateWord(themes[idx].word)
-}
-
 function animateWord(target) {
   if (typeTimer) clearInterval(typeTimer)
   typeTimer = null
@@ -249,7 +230,6 @@ function animateWord(target) {
   }
   let phase = 'erase'
   typeTimer = setInterval(() => {
-    if (scrollFast) return
     if (phase === 'erase') {
       if (displayWord.length > 0) {
         displayWord = displayWord.slice(0, -1)
@@ -271,22 +251,15 @@ function setActiveIdx(idx) {
   if (idx === activeIdx) return
   activeIdx = idx
   applyTheme(idx)
+  animateWord(themes[idx].word)
   // screen readers get the whole word once; the typed one is aria-hidden
   heroWordSr.textContent = themes[idx].word
 }
 
-// Arrival/leave side effects, run once the scroll has come to rest. Can run
-// repeatedly at rest, so the heavy part bails unless the section changed.
-// Speedline visibility is synced first so an aborted step can't leave them
-// running (and so they only appear on arrival).
+// Arrival/leave side effects. Can run repeatedly, so the heavy part bails
+// unless the section changed. Speedline visibility is synced first so an
+// aborted step can't leave them running.
 function settleSection() {
-  scrollFast = false
-  clearTimeout(settleTimer)
-  settleTimer = null
-  document.documentElement.classList.remove('theme-snap')
-  syncHero(activeIdx)
-  // instant; body sits under the bg layers and drives toolbar tint / safe areas
-  document.body.style.backgroundColor = themes[activeIdx].bg
   speedlines.classList.toggle('hidden', activeIdx !== 3)
   if (settledIdx === activeIdx) return
   settledIdx = activeIdx
@@ -315,7 +288,10 @@ function nearestIdx(scrollTop) {
 
 // Cached on resize so scroll frames never read layout beyond scrollTop
 function measure() {
-  sectionTops = sectionEls.map((s) => s.offsetTop)
+  // defensive clamp: keeps every top reachable if .app outgrows the spacer
+  const maxTop = app.scrollHeight - app.clientHeight
+  sectionTops = sectionEls.map((s) => Math.min(s.offsetTop, maxTop))
+  secH = sectionEls[0].offsetHeight
   viewH = app.clientHeight
   onScrollFrame()
 }
@@ -331,44 +307,13 @@ function onScroll() {
 function onScrollFrame() {
   const scrollTop = app.scrollTop
   updateBalloonRun(scrollTop)
-  const now = performance.now()
-  const delta = Math.abs(scrollTop - lastTop)
-  // JS-driven steps never pause the loops
-  scrollFast = !stepping && delta / Math.max(1, now - lastFrameT) > FAST_PX_PER_MS
-  lastTop = scrollTop
-  lastFrameT = now
   if (stepping) {
     if (Math.abs(scrollTop - sectionTops[stepTarget]) <= 1) endStep()
     else armStepTimer(STEP_IDLE_MS)
     return
   }
-  // crossing a midpoint only does the cheap theme swap; the rest waits for rest
-  const idx = nearestIdx(scrollTop)
-  setActiveIdx(idx)
-  if (Math.abs(scrollTop - sectionTops[idx]) <= SETTLE_PX && delta <= SETTLE_DELTA_PX) settleSection()
-  else armSettle()
-}
-
-function armSettle() {
-  clearTimeout(settleTimer)
-  settleTimer = setTimeout(onSettleIdle, SETTLE_IDLE_MS)
-}
-
-// re-check so a timer queued behind a main-thread stall can't settle mid-fling
-function onSettleIdle() {
-  settleTimer = null
-  // a timer can't see compositor scroll progress; compare inside the next frame
-  requestAnimationFrame(() => {
-    // a newer scroll frame may have re-armed in between
-    if (stepping || settleTimer) return
-    const top = app.scrollTop
-    if (top !== lastTop) return armSettle()
-    if (touching && Math.abs(top - sectionTops[activeIdx]) > SETTLE_TOUCH_PX) {
-      scrollFast = false
-      return
-    }
-    settleSection()
-  })
+  setActiveIdx(nearestIdx(scrollTop))
+  settleSection()
 }
 
 // JS-driven step: theme switches at the start, side effects on arrival
@@ -381,13 +326,8 @@ function goTo(i) {
     return
   }
   stepping = true
-  // can be stale from a preceding touch scroll until the first step frame
-  scrollFast = false
   stepTarget = i
-  clearTimeout(settleTimer)
-  settleTimer = null
   setActiveIdx(i)
-  syncHero(i)
   app.scrollTo({ top: sectionTops[i], behavior: still() ? 'auto' : 'smooth' })
   armStepTimer(STEP_START_MS)
 }
@@ -399,14 +339,10 @@ function armStepTimer(ms) {
   stepTimer = setTimeout(endStep, ms)
 }
 
-function stopStep() {
+function endStep() {
   clearTimeout(stepTimer)
   stepTimer = null
   stepping = false
-}
-
-function endStep() {
-  stopStep()
   setActiveIdx(nearestIdx(app.scrollTop))
   settleSection()
 }
@@ -517,9 +453,9 @@ function buildNav() {
 function toggleMotion() {
   const on = document.documentElement.classList.toggle('still')
   btnMotion.setAttribute('aria-pressed', String(on))
-  // finish a word that is mid-type (heroIdx: the hero lags activeIdx until settle)
+  // finish a word that is mid-type
   if (on) {
-    animateWord(themes[heroIdx].word)
+    animateWord(themes[activeIdx].word)
     bgAnim?.finish()
   }
 }
@@ -541,7 +477,7 @@ const featured = allProjects.filter((p) => p.featured)
 function makeBalloons() {
   balloonField.innerHTML = ''
   const W = window.innerWidth
-  const H = window.innerHeight
+  const H = secH
   const projR = Math.max(44, Math.min(62, W / 8))
   const items = [
     ...featured.map((p) => ({ project: p, r: projR })),
@@ -626,7 +562,7 @@ function updateBalloonEl(b) {
   b.el.style.transform = `translate3d(${b.x - b.r}px, ${b.y - b.r * 1.15}px, 0) scale(${b.scale}) rotate(${b.tilt}deg)`
 }
 
-function clampBalloon(b, W = window.innerWidth, H = window.innerHeight) {
+function clampBalloon(b, W = window.innerWidth, H = secH) {
   b.x = Math.min(Math.max(b.x, b.r), W - b.r)
   b.y = Math.min(Math.max(b.y, b.r * 1.15), H - b.r * 1.15)
 }
@@ -641,7 +577,9 @@ function syncBalloonState(b) {
 
 // only animate while the balloon section is at least partly on screen
 function updateBalloonRun(scrollTop) {
-  const visible = Math.abs(scrollTop - sectionTops[balloonIdx]) < viewH - 1
+  // asymmetric: the viewport (viewH) can be taller than a section (secH)
+  const d = scrollTop - sectionTops[balloonIdx]
+  const visible = d > 1 - viewH && d < secH - 1
   if (visible && !balloonRaf) balloonRaf = requestAnimationFrame(balloonTick)
   else if (!visible && balloonRaf) stopBalloons()
 }
@@ -660,12 +598,9 @@ function stopBalloons() {
 }
 
 function balloonTick() {
-  if (scrollFast) {
-    balloonRaf = requestAnimationFrame(balloonTick)
-    return
-  }
   const W = window.innerWidth
-  const H = window.innerHeight
+  // the section, not the window: it stays svh-tall and clips when the toolbar hides
+  const H = secH
   const t = performance.now() / 1000
   const perp = { x: -up.y, y: up.x }
   const calm = still()
@@ -762,7 +697,7 @@ function grabBalloon(b) {
     try { navigator.vibrate?.(60) } catch { /* unsupported */ }
     setTimeout(() => {
       b.x = Math.random() * window.innerWidth
-      b.y = up.y <= 0 ? window.innerHeight + b.r * 2 : -b.r * 2
+      b.y = up.y <= 0 ? secH + b.r * 2 : -b.r * 2
       b.popped = false
       updateBalloonEl(b)
       syncBalloonState(b)
@@ -832,16 +767,10 @@ function animatePerf() {
     shownLoadMsEl.textContent = fmt(shownLoadMs)
     return
   }
-  let start = performance.now()
-  let prev = start
+  const start = performance.now()
   const dur = 900
   const step = () => {
-    const now = performance.now()
-    // paused frames push start forward so the count resumes, not jumps
-    if (scrollFast) start += now - prev
-    prev = now
-    if (scrollFast) return requestAnimationFrame(step)
-    const p = Math.min(1, (now - start) / dur)
+    const p = Math.min(1, (performance.now() - start) / dur)
     const ease = 1 - (1 - p) ** 3
     shownLoadMs = Math.round(loadMs * ease)
     shownLoadMsEl.textContent = fmt(shownLoadMs)
@@ -1061,31 +990,19 @@ function init() {
   renderTapRace()
   updateCutUI()
 
-  // measure() starts the balloon loop if their section is in view
+  // measure() starts the balloon loop if their section is in view;
+  // balloons need the section height before that
+  secH = sectionEls[0].offsetHeight
   makeBalloons()
-  // a restored scroll position counts as at rest, so it settles immediately
-  lastTop = app.scrollTop
   measure()
   new ResizeObserver(measure).observe(app)
 
   app.addEventListener('scroll', onScroll, { passive: true })
   app.addEventListener('wheel', onWheel, { passive: false })
-  // a finger interrupting a step hands control back to nearest-section
-  // detection, which defers the heavy settle work until the scroll rests
+  // a finger interrupting a step hands control back to nearest-section detection
   app.addEventListener('touchstart', () => {
-    touching = true
-    if (stepping) {
-      stopStep()
-      onScrollFrame()
-    }
+    if (stepping) endStep()
   }, { passive: true })
-  // lifting the finger lets a rest off a snap point settle (snap may move it)
-  const onTouchEnd = () => {
-    touching = false
-    armSettle()
-  }
-  app.addEventListener('touchend', onTouchEnd, { passive: true })
-  app.addEventListener('touchcancel', onTouchEnd, { passive: true })
   window.addEventListener('keydown', onKey)
 
   btnContact.addEventListener('click', openContactModal)
@@ -1133,6 +1050,110 @@ function init() {
   } else if (typeof DeviceOrientationEvent !== 'undefined') {
     window.addEventListener('deviceorientation', onOrientation)
   }
+
+  if (new URLSearchParams(location.search).has('debug')) initDebug()
+}
+
+// TEMP: on-device scroll diagnostics (?debug) — remove once the mobile jank is diagnosed
+function initDebug() {
+  const el = document.createElement('pre')
+  el.setAttribute('aria-hidden', 'true')
+  // fixed size + strict containment: text updates can't touch scroller layout
+  el.style.cssText = 'position:fixed;left:0;top:0;z-index:99;width:13rem;height:9.5rem;contain:strict;pointer-events:none;margin:0;padding:4px;font:10px/1.25 ui-monospace,monospace;background:rgba(0,0,0,.75);color:#0f0;white-space:pre;overflow:hidden'
+  document.body.appendChild(el)
+
+  const ua = navigator.userAgent
+  const ver = ua.match(/(SamsungBrowser|CriOS|FxiOS|EdgA|Chrome|Version)\/[\d.]+/)
+  const os = /iPhone|iPad|iPod/.test(ua) ? 'iOS' : /Android/.test(ua) ? 'Android' : 'other'
+  const browser = `${ver ? ver[0] : '?'} ${os}`
+
+  const app0 = app.clientHeight
+  const sec0 = sectionEls[0].offsetHeight
+  let appH = app0
+  let secHNow = sec0
+  let appMin = app0
+  let appMax = app0
+  let nResize = 0
+  let nResizeInScroll = 0
+  let lsSupported = true
+  let lsN = 0
+  let lsSum = 0
+  let gaps = 0
+  let worst = 0
+  let lastScrollT = -Infinity
+  let dirty = true
+
+  let first = true
+  new ResizeObserver(() => {
+    const a = app.clientHeight
+    const s = sectionEls[0].offsetHeight
+    if (first) {
+      first = false
+      return
+    }
+    if (a === appH && s === secHNow) return
+    appH = a
+    secHNow = s
+    appMin = Math.min(appMin, a)
+    appMax = Math.max(appMax, a)
+    nResize++
+    if (performance.now() - lastScrollT < 300) nResizeInScroll++
+    dirty = true
+  }).observe(app)
+
+  window.visualViewport?.addEventListener('resize', () => { dirty = true })
+
+  try {
+    new PerformanceObserver((list) => {
+      for (const e of list.getEntries()) {
+        lsN++
+        lsSum += e.value
+      }
+      dirty = true
+    }).observe({ type: 'layout-shift', buffered: true })
+  } catch {
+    lsSupported = false
+  }
+  // Safari ignores unknown entry types instead of throwing
+  if (typeof PerformanceObserver === 'undefined' || !PerformanceObserver.supportedEntryTypes?.includes('layout-shift')) lsSupported = false
+
+  // frame-gap watch while scrolling; no layout reads in here
+  let raf = 0
+  let prev = 0
+  const frame = (t) => {
+    if (prev) {
+      const dt = t - prev
+      if (dt > 50) {
+        gaps++
+        worst = Math.max(worst, dt)
+        dirty = true
+      }
+    }
+    prev = t
+    if (performance.now() - lastScrollT < 300) raf = requestAnimationFrame(frame)
+    else raf = 0
+  }
+  app.addEventListener('scroll', () => {
+    lastScrollT = performance.now()
+    if (raf) return
+    prev = 0
+    raf = requestAnimationFrame(frame)
+  }, { passive: true })
+
+  setInterval(() => {
+    if (!dirty) return
+    dirty = false
+    const vv = window.visualViewport
+    el.textContent = [
+      browser,
+      `app  ${appH} / ${app0} / ${appMin}-${appMax}`,
+      `sec  ${secHNow} / ${sec0}`,
+      `inner / vv ${window.innerHeight} / ${vv ? Math.round(vv.height) : '-'}`,
+      `resizes ${nResize} (in-scroll ${nResizeInScroll})`,
+      `LS ${lsSupported ? `${lsN} / ${lsSum.toFixed(3)}` : 'n/a'}`,
+      `gaps>50 ${gaps}, worst ${Math.round(worst)} ms`,
+    ].join('\n')
+  }, 250)
 }
 
 // The static HTML is the page; everything here is enhancement. Start it one

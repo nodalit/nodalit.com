@@ -10,7 +10,8 @@ html, body {
 /* the theme background is two fixed solid layers under everything (a base
    plus a fade animated on opacity only, so it stays on the compositor) —
    never the scroll container, whose tiles can cache a stale colour.
-   body gets the colour instantly at settle for toolbar tint / safe areas.
+   body gets the colour instantly on each theme change, for toolbar tint /
+   safe areas.
    No z-index: positioned and earlier in the DOM, they paint under .app */
 body {
   background-color: #f1f5f9;
@@ -84,13 +85,23 @@ html.still *, html.still *::before, html.still *::after {
   overflow-y: auto;
   scroll-snap-type: y mandatory;
   overscroll-behavior-y: contain;
-  -webkit-overflow-scrolling: touch;
   background: transparent;
 }
 
+/* lets the last section still start-align when the toolbar is hidden and
+   .app is taller than one section; 0 where unsupported; mandatory snap
+   never rests on it */
+.app::after {
+  content: '';
+  display: block;
+  height: calc(100lvh - 100svh);
+}
+
 section {
+  /* svh, not .app's live height: toolbar show/hide must not resize
+     sections or move snap points mid-scroll */
   height: 100%;
-  min-height: 100%;
+  height: 100svh;
   scroll-snap-align: start;
   /* a hard fling must stop at the next section instead of skipping past it */
   scroll-snap-stop: always;
@@ -251,14 +262,6 @@ section {
   transform: scale(1.5);
   opacity: 1;
   background-color: currentColor;
-}
-
-/* a fast fling swaps theme colours instantly: no per-frame repaint of the hero */
-html.theme-snap .hero,
-html.theme-snap .hero-word,
-html.theme-snap .nav-rail,
-html.theme-snap .nav-dot {
-  transition: none;
 }
 
 /* pause/play toggle, sits under the dots */
