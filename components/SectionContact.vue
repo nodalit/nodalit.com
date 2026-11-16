@@ -1,219 +1,137 @@
 <template>
-  <BaseSection id="kontakt" class="overflow-hidden" :bg-color="'gray-900'">
-    <h3 class="responsive-text-base pb-6 text-white">KONTAKT OS</h3>
-    <TextFader
-      :uid="'contact-intro'"
-      :text="pageIntro"
-      :highlight-first-words="4"
-      :text-color="'white'"
-      :highlight-color="'logo1'"
-      class="mb-12"
-    />
-    <BaseFadeIn :uid="'876'">
-      <dl class="my-12 space-y-6">
-        <dt><span class="sr-only">Email</span></dt>
-        <Transition
-          :css="false"
-          mode="out-in"
-          @enter="enterLeftElement"
-        >
-          <dd v-if="showSections" class="flex items-center text-indigo-50">
-            <MailIcon class="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 text-logo1" aria-hidden="true" />
-            <span class="ml-3 sm:ml-6 pb-2 responsive-text-mega"><a href="mailto:kontakt@nodalit.com">{{ contactEmail }}</a></span>
-          </dd>
-        </Transition>
-        <Transition
-          :css="false"
-          mode="out-in"
-          @enter="enterLeftElement"
-        >
-          <dd v-if="showSections" class="flex items-center text-indigo-50">
-            <DeviceMobileIcon class="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 text-logo1" aria-hidden="true" />
-            <span class="ml-3 sm:ml-6 pb-2 responsive-text-mega"><a href="tel:+4520317127">{{ contactPhone }}</a></span>
-          </dd>
-        </Transition>
+  <section id="kontakt" class="base-section py-16 md:py-24 bg-gray-900 text-white">
+    <div class="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-16">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-400">
+        Kontakt
+      </h2>
+      <p class="mt-2 text-3xl sm:text-4xl font-bold">
+        Lad os tage en snak
+      </p>
+      <p class="mt-4 text-lg text-gray-300 max-w-xl">
+        {{ pageIntro }}
+      </p>
+
+      <dl class="mt-10 space-y-4">
+        <div class="flex items-center gap-3">
+          <MailIcon class="h-5 w-5 text-logo1 flex-shrink-0" />
+          <a :href="`mailto:${contactEmail}`" class="text-lg hover:text-logo1 transition-colors">
+            {{ contactEmail }}
+          </a>
+        </div>
+        <div class="flex items-center gap-3">
+          <DeviceMobileIcon class="h-5 w-5 text-logo1 flex-shrink-0" />
+          <a :href="`tel:${contactPhone.replace(/\s/g, '')}`" class="text-lg hover:text-logo1 transition-colors">
+            {{ contactPhone }}
+          </a>
+        </div>
       </dl>
-    </BaseFadeIn>
-    <BaseFadeIn :uid="'877'">
-      <div class="relative md:border-logo1 md:border-4 md:rounded-md">
-        <h2 class="sr-only">Kontakt os</h2>
-        <div class="">
-          <div class="md:py-10 md:px-10 lg:col-span-2 xl:p-12 text-white">
-            <h3 class="responsive-text-base">SEND EN BESKED</h3>
-            <div class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
-              <div>
-                <label for="name" class="block text-sm font-medium">Navn</label>
-                <div class="mt-1">
-                  <input
-                    id="name"
-                    v-model="name"
-                    type="text"
-                    name="name"
-                    autocomplete="name"
-                    class="py-3 px-4 text-gray-900 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
-              <div>
-                <label for="email" class="block text-sm font-medium">Email</label>
-                <div class="mt-1">
-                  <input
-                    id="email"
-                    v-model="email"
-                    name="email"
-                    type="email"
-                    autocomplete="email"
-                    class="py-3 px-4 block w-full text-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
-              <div class="sm:col-span-2">
-                <div class="flex justify-between">
-                  <label for="message" class="block text-sm font-medium">Besked</label>
-                  <span id="message-max" class="text-sm text-gray-300">Max. 500 tegn</span>
-                </div>
-                <div class="mt-1">
-                  <textarea
-                    id="message"
-                    v-model="message"
-                    name="message"
-                    rows="4"
-                    class="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border border-gray-300 rounded-md"
-                    aria-describedby="message-max"
-                  />
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="h-6">
-                <div>
-                  <Transition name="slide-fade">
-                    <div v-if="isSent" class="sm:col-span-2 sm:flex">
-                      <p class="text-center text-gray-900 font-medium text-xl my-2">Din besked er sendt. Tak for din henvendelse.</p>
-                    </div>
-                  </Transition>
-                  <Transition name="slide-fade">
-                    <div v-if="isError" class="sm:col-span-2 sm:flex">
-                      <p class="text-center text-red-700 font-medium text-xl my-2">Der opstod en fejl – prøv meget gerne igen.</p>
-                    </div>
-                  </Transition>
-                </div>
-              </div>
-              <Transition
-                :css="false"
-                mode="out-in"
-                @enter="enterRightElement"
-              >
-                <div v-if="showSections" class="sm:col-span-2 sm:flex sm:justify-end">
-                  <button type="submit" class="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-bold text-black bg-logo1 border-4 border-logo1 hover:bg-transparent hover:text-logo1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black sm:w-auto" :disabled="isSending" @click="send">
-                    <svg v-if="isSending" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle
-                        class="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        stroke-width="4"
-                      ></circle>
-                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    <span v-if="isSending">Sender...</span>
-                    <span v-if="!isSending">SEND</span>
-                  </button>
-                </div>
-              </Transition>
-            </div>
+
+      <form class="mt-12 max-w-xl space-y-6" @submit.prevent="send">
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-300">Navn</label>
+            <input
+              id="name"
+              v-model="name"
+              type="text"
+              name="name"
+              autocomplete="name"
+              required
+              class="mt-1 py-3 px-4 text-gray-900 block w-full rounded-md border-gray-300 focus:ring-logo1 focus:border-logo1"
+            />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+            <input
+              id="email"
+              v-model="email"
+              type="email"
+              name="email"
+              autocomplete="email"
+              required
+              class="mt-1 py-3 px-4 text-gray-900 block w-full rounded-md border-gray-300 focus:ring-logo1 focus:border-logo1"
+            />
           </div>
         </div>
-      </div>
-    </BaseFadeIn>
-  </BaseSection>
+        <div>
+          <label for="message" class="block text-sm font-medium text-gray-300">Besked</label>
+          <textarea
+            id="message"
+            v-model="message"
+            name="message"
+            rows="4"
+            required
+            maxlength="500"
+            class="mt-1 py-3 px-4 text-gray-900 block w-full rounded-md border-gray-300 focus:ring-logo1 focus:border-logo1"
+          />
+        </div>
+
+        <p v-if="isSent" class="text-logo1 font-medium">
+          Din besked er sendt. Tak for din henvendelse.
+        </p>
+        <p v-if="isError" class="text-red-400 font-medium">
+          Der opstod en fejl – prøv meget gerne igen.
+        </p>
+
+        <button
+          type="submit"
+          :disabled="isSending"
+          class="inline-flex items-center px-6 py-3 rounded-md text-base font-semibold text-black bg-logo1 hover:bg-yellow-400 disabled:opacity-50 transition-colors"
+        >
+          {{ isSending ? 'Sender...' : 'Send besked' }}
+        </button>
+      </form>
+    </div>
+  </section>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { MailIcon, DeviceMobileIcon } from '@heroicons/vue/outline/esm/index.js'
-import anime from 'animejs/lib/anime.es.js'
 import texts from '@/assets/texts'
+
 const pageIntro = texts.contact.intro
 const contactEmail = texts.contact.email
 const contactPhone = texts.contact.telephone
+
 const email = ref('')
 const name = ref('')
 const message = ref('')
 const isSending = ref(false)
 const isSent = ref(false)
 const isError = ref(false)
-const showSections = ref(false)
 
-onMounted(() => {
-  showSections.value = true
-})
-
-const send = async (e: Event) => {
-  e.preventDefault()
+const send = async () => {
   isSending.value = true
-  const response = await fetch('/api/contact', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      name: name.value,
-      email: email.value,
-      message: message.value,
-    }),
-  })
-  const json = await response.json()
-  isSending.value = false
-  if (json.success) {
-    isSent.value = true
-    email.value = ''
-    name.value = ''
-    message.value = ''
-    setTimeout(() => {
-      isSent.value = false
-    }, 5000)
-  } else {
+  isSent.value = false
+  isError.value = false
+
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name.value,
+        email: email.value,
+        message: message.value,
+      }),
+    })
+    const json = await response.json()
+
+    if (json.success) {
+      isSent.value = true
+      name.value = ''
+      email.value = ''
+      message.value = ''
+      setTimeout(() => { isSent.value = false }, 5000)
+    } else {
+      isError.value = true
+      setTimeout(() => { isError.value = false }, 5000)
+    }
+  } catch {
     isError.value = true
-    setTimeout(() => {
-      isError.value = false
-    }, 5000)
+    setTimeout(() => { isError.value = false }, 5000)
+  } finally {
+    isSending.value = false
   }
 }
-
-const enterLeftElement = (el: HTMLElement, done) => {
-  anime({
-    targets: el,
-    translateX: [-400, 0],
-    // easing: 'easeOutExpo',
-    complete: done,
-    duration: 750,
-  })
-}
-
-const enterRightElement = (el: HTMLElement, done) => {
-  anime({
-    targets: el,
-    translateX: [400, 0],
-    easing: 'easeOutExpo',
-    complete: done,
-    duration: 750,
-  })
-}
 </script>
-
-<style>
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateY(-20px);
-  opacity: 0;
-}
-</style>

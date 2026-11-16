@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Header :dark-bg="darkBg" />
+    <!-- Header hidden on prototype routes so variants render standalone -->
+    <Header v-if="!isPrototype" :dark-bg="darkBg" />
     <NuxtPage />
   </div>
 </template>
@@ -8,6 +9,7 @@
 <script lang="ts" setup>
 import isElementBgDark from '@/composables/isElementBgDark'
 import isBehindElement from '@/composables/isBehindElement'
+
 useHead({
   title: 'Nodalit – web-apps til mennesker',
   meta: [
@@ -47,6 +49,9 @@ useHead({
   ],
 })
 
+const route = useRoute()
+const isPrototype = computed(() => route.path.startsWith('/prototype'))
+
 const darkBg = ref(true)
 
 const scrolling = () => {
@@ -64,6 +69,7 @@ const scrolling = () => {
     })
   }
 }
+
 onMounted(() => {
   scrolling()
   window.addEventListener('scroll', scrolling)

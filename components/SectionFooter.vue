@@ -1,12 +1,14 @@
 <template>
-  <BaseSection id="kontakt" class="overflow-hidden" :bg-color="'gray-900'">
-    <div class="border-t-2 md:border-t-0 py-6 border-white flex flex-col md:flex-row items-center md:justify-center text-white text-xl">
-      <span>CVR: 42252301</span>
-      <span class="hidden md:inline-block mx-2">|</span>
-      <span class="text-center">Adresse: Skovbogårds Allé 15, 2500 Valby</span>
+  <footer class="base-section py-8 bg-gray-900 border-t border-gray-800">
+    <div class="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-16 text-gray-400 text-sm">
+      <p class="text-white font-medium">
+        Nodalit — Mads Ringblom & Thomas Titanium
+      </p>
+      <div class="mt-4 flex flex-col sm:flex-row sm:gap-4">
+        <span>CVR: 42252301</span>
+        <span class="hidden sm:inline">·</span>
+        <span>Skovbogårds Allé 15, 2500 Valby</span>
+      </div>
     </div>
-  </BaseSection>
+  </footer>
 </template>
-
-<script setup lang="ts">
-</script>

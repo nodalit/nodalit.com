@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-8 bg-gray-900 lg:pb-14 lg:overflow-hidden">
+  <div id="top" class="base-section pt-8 bg-gray-900 lg:pb-14 lg:overflow-hidden">
     <div class="mx-auto max-w-7xl lg:px-8">
       <div class="lg:grid lg:grid-cols-2 lg:gap-8">
         <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
@@ -13,18 +13,24 @@
               Vi udvikler digitale løsninger for store og små kunder i danmark og norden.
               Vi er billigere end de fleste, til gengæld er vi også bedre :)
               Spørg bare nogle af vores
-              <NuxtLink :href="'/referencer'" class="text-logo1">
+              <a href="#arbejde" class="text-logo1 hover:underline" @click.prevent="scrollTo('arbejde')">
                 kunder
-              </NuxtLink>!
+              </a>!
             </p>
           </div>
         </div>
         <div class="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative">
           <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0">
-            <img class="w-full lg:absolute lg:inset-y-0 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none" src="assets/hero.png" alt="" />
+            <img class="w-full lg:absolute lg:inset-y-0 lg:-left-20 lg:h-full lg:w-auto lg:max-w-none" src="/hero.png" alt="" />
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+const scrollTo = (id) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+}
+</script>

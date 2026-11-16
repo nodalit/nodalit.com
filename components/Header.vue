@@ -11,15 +11,15 @@
           <span class="sr-only">Nodalit</span>
           <ClientOnly>
             <span
-              class="text-3xl font-bold text-white"
+              class="text-3xl font-bold"
+              :class="darkBg ? 'text-white' : 'text-gray-900'"
               style="line-height: 1;"
             >
               <span class="text-logo1">N</span>
-              <span class="">od</span>
-              <span class="">al</span>
+              <span>od</span>
+              <span>al</span>
               <span class="text-logo3">it</span>
             </span>
-            <!-- <Logo id="headerLogo" :height="headerHeight" /> -->
           </ClientOnly>
         </a>
         <div v-if="!isSmall" class="col-span-12 hidden md:flex items-center space-x-8">
@@ -27,7 +27,8 @@
             v-for="link in navigation"
             :key="link.name"
             :href="link.href"
-            class="cursor-pointer flex-shrink-0 text-base uppercase text-white hover:text-indigo-50"
+            class="cursor-pointer flex-shrink-0 text-base uppercase hover:text-indigo-50"
+            :class="darkBg ? 'text-white' : 'text-gray-900'"
             @click.prevent="scrollTo(link.id)"
           >
             {{ link.name }}
@@ -43,8 +44,8 @@
       <div class="-mr-2">
         <span class="sr-only">Open menu</span>
         <MenuIcon
-          class="h-8 w-8 text-white rouned-md"
-          :style="{ color: props.darkBg ? 'white' : 'black' }"
+          class="h-8 w-8 rouned-md"
+          :style="{ color: darkBg ? 'white' : 'black' }"
           aria-hidden="true"
         />
       </div>
@@ -62,12 +63,6 @@
             class="menu-item -m-3 p-3 flex justify-center items-center rounded-lg text-slate-50 hover:text-logo3 hover:cursor-pointer"
             @click.prevent="scrollTo(link.id)"
           >
-            <!-- <div
-              class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full"
-              style="background: #ff006e;"
-            >
-              <component :is="item.icon" class="h-6 w-6" aria-hidden="true" />
-            </div> -->
             <div class="ml-4 text-5xl text-center">
               {{ link.name }}
             </div>
@@ -80,9 +75,7 @@
 
 <script setup lang="ts">
 import anime from 'animejs/lib/anime.es.js'
-import {
-  MenuIcon,
-} from '@heroicons/vue/outline/esm/index.js'
+import { MenuIcon } from '@heroicons/vue/outline/esm/index.js'
 
 const props = defineProps({
   darkBg: {
@@ -90,53 +83,6 @@ const props = defineProps({
     default: true,
   },
 })
-
-/* const rgbToHsl = (r, g, b) => {
-  r /= 255
-  g /= 255
-  b /= 255
-  const max = Math.max(r, g, b)
-  const min = Math.min(r, g, b)
-  let h = (max + min) / 2
-  let s = (max + min) / 2
-  const l = (max + min) / 2
-
-  if (max === min) {
-    h = s = 0
-  } else {
-    const d = max - min
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
-    switch (max) {
-      case r: h = (g - b) / d + (g < b ? 6 : 0); break
-      case g: h = (b - r) / d + 2; break
-      case b: h = (r - g) / d + 4; break
-    }
-    h /= 6
-  }
-  return [h, s, l]
-} */
-
-/* const elementBackgroundColor = (element) => {
-  const bgColor = window.getComputedStyle(element).backgroundColor
-  if (bgColor === 'rgba(0, 0, 0, 0)') { // Transparent
-    return elementBackgroundColor(element.parentElement)
-  } else {
-    return bgColor
-  }
-} */
-
-/* const textColor = computed(() => {
-  if (process.client) {
-    const bgColor = elementBackgroundColor(document.getElementById('header'))
-    console.log(bgColor)
-    const regex = /\((.*)\)/gm
-    const ex = regex.exec(bgColor)
-    const rgb = ex[1].split(',').map(x => parseInt(x))
-    const hsl = rgbToHsl(rgb[0], rgb[1], rgb[2])
-    console.log(hsl)
-  }
-  return '#fff'
-}) */
 
 const isSmall = ref(false)
 const showMenu = ref(false)
@@ -154,21 +100,15 @@ const scrolling = () => {
 }
 
 watch(isSmall, (val) => {
-  if (val) {
-    anime({
-      targets: document.getElementById('headerLogo'),
-      translateX: [100, 0],
-      easing: 'easeOutExpo',
-      duration: 750,
-    })
-  } else {
-    anime({
-      targets: document.getElementById('headerLogo'),
-      translateX: [-100, 0],
-      easing: 'easeOutExpo',
-      duration: 750,
-    })
-  }
+  const logo = document.getElementById('headerLogo')
+  if (!logo) return
+
+  anime({
+    targets: logo,
+    translateX: val ? [100, 0] : [-100, 0],
+    easing: 'easeOutExpo',
+    duration: 750,
+  })
 })
 
 onMounted(() => {
@@ -181,23 +121,16 @@ onUnmounted(() => {
 })
 
 const navigation = [
-  { name: 'Vores ekspertise', href: '#ekspertise', id: 'ekspertise' },
-  { name: 'Kundecases', href: '#cases', id: 'cases' },
-  { name: 'Team', href: '#team', id: 'team' },
-  { name: 'Manifest', href: '#manifest', id: 'manifest' },
+  { name: 'Arbejde', href: '#arbejde', id: 'arbejde' },
+  { name: 'Ekspertise', href: '#ekspertise', id: 'ekspertise' },
   { name: 'Kontakt', href: '#kontakt', id: 'kontakt' },
 ]
 
 const scrollTo = (id) => {
   showMenu.value = false
   const element = document.getElementById(id)
-  element.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+  element?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
 }
-
-/* const goto = (href: string) => {
-  navigateTo(href)
-  showMenu.value = false
-} */
 
 const enterMenu = () => {
   anime({
@@ -208,7 +141,6 @@ const enterMenu = () => {
     duration: 250,
   })
 }
-
 </script>
 
 <style>
