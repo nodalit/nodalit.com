@@ -761,8 +761,10 @@ function burst(x, y) {
 function measurePerf() {
   const nav = performance.getEntriesByType('navigation')[0]
   if (!nav) return
-  const t = nav.loadEventEnd > 0 ? nav.loadEventEnd : nav.domContentLoadedEventEnd
-  loadMs = Math.max(1, Math.round(t))
+  const end = nav.loadEventEnd > 0 ? nav.loadEventEnd : nav.domContentLoadedEventEnd
+  // from fetchStart rather than from the tap: leaves out app switching, tab
+  // start-up and redirects, which happen before the page is asked for
+  loadMs = Math.max(1, Math.round(end - nav.fetchStart))
 }
 
 // Swaps the static estimate for this view's own transfer. Leaves the static
