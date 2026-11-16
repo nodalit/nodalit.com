@@ -629,4 +629,7 @@ function init() {
   }
 }
 
-init()
+// The static HTML is the page; everything here is enhancement. Start it one
+// task after the load event so script work never delays the page load.
+if (document.readyState === 'complete') init()
+else window.addEventListener('load', () => setTimeout(init, 0), { once: true })
