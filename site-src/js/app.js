@@ -56,18 +56,43 @@ const modalProjectRole = document.getElementById('modal-project-role')
 const modalProjectLink =document.getElementById('modal-project-link')
 
 const sectionEls = Array.from(app.querySelectorAll('section'))
+const balloonIdx = sectionEls.indexOf(balloonField.closest('section'))
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
 // --- state ---
 let activeIdx = 0
+let settledIdx = -1
 let displayWord = themes[0].word
 let typeTimer = null
-let scrollRaf = null
+let navDots = []
+let navLabels = []
+
+let sectionTops = []
+let viewH = 0
+let scrollTick = 0
+let stepping = false
+let stepTarget = 0
+let stepTimer = null
+
+const GAP_MS = 140
+const ACC_MIN = 4
+const MIN_HOLD = 350
+// reduced motion ends a step instantly, so the hold is the only guard
+// against one long drag double-stepping
+const MIN_HOLD_REDUCED = 700
+const SPIKE_MIN = 12
+const STEP_START_MS = 500
+const STEP_IDLE_MS = 300
+let lastWheelT = 0
+let acc = 0
+let consumed = false
+let tailLow = Infinity
+let holdUntil = 0
+
 let balloonRaf = 0
 let bodiesB = []
-let balloonEls = new Map()
 let heldBalloon = null
 let heldId = null
-let confettiId = 0
 const up = { x: 0, y: -1 }
 
 let loadMs = 0
@@ -84,22 +109,18 @@ let tapResetTimer = null
 let cutProgress = 0
 let cutting = false
 
-// --- debug logging ---
-function debugMsg(msg) {
-  console.log(`[bg-debug] ${(performance.now() / 1000).toFixed(2)}s ${msg}`)
-}
-
 // call bgDebug() in the console when the background looks wrong
 window.bgDebug = () => {
   console.table({
     scrollTop: Math.round(app.scrollTop),
     clientHeight: app.clientHeight,
     activeIdx,
+    stepping,
     word: themes[activeIdx].word,
     expectedBg: themes[activeIdx].bg,
     inlineBg: document.body.style.backgroundColor,
     computedBg: getComputedStyle(document.body).backgroundColor,
-    offsetTops: sectionEls.map(s => s.offsetTop).join(', '),
+    sectionTops: sectionTops.join(', '),
   })
 }
 
@@ -116,15 +137,16 @@ function applyTheme(idx) {
   heroHeadline.classList.remove('font-mono', 'font-comic', 'font-serif', 'font-italic')
   if (t.heroFont) heroHeadline.classList.add(t.heroFont)
 
-  navRail.querySelectorAll('.nav-dot').forEach((dot, i) => {
+  navDots.forEach((dot, i) => {
     dot.classList.toggle('active', i === idx)
     dot.style.backgroundColor = t.heroText
   })
-  navRail.querySelectorAll('.nav-label').forEach((label) => {
+  navLabels.forEach((label) => {
     label.style.color = t.heroText
   })
 
-  speedlines.classList.toggle('hidden', idx !== 3)
+  // only shown here; hidden in settleSection so they don't pop out mid-step
+  if (idx === 3) speedlines.classList.remove('hidden')
 }
 
 function animateWord(target) {
@@ -150,38 +172,181 @@ function animateWord(target) {
 
 function setActiveIdx(idx) {
   if (idx === activeIdx) return
-  debugMsg(`idx ${activeIdx}→${idx} (${themes[idx].word}) scrollTop=${Math.round(app.scrollTop)}`)
   activeIdx = idx
   applyTheme(idx)
   animateWord(themes[idx].word)
-  if (idx === 3) animatePerf()
-  else resetTapRace()
 }
 
-// Nearest section by offsetTop, sampled every frame — robust against mobile
-// viewport-height changes and never fights the native snap animation.
-function updateActiveSection() {
-  const scrollTop = app.scrollTop
+// Arrival/leave side effects. Runs on every non-stepping scroll frame, so it
+// must stay cheap: bail unless the section actually changed. Speedline
+// visibility is synced first so an aborted step can't leave them running.
+function settleSection() {
+  speedlines.classList.toggle('hidden', activeIdx !== 3)
+  if (settledIdx === activeIdx) return
+  settledIdx = activeIdx
+  if (activeIdx === 3) {
+    animatePerf()
+  } else if (tapState !== 'idle') {
+    resetTapRace()
+  }
+}
+
+// --- scroll ---
+const clampIdx = (i) => Math.max(0, Math.min(sectionEls.length - 1, i))
+
+function nearestIdx(scrollTop) {
   let best = 0
   let bestDist = Infinity
-  sectionEls.forEach((s, i) => {
-    const d = Math.abs(s.offsetTop - scrollTop)
+  sectionTops.forEach((top, i) => {
+    const d = Math.abs(top - scrollTop)
     if (d < bestDist) {
       bestDist = d
       best = i
     }
   })
-  setActiveIdx(best)
+  return best
 }
 
-function scrollLoop() {
-  updateActiveSection()
-  scrollRaf = requestAnimationFrame(scrollLoop)
+// Cached on resize so scroll frames never read layout beyond scrollTop
+function measure() {
+  sectionTops = sectionEls.map((s) => s.offsetTop)
+  viewH = app.clientHeight
+  onScrollFrame()
 }
 
+function onScroll() {
+  if (scrollTick) return
+  scrollTick = requestAnimationFrame(() => {
+    scrollTick = 0
+    onScrollFrame()
+  })
+}
+
+function onScrollFrame() {
+  const scrollTop = app.scrollTop
+  updateBalloonRun(scrollTop)
+  if (stepping) {
+    if (Math.abs(scrollTop - sectionTops[stepTarget]) <= 1) endStep()
+    else armStepTimer(STEP_IDLE_MS)
+    return
+  }
+  setActiveIdx(nearestIdx(scrollTop))
+  settleSection()
+}
+
+// JS-driven step: theme switches at the start, side effects on arrival
 function goTo(i) {
-  const section = sectionEls[i]
-  if (section) app.scrollTo({ top: section.offsetTop, behavior: 'smooth' })
+  i = clampIdx(i)
+  if (Math.abs(app.scrollTop - sectionTops[i]) <= 1) {
+    // cancel an in-flight smooth scroll heading elsewhere
+    if (stepping) app.scrollTo({ top: sectionTops[i] })
+    endStep()
+    return
+  }
+  stepping = true
+  stepTarget = i
+  setActiveIdx(i)
+  app.scrollTo({ top: sectionTops[i], behavior: reduceMotion.matches ? 'auto' : 'smooth' })
+  armStepTimer(STEP_START_MS)
+}
+
+// Fallback for a step that never lands exactly (interrupted, resized): end it
+// once the scroll goes idle. Long jumps take longer than any fixed timeout.
+function armStepTimer(ms) {
+  clearTimeout(stepTimer)
+  stepTimer = setTimeout(endStep, ms)
+}
+
+function endStep() {
+  clearTimeout(stepTimer)
+  stepTimer = null
+  stepping = false
+  setActiveIdx(nearestIdx(app.scrollTop))
+  settleSection()
+}
+
+// --- wheel + keys ---
+// One gesture = one section. Trackpad momentum tails are swallowed; a new
+// gesture starts after a pause or when deltas spike above the decaying tail.
+// Detection keeps running while a step animates, so a new gesture mid-step
+// retargets from the step's destination.
+function onWheel(e) {
+  // non-cancelable: the browser already owns this gesture natively
+  if (e.ctrlKey || !e.cancelable) return
+  const now = performance.now()
+  const gap = now - lastWheelT
+  // horizontal swipes (history nav) stay native unless we're mid-gesture
+  const owned = stepping || now < holdUntil || (consumed && gap <= GAP_MS)
+  if (!owned && Math.abs(e.deltaX) > Math.abs(e.deltaY)) return
+  e.preventDefault()
+  lastWheelT = now
+
+  const dy = e.deltaMode === 1 ? e.deltaY * 40 : e.deltaMode === 2 ? e.deltaY * viewH : e.deltaY
+  const abs = Math.abs(dy)
+
+  // still inside the swipe that triggered the step: ignore its ramp-up
+  if (now < holdUntil) {
+    tailLow = Infinity
+    return
+  }
+
+  const spike = Math.max(SPIKE_MIN, 3 * tailLow)
+  if (gap > GAP_MS || abs >= spike) {
+    consumed = false
+    acc = 0
+    tailLow = abs
+  } else {
+    tailLow = Math.min(tailLow, abs)
+  }
+
+  if (consumed) return
+  acc += dy
+  if (Math.abs(acc) < ACC_MIN) return
+  consumed = true
+  // a new gesture during a step retargets from where the step is heading
+  const from = stepping ? stepTarget : activeIdx
+  const target = clampIdx(from + Math.sign(acc))
+  if (target !== from) {
+    holdUntil = now + (reduceMotion.matches ? MIN_HOLD_REDUCED : MIN_HOLD)
+    goTo(target)
+  }
+}
+
+function modalOpen() {
+  return !modalContact.classList.contains('hidden') || !modalProject.classList.contains('hidden')
+}
+
+function isEditable(el) {
+  return el instanceof Element && (el.matches('input, textarea, select') || el.isContentEditable)
+}
+
+function onKey(e) {
+  if (modalOpen() || e.ctrlKey || e.metaKey || e.altKey || isEditable(e.target)) return
+  let target
+  switch (e.key) {
+    case 'ArrowDown':
+    case 'PageDown':
+      target = activeIdx + 1
+      break
+    case 'ArrowUp':
+    case 'PageUp':
+      target = activeIdx - 1
+      break
+    case ' ':
+      if (e.target instanceof Element && e.target.closest('button, a')) return
+      target = activeIdx + (e.shiftKey ? -1 : 1)
+      break
+    case 'Home':
+      target = 0
+      break
+    case 'End':
+      target = sectionEls.length - 1
+      break
+    default:
+      return
+  }
+  e.preventDefault()
+  if (!stepping) goTo(target)
 }
 
 // --- nav ---
@@ -198,6 +363,8 @@ function buildNav() {
     btn.addEventListener('click', () => goTo(i))
     navRail.appendChild(btn)
   })
+  navDots = Array.from(navRail.querySelectorAll('.nav-dot'))
+  navLabels = Array.from(navRail.querySelectorAll('.nav-label'))
 }
 
 // --- speedlines ---
@@ -216,7 +383,6 @@ const featured = allProjects.filter((p) => p.featured)
 
 function makeBalloons() {
   balloonField.innerHTML = ''
-  balloonEls.clear()
   const W = window.innerWidth
   const H = window.innerHeight
   const projR = Math.max(44, Math.min(62, W / 8))
@@ -258,32 +424,56 @@ function makeBalloons() {
       grabBalloon(body)
     })
     el.addEventListener('contextmenu', (e) => e.preventDefault())
+
+    // size + colours never change after creation: set once
+    el.style.width = `${body.r * 2}px`
+    el.style.height = `${body.r * 2.3}px`
+    const balloonBody = el.querySelector('.balloon-body')
+    balloonBody.style.backgroundColor = body.bg
+    balloonBody.style.color = body.fg
+    el.querySelector('.balloon-knot').style.backgroundColor = body.bg
+    body.el = el
+    body.labelEl = el.querySelector('.balloon-label')
+
     balloonField.appendChild(el)
-    balloonEls.set(body.id, el)
+    syncBalloonState(body)
+    updateBalloonEl(body)
     return body
   })
 }
 
+// per-frame: transform only (no layout)
 function updateBalloonEl(b) {
-  const el = balloonEls.get(b.id)
-  if (!el) return
-  el.hidden = b.popped
-  const w = b.r * 2
-  const h = b.r * 2.3
-  el.style.left = `${b.x}px`
-  el.style.top = `${b.y}px`
-  el.style.width = `${w}px`
-  el.style.height = `${h}px`
-  el.style.transform = `translate(-50%, -50%) scale(${b.scale}) rotate(${b.tilt}deg)`
-  el.style.zIndex = heldId === b.id || b.frozen ? 40 : 10
+  if (b.popped) return
+  b.el.style.transform = `translate3d(${b.x - b.r}px, ${b.y - b.r * 1.15}px, 0) scale(${b.scale}) rotate(${b.tilt}deg)`
+}
 
-  const balloonBody = el.querySelector('.balloon-body')
-  const knot = el.querySelector('.balloon-knot')
-  const label = el.querySelector('.balloon-label')
-  balloonBody.style.backgroundColor = b.bg
-  balloonBody.style.color = b.fg
-  knot.style.backgroundColor = b.bg
-  label.style.opacity = heldId === b.id ? '0' : '1'
+// call whenever popped / held / frozen changes
+function syncBalloonState(b) {
+  const held = heldId === b.id
+  b.el.hidden = b.popped
+  b.el.style.zIndex = held || b.frozen ? 40 : 10
+  b.labelEl.style.opacity = held ? '0' : '1'
+}
+
+// only animate while the balloon section is at least partly on screen
+function updateBalloonRun(scrollTop) {
+  const visible = Math.abs(scrollTop - sectionTops[balloonIdx]) < viewH - 1
+  if (visible && !balloonRaf) balloonRaf = requestAnimationFrame(balloonTick)
+  else if (!visible && balloonRaf) stopBalloons()
+}
+
+function stopBalloons() {
+  cancelAnimationFrame(balloonRaf)
+  balloonRaf = 0
+  // cancel a hold in progress, else holdStart ages and the modal opens on return
+  const b = heldBalloon
+  if (!b) return
+  b.scale = 1
+  heldBalloon = null
+  heldId = null
+  syncBalloonState(b)
+  updateBalloonEl(b)
 }
 
 function balloonTick() {
@@ -311,9 +501,12 @@ function balloonTick() {
         heldBalloon = null
         heldId = null
         b.frozen = true
+        syncBalloonState(b)
         setTimeout(() => {
           b.frozen = false
           b.scale = 1
+          syncBalloonState(b)
+          updateBalloonEl(b)
         }, 500)
       }
       continue
@@ -363,14 +556,18 @@ function grabBalloon(b) {
     b.holdStart = performance.now()
     heldBalloon = b
     heldId = b.id
+    syncBalloonState(b)
   } else {
     b.popped = true
+    syncBalloonState(b)
     burst(b.x, b.y)
     try { navigator.vibrate?.(60) } catch { /* unsupported */ }
     setTimeout(() => {
       b.x = Math.random() * window.innerWidth
       b.y = up.y <= 0 ? window.innerHeight + b.r * 2 : -b.r * 2
       b.popped = false
+      updateBalloonEl(b)
+      syncBalloonState(b)
     }, 2500)
   }
 }
@@ -600,9 +797,16 @@ function init() {
   renderTapRace()
   updateCutUI()
 
-  scrollRaf = requestAnimationFrame(scrollLoop)
+  // measure() starts the balloon loop if their section is in view
   makeBalloons()
-  balloonRaf = requestAnimationFrame(balloonTick)
+  measure()
+  new ResizeObserver(measure).observe(app)
+
+  app.addEventListener('scroll', onScroll, { passive: true })
+  app.addEventListener('wheel', onWheel, { passive: false })
+  // a finger interrupting a step hands control back to nearest-section detection
+  app.addEventListener('touchstart', () => { if (stepping) endStep() }, { passive: true })
+  window.addEventListener('keydown', onKey)
 
   btnContact.addEventListener('click', openContactModal)
   modalContactClose.addEventListener('click', () => closeModal(modalContact))
