@@ -841,6 +841,12 @@ section {
 
 @media (min-width: 768px) { .modal-project .tagline { font-size: 1.25rem; } }
 
+.modal-project .role {
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  opacity: 0.7;
+}
+
 .modal-project .visit {
   margin-top: 2.5rem;
   padding: 1rem 2rem;

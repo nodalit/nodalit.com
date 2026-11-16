@@ -52,7 +52,8 @@ const modalProjectDismiss = document.getElementById('modal-project-dismiss')
 const modalProjectClient = document.getElementById('modal-project-client')
 const modalProjectName = document.getElementById('modal-project-name')
 const modalProjectTagline = document.getElementById('modal-project-tagline')
-const modalProjectLink = document.getElementById('modal-project-link')
+const modalProjectRole = document.getElementById('modal-project-role')
+const modalProjectLink =document.getElementById('modal-project-link')
 
 const sectionEls = Array.from(app.querySelectorAll('section'))
 
@@ -574,9 +575,10 @@ function openProjectModal(b) {
   modalProject.style.backgroundColor = b.bg
   modalProject.style.color = b.fg
   modalProjectClose.style.borderColor = b.fg
-  modalProjectClient.textContent = b.project.client
+  modalProjectClient.textContent = b.project.own ? 'Eget produkt' : b.project.client
   modalProjectName.textContent = b.project.name
   modalProjectTagline.textContent = b.project.tagline
+  modalProjectRole.textContent = b.project.role ? `Vores rolle: ${b.project.role}` : ''
 
   if (b.project.url) {
     modalProjectLink.href = b.project.url
