@@ -24,7 +24,7 @@ export default [
     featured: true,
   },
   {
-    client: 'Velliv',
+    client: 'Core Culture',
     name: 'Core Culture',
     tagline: 'Værktøj til kulturmåling og analyse',
     image: '/code.png',

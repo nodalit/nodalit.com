@@ -111,8 +111,7 @@
         <p class="text-sm uppercase tracking-widest text-cyan-400 mb-6">🔒 Krypteret indhold — hover for at dekryptere</p>
         <p class="text-xl md:text-2xl leading-relaxed">
           Vi bygger løsninger til
-          <span class="redacted">Klimadatastyrelsen</span>,
-          <span class="redacted">Velliv</span> og
+          <span class="redacted">Klimadatastyrelsen</span> og
           <span class="redacted">LINK Arkitektur</span>
           med fokus på
           <span class="redacted">it-sikkerhed</span> og
