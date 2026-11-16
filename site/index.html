@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nodalit – web-apps til mennesker</title>
+  <meta name="description" content="Vi laver digitale løsninger for vores kunder – store som små. Vi har fair priser og vi elsker vores arbejde.">
+  <meta property="og:title" content="Nodalit – web-apps til mennesker">
+  <meta property="og:description" content="Vi laver digitale løsninger for vores kunder – store som små. Vi har fair priser og vi elsker vores arbejde.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nodalit.com">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="hero" class="hero">
+    <p class="hero-logo">Nodalit</p>
+    <h1 id="hero-headline" class="hero-headline">
+      Vi bygger<br class="sm-only"> <span id="hero-word" class="hero-word">brugervenlige</span><span class="cursor-blink" id="hero-cursor">|</span><br>
+      digitale løsninger
+    </h1>
+  </header>
+
+  <nav id="nav-rail" class="nav-rail" aria-label="Sektioner"></nav>
+
+  <main id="app" class="app">
+    <!-- 1. BRUGERVENLIG -->
+    <section id="section-0">
+      <div class="section-bottom section-friendly">
+        <div class="section-inner">
+          <p class="lead">Simpelt, tilgængeligt<br class="sm-only"> og til at forstå.</p>
+          <p class="body">
+            Gennemarbejdede løsninger sparer både jer og jeres brugere for tid og frustration.
+            Vi omsætter komplekse forretningskrav til brugerflader, der ikke kræver en manual.
+          </p>
+          <button type="button" class="btn-contact" id="btn-contact">Kontakt os 💬</button>
+          <div class="scroll-hint" aria-hidden="true">
+            <span class="scroll-chevron"></span>
+            <span class="scroll-chevron" style="animation-delay: 0.2s"></span>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="peek-btn" id="peek-balloon" aria-label="Scroll ned til ballonerne">
+        <span class="peek-bob">
+          <span class="balloon-body" style="background-color: #ff006e; display: block; width: 100%; height: 85%; border-radius: 50% 50% 50% 50% / 42% 42% 58% 58%;"></span>
+          <span class="balloon-knot" style="background-color: #ff006e;"></span>
+        </span>
+      </button>
+    </section>
+
+    <!-- 2. SJOV -->
+    <section id="section-1" class="section-fun">
+      <p class="fun-text">
+        Digitale værktøjer må gerne være en fornøjelse. Vi bygger løsninger,
+        som brugerne faktisk har lyst til at åbne — det gør arbejdet lettere og resultaterne bedre.
+      </p>
+      <p class="fun-hint">Tryk på en ballon for at læse om et af vores mange projekter 🎈</p>
+      <div id="balloon-field"></div>
+      <button type="button" class="btn-tilt hidden" id="btn-tilt">Aktivér tilt 📱</button>
+    </section>
+
+    <!-- 3. SIKKER -->
+    <section id="section-2">
+      <div class="section-bottom section-secure">
+        <div class="section-inner">
+          <p class="eyebrow">🔒 Krypteret indhold — hover for at dekryptere</p>
+          <p class="copy">
+            Vi bygger løsninger til
+            <span class="redacted">Klimadatastyrelsen</span>,
+            <span class="redacted">Velliv</span> og
+            <span class="redacted">LINK Arkitektur</span>
+            med fokus på
+            <span class="redacted">it-sikkerhed</span> og
+            <span class="redacted">GDPR</span>.
+          </p>
+          <p class="audit">&gt; audit.log: 0 breaches · 2FA everywhere · data i EU_</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. HURTIG -->
+    <section id="section-3">
+      <div id="speedlines" class="speedlines hidden" aria-hidden="true"></div>
+      <div class="section-bottom section-fast">
+        <div class="section-inner">
+          <p class="load-ms">
+            <span id="shown-load-ms">0</span> <span class="load-ms-unit">ms</span>
+          </p>
+          <p class="load-caption">— så hurtigt loadede denne side. Målt lige nu, i din browser. ⚡</p>
+
+          <button type="button" class="tap-race" id="tap-race">
+            <div class="tap-race-panel" id="tap-race-panel"></div>
+          </button>
+
+          <p class="footnote">
+            Hastighed er respekt for brugernes tid. Vi bygger uden unødige lag og tunge frameworks,
+            så løsningen svarer med det samme — også på en gammel telefon med dårligt netværk.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. BÆREDYGTIG -->
+    <section id="section-4">
+      <div class="section-bottom section-green">
+        <div class="section-inner">
+          <p class="plants" aria-hidden="true">
+            <span class="plant" style="animation-delay: 0s">🌱</span>
+            <span class="plant" style="animation-delay: 0.25s">🌿</span>
+            <span class="plant" style="animation-delay: 0.5s">🌱</span>
+            <span class="plant" style="animation-delay: 0.75s">🪴</span>
+            <span class="plant" style="animation-delay: 1s">🌿</span>
+            <span class="plant" style="animation-delay: 1.25s">🌳</span>
+          </p>
+          <p class="lead">Lavenergi-tilstand aktiveret. 🌙</p>
+          <p class="body">
+            Letvægtskode på grønne servere belaster klimaet mindre. Vi vælger vores projekter med omhu
+            og har bæredygtighed med som parameter i alle valg — fra teknologi til hosting.
+            Denne side udledte ca. <strong>0,14 g CO₂</strong>.
+          </p>
+          <p class="hint">Scroll videre — vi har et GODT TILBUD til dig ↓</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. BILLIG / KONTAKT -->
+    <section id="section-5">
+      <div class="section-bottom section-cheap">
+        <div class="section-inner">
+          <p class="lead" id="cut-lead">Klip kuponen ud med saksen 👇</p>
+
+          <div class="cut-line" id="cut-line">
+            <div class="cut-overlay" id="cut-overlay"></div>
+            <button type="button" class="cut-scissors" id="cut-scissors" aria-label="Klip kuponen">✂️</button>
+          </div>
+
+          <div class="coupon" id="coupon">
+            <p class="coupon-eyebrow">Værdikupon</p>
+            <p class="coupon-title">1 stk. uforpligtende snak</p>
+            <p class="coupon-price">
+              <span class="strike">Værdi: 1.400 kr</span>
+              <span class="free">GRATIS</span>
+            </p>
+            <div id="coupon-redeem" class="hidden">
+              <a
+                class="coupon-redeem"
+                href="mailto:kontakt@nodalit.com?subject=Jeg%20har%20klippet%20kuponen!%20%E2%9C%82%EF%B8%8F"
+              >Indløs: kontakt@nodalit.com</a>
+              <a class="coupon-phone" href="tel:+4520317127">…eller ring: +45 20 31 71 27</a>
+            </div>
+            <p class="coupon-hint" id="coupon-hint">— klip kuponen fri for at indløse —</p>
+            <p class="coupon-fine">
+              *Det med småt: Ingen dyre mellemled, intet projektlag oveni. I betaler kun for det,
+              der faktisk bliver bygget — fair timepris, korte leverancer, ingen overraskelser.
+            </p>
+          </div>
+
+          <p class="footer">Nodalit ApS · CVR 42252301 · Skovbogårds Allé 15, 2500 Valby</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="confetti-root"></div>
+
+  <!-- Contact modal -->
+  <div id="modal-contact" class="modal modal-contact hidden" role="dialog" aria-modal="true" aria-labelledby="modal-contact-title">
+    <button type="button" class="modal-close" id="modal-contact-close" aria-label="Luk">✕</button>
+    <div class="modal-body">
+      <h2 id="modal-contact-title">Lad os tage en snak</h2>
+      <p>Skriv eller ring — vi svarer hurtigt, og det er helt uforpligtende.</p>
+      <a class="modal-link primary" href="mailto:kontakt@nodalit.com">kontakt@nodalit.com</a>
+      <a class="modal-link outline" href="tel:+4520317127">+45 20 31 71 27</a>
+      <p class="meta">Nodalit ApS · CVR 42252301 · Skovbogårds Allé 15, 2500 Valby</p>
+    </div>
+  </div>
+
+  <!-- Project modal -->
+  <div id="modal-project" class="modal modal-project hidden" role="dialog" aria-modal="true">
+    <button type="button" class="modal-close" id="modal-project-close" aria-label="Luk">✕</button>
+    <div class="modal-body">
+      <p class="eyebrow" id="modal-project-client"></p>
+      <h2 id="modal-project-name"></h2>
+      <p class="tagline" id="modal-project-tagline"></p>
+      <a class="visit hidden" id="modal-project-link" href="#" target="_blank" rel="noopener">Besøg projektet →</a>
+      <button type="button" class="dismiss" id="modal-project-dismiss">🎈 pfffft… (luk)</button>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
