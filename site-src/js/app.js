@@ -36,6 +36,7 @@ const btnContact = document.getElementById('btn-contact')
 const peekBalloon = document.getElementById('peek-balloon')
 const speedlines = document.getElementById('speedlines')
 const shownLoadMsEl = document.getElementById('shown-load-ms')
+const co2Note = document.getElementById('co2-note')
 const tapRace = document.getElementById('tap-race')
 const tapRacePanel = document.getElementById('tap-race-panel')
 const tapRacePlay = document.getElementById('tap-race-play')
@@ -99,6 +100,11 @@ let stepTarget = 0
 let stepTimer = null
 
 const BG_FADE_MS = 350
+
+// Sustainable Web Design Model v4: 0.300 kWh/GB (operational + embodied,
+// all three segments) × 494 g CO₂e/kWh. One measured page view, no
+// green-hosting discount.
+const MG_CO2_PER_BYTE = 0.3 * 494 * 1000 / 1e9
 
 const GAP_MS = 140
 const ACC_MIN = 4
@@ -268,6 +274,7 @@ function settleSection() {
   } else if (tapState !== 'idle') {
     resetTapRace()
   }
+  if (activeIdx === 4) renderCo2()
 }
 
 // --- scroll ---
@@ -758,6 +765,28 @@ function measurePerf() {
   loadMs = Math.max(1, Math.round(t))
 }
 
+// Swaps the static estimate for this view's own transfer. Leaves the static
+// sentence when the browser reports no sizes (older engines) rather than
+// show a wrong number. Everything is same-origin; a cross-origin resource
+// would report 0 here and go uncounted.
+function renderCo2() {
+  const nav = performance.getEntriesByType('navigation')[0]
+  if (!nav) return
+  const entries = [nav, ...performance.getEntriesByType('resource')]
+  if (entries.some((e) => typeof e.transferSize !== 'number')) return
+  const bytes = entries.reduce((sum, e) => sum + e.transferSize, 0)
+  const mg = bytes * MG_CO2_PER_BYTE
+  // a visit served from cache transfers next to nothing, but the model scales
+  // device energy by bytes too, so "almost zero" would understate it: keep
+  // the static first-visit figure instead
+  if (mg < 0.1) return
+  const strong = document.createElement('strong')
+  const n = mg.toLocaleString('da-DK', { maximumSignificantDigits: 2 })
+  strong.textContent = `${n}\u00a0mg CO₂`
+  // kept this short on purpose: one more line pushes the section into the hero on small phones
+  co2Note.replaceChildren('Dit besøg: ca. ', strong)
+}
+
 function animatePerf() {
   if (perfAnimated) return
   perfAnimated = true
@@ -987,6 +1016,7 @@ function init() {
   buildNav()
   buildSpeedlines()
   measurePerf()
+  renderCo2()
   applyTheme(0)
   renderTapRace()
   updateCutUI()

@@ -722,6 +722,8 @@ section {
   color: rgba(74, 222, 128, 0.8);
   line-height: 1.6;
 }
+.section-green .body a { text-underline-offset: 0.2em; }
+.section-green .body a:hover { color: #dcfce7; }
 
 .section-green .hint {
   margin-top: 2.5rem;
