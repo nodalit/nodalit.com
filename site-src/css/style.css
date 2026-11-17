@@ -255,10 +255,12 @@ section {
 
 @media (min-width: 768px) {
   .nav-label { display: inline; }
-  .nav-item:hover .nav-label { opacity: 1; }
+  .nav-item:hover .nav-label,
+  .btn-motion:hover .nav-label { opacity: 1; }
 }
 
-.nav-item:focus-visible .nav-label { display: inline; opacity: 1; }
+.nav-item:focus-visible .nav-label,
+.btn-motion:focus-visible .nav-label { display: inline; opacity: 1; }
 
 /* inactive = ring, active = filled; colour comes from the rail (currentColor) */
 .nav-dot {
@@ -277,14 +279,24 @@ section {
   background-color: currentColor;
 }
 
-/* pause/play toggle, sits under the dots */
+/* pause/play toggle, sits under the dots; same box as .nav-item so its
+   label and glyph line up with the dot labels and dots */
 .btn-motion {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
+  padding: 0.5rem;
   margin-top: 0.25rem;
+}
+
+/* out of flow: a long invisible label must not widen the click area */
+.btn-motion .nav-label {
+  position: absolute;
+  right: 100%;
+  white-space: nowrap;
+  text-align: right;
+  line-height: 1.4;
+  pointer-events: none;
 }
 
 /* OS already stops motion, the toggle has nothing to do (must follow .btn-motion) */
@@ -459,20 +471,6 @@ section {
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }
 
-.btn-tilt {
-  position: absolute;
-  z-index: 30;
-  bottom: 7rem;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 0.625rem 1.25rem;
-  border-radius: 9999px;
-  background: #fff;
-  color: #db2777;
-  font-weight: 600;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
-}
-
 /* 3. sikker */
 .section-secure {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -511,8 +509,17 @@ section {
   cursor: help;
 }
 
-.redacted:hover,
-.copy.revealed .redacted { background: transparent; }
+/* one word at a time: hover with a mouse, tap on touch (see toggleDecrypt), focus by keyboard */
+.redacted.revealed,
+.redacted:focus-visible { background: transparent; }
+
+.section-secure .hint-hover { display: none; }
+
+@media (hover: hover) and (pointer: fine) {
+  .section-secure .hint-hover { display: inline; }
+  .section-secure .hint-touch { display: none; }
+  .redacted:hover { background: transparent; }
+}
 
 /* 4. hurtig */
 .section-fast { text-align: center; color: #111; }

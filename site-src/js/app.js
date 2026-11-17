@@ -31,7 +31,6 @@ const heroCursor = document.getElementById('hero-cursor')
 const navRail = document.getElementById('nav-rail')
 const btnMotion = document.getElementById('btn-motion')
 const balloonField = document.getElementById('balloon-field')
-const btnTilt = document.getElementById('btn-tilt')
 const btnContact = document.getElementById('btn-contact')
 const peekBalloon = document.getElementById('peek-balloon')
 const speedlines = document.getElementById('speedlines')
@@ -48,8 +47,8 @@ const tapRaceVerdictText = document.getElementById('tap-race-verdict-text')
 const tapRaceVerdictEmoji = document.getElementById('tap-race-verdict-emoji')
 const tapRaceRetry = document.getElementById('tap-race-retry')
 const tapBtns = Array.from(tapRace.querySelectorAll('.tap-btn'))
-const btnDecrypt = document.getElementById('btn-decrypt')
 const secureCopy = document.getElementById('secure-copy')
+let decryptPointer = ''
 const cutLine = document.getElementById('cut-line')
 const cutOverlay = document.getElementById('cut-overlay')
 const cutScissors = document.getElementById('cut-scissors')
@@ -723,18 +722,6 @@ function onOrientation(e) {
   up.y = -gy / len
 }
 
-async function enableTilt() {
-  try {
-    const res = await DeviceOrientationEvent.requestPermission()
-    if (res === 'granted') {
-      btnTilt.classList.add('hidden')
-      window.addEventListener('deviceorientation', onOrientation)
-    }
-  } catch {
-    btnTilt.classList.add('hidden')
-  }
-}
-
 // --- confetti ---
 function burst(x, y) {
   if (still()) return
@@ -984,9 +971,10 @@ function closeModal(el) {
   closeTimers.set(el, setTimeout(() => el.close(), still() ? 0 : 250))
 }
 
-function toggleDecrypt() {
-  const on = secureCopy.classList.toggle('revealed')
-  btnDecrypt.setAttribute('aria-pressed', String(on))
+function toggleDecrypt(e) {
+  // a mouse decrypts by hovering (CSS); a tap toggles just the word under the finger
+  if (decryptPointer === 'mouse') return
+  e.target.closest('.redacted')?.classList.toggle('revealed')
 }
 
 function openContactModal() {
@@ -1054,9 +1042,8 @@ function init() {
     })
   }
   peekBalloon.addEventListener('click', () => goTo(1))
-  btnTilt.addEventListener('click', enableTilt)
   btnMotion.addEventListener('click', toggleMotion)
-  btnDecrypt.addEventListener('click', toggleDecrypt)
+  secureCopy.addEventListener('pointerdown', (e) => { decryptPointer = e.pointerType })
   secureCopy.addEventListener('click', toggleDecrypt)
   // pointerdown for speed; click only for keyboard/AT (detail 0), else the
   // click after the 3rd pointerdown would instantly reset the result
@@ -1076,11 +1063,10 @@ function init() {
   window.addEventListener('pointermove', onCutMove)
   window.addEventListener('pointerup', stopCut)
 
-  const iosGate = typeof DeviceOrientationEvent !== 'undefined' &&
-    typeof DeviceOrientationEvent.requestPermission === 'function'
-  if (iosGate) {
-    btnTilt.classList.remove('hidden')
-  } else if (typeof DeviceOrientationEvent !== 'undefined') {
+  // balloons follow device tilt where the browser allows it without a prompt;
+  // iOS needs a permission tap, which is not worth a button, so they just float up there
+  if (typeof DeviceOrientationEvent !== 'undefined' &&
+    typeof DeviceOrientationEvent.requestPermission !== 'function') {
     window.addEventListener('deviceorientation', onOrientation)
   }
 
