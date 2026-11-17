@@ -42,13 +42,14 @@
             Vi omsætter komplekse forretningskrav til brugerflader, der ikke kræver en manual.
           </p>
           <button type="button" class="btn-contact" id="btn-contact">Kontakt os <span aria-hidden="true">💬</span></button>
-          <div class="scroll-hint" aria-hidden="true">
+          <!-- any [data-next] button scrolls to the section after its own -->
+          <button type="button" class="scroll-hint" data-next aria-label="Scroll ned til næste sektion">
             <span class="scroll-chevron"></span>
             <span class="scroll-chevron" style="animation-delay: 0.2s"></span>
-          </div>
+          </button>
         </div>
       </div>
-      <button type="button" class="peek-btn" id="peek-balloon" aria-label="Scroll ned til ballonerne">
+      <button type="button" class="peek-btn" data-next aria-label="Scroll ned til ballonerne">
         <span class="peek-bob">
           <span class="balloon-body" style="background-color: #ff006e; display: block; width: 100%; height: 85%; border-radius: 50% 50% 50% 50% / 42% 42% 58% 58%;"></span>
           <span class="balloon-knot" style="background-color: #ff006e;"></span>
@@ -64,6 +65,10 @@
         som brugerne faktisk har lyst til at åbne — det gør arbejdet lettere og resultaterne bedre.
       </p>
       <p class="fun-hint">Tryk på en ballon for at læse om et af vores mange projekter <span aria-hidden="true">🎈</span></p>
+      <button type="button" class="scroll-hint" data-next aria-label="Scroll ned til næste sektion">
+        <span class="scroll-chevron"></span>
+        <span class="scroll-chevron" style="animation-delay: 0.2s"></span>
+      </button>
       <div id="balloon-field"></div>
     </section>
 
@@ -84,6 +89,10 @@
           <p class="audit" lang="en">&gt; audit.log: 0 breaches · 2FA everywhere · data i EU_</p>
         </div>
       </div>
+      <button type="button" class="scroll-hint" data-next aria-label="Scroll ned til næste sektion">
+        <span class="scroll-chevron"></span>
+        <span class="scroll-chevron" style="animation-delay: 0.2s"></span>
+      </button>
     </section>
 
     <!-- 4. HURTIG -->
@@ -122,6 +131,10 @@
           </p>
         </div>
       </div>
+      <button type="button" class="scroll-hint" data-next aria-label="Scroll ned til næste sektion">
+        <span class="scroll-chevron"></span>
+        <span class="scroll-chevron" style="animation-delay: 0.2s"></span>
+      </button>
     </section>
 
     <!-- 5. BÆREDYGTIG -->
@@ -147,6 +160,10 @@
           <p class="hint">Scroll videre — vi har et GODT TILBUD til dig <span aria-hidden="true">↓</span></p>
         </div>
       </div>
+      <button type="button" class="scroll-hint" data-next aria-label="Scroll ned til næste sektion">
+        <span class="scroll-chevron"></span>
+        <span class="scroll-chevron" style="animation-delay: 0.2s"></span>
+      </button>
     </section>
 
     <!-- 6. BILLIG / KONTAKT -->

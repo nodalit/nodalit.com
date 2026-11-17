@@ -126,7 +126,8 @@ section {
 
 /* fast + cheap hold the tallest content — anchor them lower so they don't ride up into the hero */
 .section-bottom.section-fast {
-  padding-bottom: 2rem;
+  /* room for the scroll chevron; the tighter margins inside pay for it on phones */
+  padding-bottom: 3.25rem;
 }
 
 .section-bottom.section-cheap {
@@ -134,7 +135,6 @@ section {
 }
 
 @media (min-width: 768px) {
-  .section-bottom.section-fast { padding-bottom: 3rem; }
   .section-bottom.section-cheap { padding-bottom: 2.5rem; }
 }
 
@@ -349,17 +349,46 @@ section {
 .btn-contact:active { transform: scale(0.95); }
 
 .scroll-hint {
-  margin-top: 3rem;
+  position: relative;
+  margin: 3rem auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #64748b;
+  transition: color 0.15s ease;
 }
+
+/* 48px tap target without moving the layout */
+.scroll-hint::before {
+  content: "";
+  position: absolute;
+  inset: -17px;
+}
+
+.scroll-hint:hover { color: #1e293b; }
+
+/* pages 2-5: pinned to the bottom of the section, in that page's own hint colour */
+section > .scroll-hint {
+  position: absolute;
+  left: calc(50% - 7px);
+  bottom: 1rem;
+  margin: 0;
+}
+
+#section-1 > .scroll-hint { color: rgba(255, 255, 255, 0.75); }
+#section-1 > .scroll-hint:hover { color: #fff; }
+#section-2 > .scroll-hint { color: #22d3ee; }
+#section-2 > .scroll-hint:hover { color: #cffafe; }
+#section-3 > .scroll-hint { color: #6b7280; }
+#section-3 > .scroll-hint:hover { color: #111; }
+#section-4 > .scroll-hint { color: #16a34a; }
+#section-4 > .scroll-hint:hover { color: #dcfce7; }
 
 .scroll-chevron {
   width: 14px;
   height: 14px;
-  border-right: 2.5px solid #94a3b8;
-  border-bottom: 2.5px solid #94a3b8;
+  border-right: 2.5px solid currentColor;
+  border-bottom: 2.5px solid currentColor;
   transform: rotate(45deg);
   margin-top: -7px;
   animation: chevron-fade 1.8s ease-in-out infinite;
@@ -415,7 +444,7 @@ section {
 
 .section-fun .fun-hint {
   position: absolute;
-  bottom: 2.5rem;
+  bottom: 4rem;
   inset-inline: 0;
   text-align: center;
   color: rgba(255, 255, 255, 0.75);
@@ -427,9 +456,11 @@ section {
 
 @media (min-width: 768px) { .section-fun .fun-hint { font-size: 1.125rem; } }
 
-#balloon-field { position: absolute; inset: 0; z-index: 5; }
+/* the field itself lets taps through to the scroll chevron under it; balloons take them back */
+#balloon-field { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
 
 .balloon {
+  pointer-events: auto;
   position: absolute;
   left: 0;
   top: 0;
@@ -570,9 +601,9 @@ section {
   touch-action: manipulation;
   border: 2px solid #111;
   border-radius: 1rem;
-  padding: 1.25rem 1.5rem;
+  padding: 1.125rem 1.5rem;
   background: #fff;
-  margin: 1.5rem auto 0;
+  margin: 1rem auto 0;
   width: 100%;
   max-width: 24rem;
   display: flex;
@@ -582,6 +613,8 @@ section {
   text-align: center;
   transition: transform 0.08s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
+
+@media (min-width: 768px) { .tap-race { padding-block: 1.25rem; margin-top: 1.5rem; } }
 
 .tap-race [hidden] { display: none !important; }
 
@@ -688,7 +721,7 @@ section {
 }
 
 .section-fast .footnote {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   max-width: 32rem;
   margin-inline: auto;
   font-size: 0.875rem;
@@ -696,7 +729,7 @@ section {
   line-height: 1.6;
 }
 
-@media (min-width: 768px) { .section-fast .footnote { font-size: 1rem; } }
+@media (min-width: 768px) { .section-fast .footnote { margin-top: 1.25rem; font-size: 1rem; } }
 
 /* 5. bæredygtig */
 .section-green { text-align: center; color: #dcfce7; }

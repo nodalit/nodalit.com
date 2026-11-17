@@ -32,7 +32,6 @@ const navRail = document.getElementById('nav-rail')
 const btnMotion = document.getElementById('btn-motion')
 const balloonField = document.getElementById('balloon-field')
 const btnContact = document.getElementById('btn-contact')
-const peekBalloon = document.getElementById('peek-balloon')
 const speedlines = document.getElementById('speedlines')
 const shownLoadMsEl = document.getElementById('shown-load-ms')
 const co2Note = document.getElementById('co2-note')
@@ -1042,7 +1041,11 @@ function init() {
       clearTimeout(closeTimers.get(m))
     })
   }
-  peekBalloon.addEventListener('click', () => goTo(1))
+  // general pattern: a [data-next] button scrolls to the section after its own
+  app.addEventListener('click', (e) => {
+    const next = e.target.closest('[data-next]')
+    if (next) goTo(sectionEls.indexOf(next.closest('section')) + 1)
+  })
   btnMotion.addEventListener('click', toggleMotion)
   secureCopy.addEventListener('pointerdown', (e) => { decryptPointer = e.pointerType })
   secureCopy.addEventListener('click', toggleDecrypt)
