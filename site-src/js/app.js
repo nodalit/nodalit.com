@@ -579,7 +579,8 @@ function syncBalloonState(b) {
   const held = heldId === b.id
   b.el.hidden = b.popped
   b.el.style.zIndex = held || b.frozen ? 40 : 10
-  b.labelEl.style.opacity = held ? '0' : '1'
+  // also while frozen: the inflated balloon sits behind the modal fading in, label and all
+  b.labelEl.style.opacity = held || b.frozen ? '0' : '1'
 }
 
 // only animate while the balloon section is at least partly on screen
