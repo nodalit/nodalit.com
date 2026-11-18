@@ -14,7 +14,6 @@ const BALLOON_COLORS = [
   { bg: '#8338ec', fg: '#ffffff' },
   { bg: '#3a86ff', fg: '#00143c' },
   { bg: '#4ade80', fg: '#052e16' },
-  { bg: '#ffffff', fg: '#9d174d' },
 ]
 
 const CONFETTI_COLORS = ['#ffbe0b', '#ffffff', '#8338ec', '#3a86ff', '#4ade80']
